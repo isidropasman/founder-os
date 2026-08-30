@@ -1,0 +1,45 @@
+{
+  "name": "founderos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "founderos": "./src/cli.ts"
+  },
+  "scripts": {
+    "founderos": "node --env-file-if-exists=.env --import tsx src/cli.ts",
+    "eval": "node --env-file-if-exists=.env --import tsx src/eval.ts",
+    "eval:router": "node --env-file-if-exists=.env --import tsx src/eval.ts --router-only",
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "knowledge": "node --env-file-if-exists=.env --import tsx src/knowledge/cli.ts",
+    "knowledge:verify": "node --import tsx src/knowledge/cli.ts verify",
+    "verify": "pnpm typecheck && pnpm knowledge:verify && pnpm test",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/openai": "^2.0.0",
+    "ai": "^5.0.0",
+    "gray-matter": "^4.0.3",
+    "next": "^16.3.3",
+    "pg": "^8.23.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "yaml": "^2.5.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.21.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

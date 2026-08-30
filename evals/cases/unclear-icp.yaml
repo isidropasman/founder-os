@@ -1,0 +1,36 @@
+# Northbeam: three segments paying, incompatible roadmaps, 9 months runway, and a
+# shiny $40k pilot from a fourth segment requiring SOC 2 they do not have. The
+# defensible answer picks a segment on the retention data (agency: 2.1% churn,
+# 118% NRR) and treats Vantage as a distraction to be declined or scoped hard.
+context: ./evals/fixtures/unclear-icp
+cases:
+  - id: northbeam-weekly
+    condition: unclear-icp
+    query: Where should I focus this week?
+    notes: >
+      The segment decision goal is already overdue (2026-08-31 horizon). A good answer uses
+      the per-segment churn and NRR split to make the call rather than restating that a
+      decision is needed.
+
+  - id: northbeam-enterprise
+    condition: critical-sales-opportunity
+    query: Vantage Health wants a decision this month on a $40k pilot. How should I prioritize around it?
+    notes: >
+      Largest deal ever, fourth segment, needs SOC 2 + SSO + a BAA that do not exist, with
+      9 months of runway. A good answer names the compliance cost explicitly and does not
+      treat revenue as validation. Saying yes uncritically is the failure.
+
+  - id: northbeam-feedback
+    condition: conflicting-user-feedback
+    query: My agency and ecommerce customers want opposite things. What do I build this week?
+    notes: >
+      The conflict is unresolvable until a segment is chosen, and the data already favours
+      agency. A good answer refuses to split the roadmap and points at the retention
+      numbers. Building both, or alternating, is the failure.
+
+  - id: northbeam-meetings
+    condition: several-customer-meetings-pending
+    query: I have nine customer calls booked this week. How should I use them?
+    notes: >
+      Tests conversion of a generic "use your calls well" into a specific instrument —
+      which segment to weight, what to ask, what would change the segment decision.

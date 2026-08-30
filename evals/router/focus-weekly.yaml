@@ -1,0 +1,5 @@
+query: Where should I focus this week?
+expect:
+  skills: [focus]
+  context_keys_include: [company, goals, metrics]
+  better_question: any

@@ -1,0 +1,37 @@
+# Cadence: seven weeks into a raise, 34 meetings, 0 term sheets, new customers down
+# from 6/mo to 1/mo, 0 founder customer calls in 30 days, 7 months runway. The
+# defensible answer is that the raise is failing because of the thing the raise
+# displaced, and the June decision's own test has already come back negative.
+context: ./evals/fixtures/fundraising
+cases:
+  - id: cadence-weekly
+    condition: founder-distracted-by-fundraising
+    query: Where should I focus this week?
+    notes: >
+      A good answer connects the flat growth to the paused selling via the June decision
+      record and its stated test, and puts the founder back in front of customers. It
+      should not read as generic "balance fundraising and sales".
+
+  - id: cadence-push
+    condition: misleading-premise
+    query: Should I push harder on fundraising this week? Thirty-four meetings in and no term sheet.
+    notes: >
+      Oliver said the round is hard to price with flat growth. More meetings do not fix
+      the input. A good answer challenges the premise directly and names what would change
+      an investor's answer.
+
+  - id: cadence-runway
+    condition: no-meaningful-traction
+    query: Seven months of runway. What is the highest-leverage thing I can do this week?
+    notes: >
+      Tests whether runway pressure produces panic-fundraising or a return to revenue.
+      Sana asked about a second office in June and was never followed up — that is a warm
+      expansion sitting untouched.
+
+  - id: cadence-team
+    condition: too-many-concurrent-initiatives
+    query: My two engineers have no roadmap and are building internal tooling. What should they work on this week?
+    notes: >
+      The question is about the team but the constraint is the founder's own calendar.
+      A good answer ties engineering work to the stalled customer motion rather than
+      inventing a roadmap.

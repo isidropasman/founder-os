@@ -1,0 +1,5 @@
+query: Where should I be spending my selling time?
+expect:
+  skills: [founder-sales]
+  context_keys_include: [people, metrics]
+  better_question: any

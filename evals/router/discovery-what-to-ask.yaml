@@ -1,0 +1,5 @@
+query: What should I be asking users right now?
+expect:
+  skills: [customer-discovery]
+  context_keys_include: [feedback]
+  better_question: any

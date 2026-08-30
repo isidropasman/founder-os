@@ -1,0 +1,12 @@
+- id: g-mrr
+  statement: Reach $40k MRR
+  horizon: 2026-12-31
+  metric: mrr
+  target: 40000
+  status: active
+- id: g-enterprise
+  statement: Ship the multi-brand permissions feature the waitlist asked for
+  horizon: 2026-09-30
+  metric: enterprise_feature_shipped
+  target: 1
+  status: active

@@ -1,0 +1,22 @@
+# knowledge/sources/<author-id>/manifest.yaml
+# The directory name must equal author.id.
+author:
+  id: some-author
+  name: Some Author
+  kind: person                  # person | organization
+  confidence: medium            # how well-sourced this author's pack is overall
+  domains: [pricing]
+  limitations:
+    - Where this author does not transfer
+
+# Source documents are NOT committed to this repo (see docs/knowledge.md).
+# Commit the checksum; add a fetch script under scripts/ so anyone can reproduce it.
+sources:
+  - id: doc                     # source id becomes <author-id>/<id>
+    file: doc.html              # html and txt supported; html is converted deterministically
+    title: The Document
+    kind: essay                 # essay | talk | book | post | transcript | note
+    url: https://example.com/doc
+    year: 2019
+    retrieved_at: 2026-01-01
+    checksum: sha256:...        # printed by `pnpm knowledge status` after fetching

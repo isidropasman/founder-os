@@ -1,0 +1,21 @@
+- id: p-jane
+  name: Jane Roe
+  role: Partner
+  org: Northline Capital
+  relationship: investor
+  last_touch: 2026-07-20
+  notes: Passed on the seed. Asked to see three consecutive months of improving retention before re-engaging.
+- id: p-marcus
+  name: Marcus Bell
+  role: Founder
+  org: Bell Studio
+  relationship: customer
+  last_touch: 2026-07-02
+  notes: Largest account. Sent a long email about the invoice editor being slow; has not churned.
+- id: p-dana
+  name: Dana Whitfield
+  role: Freelance designer
+  org: Independent
+  relationship: customer
+  last_touch: 2026-06-11
+  notes: Churned in June. Said onboarding took too long, never sent a first invoice.

@@ -1,0 +1,7 @@
+# A factual lookup. No skill applies in V0 — an empty skills array is the correct answer,
+# and this case exists to catch `focus` growing an appetite for everything.
+query: What was our MRR at the start of August?
+expect:
+  skills: []
+  context_keys_include: [metrics]
+  better_question: null

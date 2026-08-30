@@ -1,0 +1,21 @@
+- id: p-oliver
+  name: Oliver Grant
+  role: Partner
+  org: Fieldstone Ventures
+  relationship: investor
+  last_touch: 2026-08-04
+  notes: Furthest along. Said the round is "hard to price with flat growth" and asked to reconnect in a month.
+- id: p-sana
+  name: Sana Iqbal
+  role: Managing Partner
+  org: Iqbal & Co (accounting firm, 18 staff)
+  relationship: customer
+  last_touch: 2026-06-12
+  notes: Best account. Asked in June about rolling Cadence out to a second office. Never followed up.
+- id: p-declan
+  name: Declan Moore
+  role: Partner
+  org: Moore Bookkeeping
+  relationship: customer
+  last_touch: 2026-05-30
+  notes: Warm referral from Sana, was ready to trial in June. No contact since.

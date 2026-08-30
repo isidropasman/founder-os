@@ -1,0 +1,5 @@
+query: It's Monday. Plan my week.
+expect:
+  skills: [focus]
+  context_keys_include: [goals, metrics]
+  better_question: any

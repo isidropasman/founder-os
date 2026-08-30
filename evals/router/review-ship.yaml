@@ -1,0 +1,5 @@
+query: Is the invoice editor rebuild worth shipping?
+expect:
+  skills: [product-review]
+  context_keys_include: [feedback, metrics]
+  better_question: any

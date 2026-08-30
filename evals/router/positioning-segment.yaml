@@ -1,0 +1,5 @@
+query: Who should we actually be positioned for?
+expect:
+  skills: [positioning]
+  context_keys_include: [feedback, metrics]
+  better_question: any

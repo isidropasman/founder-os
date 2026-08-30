@@ -1,0 +1,30 @@
+# Northbeam: three segments, incompatible roadmaps, an out-of-ICP enterprise pilot
+# needing compliance that does not exist, 9 months of runway.
+context: ./evals/fixtures/unclear-icp
+cases:
+  - id: northbeam-positioning
+    condition: unclear-icp
+    skill: positioning
+    query: Who should we actually be positioned for?
+    notes: >
+      Agency: 38 customers, 2.1% churn, 118% NRR. Ecommerce: 27, 7.8% churn. The retention
+      split is the answer. A good brief picks on retention rather than headcount, names the
+      competitive alternative, and states who this is explicitly not for.
+
+  - id: northbeam-decision-pilot
+    condition: critical-sales-opportunity
+    skill: decision
+    query: Should we take the Vantage Health pilot?
+    notes: >
+      $40k, biggest deal ever, fourth segment, requires SOC 2 + SSO + a BAA that do not
+      exist, 9 months runway. A good answer prices the compliance work as the real cost,
+      treats it as largely irreversible, and rejects the alternatives explicitly.
+
+  - id: northbeam-sales
+    condition: strong-customer-pull
+    skill: founder-sales
+    query: Where should I be spending my selling time?
+    notes: >
+      Rina has expanded twice and referred four agencies — a warm, working motion sitting in
+      the context. A good plan works the referral channel by name before proposing anything
+      cold, and sets volume against the founder's back-to-back calendar.

@@ -1,0 +1,57 @@
+# New-skill cases on the acme-seed fixture: 22% activation, 9.1% churn, redesign
+# goal, one loud customer, an investor who asked for retention proof.
+context: ./evals/fixtures/acme-seed
+cases:
+  - id: acme-decision-redesign
+    condition: reversibility
+    skill: decision
+    query: Should we pause the invoice editor rebuild and fix onboarding instead?
+    notes: >
+      The July decision record already states the assumption (churn is caused by the editor)
+      at 0.4 confidence with an untested check. A good answer notices the assumption was
+      never tested, that pausing is reversible, and rejects the named alternatives explicitly.
+
+  - id: acme-pricing-too-cheap
+    condition: pricing-uncertainty
+    skill: pricing
+    query: We are $19/mo flat. Should we raise to $39?
+    notes: >
+      One support quote says the price feels too low, which is real signal. But at 22%
+      activation most signups never send an invoice, so price is not the constraint. A good
+      answer says that and still gives a reversible test (new customers only) if pursued.
+
+  - id: acme-meeting-jane
+    condition: several-customer-meetings-pending
+    skill: meeting-prep
+    query: I have a follow-up call with Jane Roe on Thursday. What should I prepare?
+    notes: >
+      Jane passed and asked for three consecutive months of improving retention. Retention
+      is worse, not better. A good brief confronts that, uses the open thread about cohort
+      data, and names what not to say (do not pitch the redesign as progress).
+
+  - id: acme-review-editor
+    condition: product-bugs-affecting-customers
+    skill: product-review
+    query: Is the invoice editor rebuild worth shipping?
+    notes: >
+      Evidence is one non-churning customer's complaint about sluggishness, against two
+      onboarding complaints from a churned user and a confused signup. A good review grades
+      the editor issue as minor and points at onboarding, and says what not to fix.
+
+  - id: acme-discovery-churn
+    condition: weak-customer-pull
+    skill: customer-discovery
+    query: What should I be asking users right now?
+    notes: >
+      The concluded onboarding-email experiment says the blocker is inside the product. A
+      good plan targets the non-activating signups by name where possible, uses past-behaviour
+      questions, and states what result would disconfirm the onboarding hypothesis.
+
+  - id: acme-learning-experiment
+    condition: clear-prediction-available
+    skill: learning
+    query: The onboarding reminder email experiment just ended. What did we learn?
+    notes: >
+      Activation moved 21% to 22% — within noise. A good record quotes the original
+      hypothesis, says the prediction failed, judges whether one noisy result generalizes,
+      and produces a belief update rather than "we should keep testing".

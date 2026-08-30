@@ -1,0 +1,17 @@
+node_modules/
+.next/
+traces/
+.env
+.env.local
+.context/
+context/*
+!context/example/
+evals/results/*
+!evals/results/.gitkeep
+
+# Third-party source documents are NOT redistributed with this repo. Contributors
+# fetch their own copy: scripts/fetch-paul-graham.sh. The manifest commits the
+# checksum of each document, so a fetched corpus is verifiable against the packs.
+knowledge/sources/**/*.html
+knowledge/sources/**/*.txt
+!test/fixtures/**

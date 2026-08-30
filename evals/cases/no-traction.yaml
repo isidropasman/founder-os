@@ -1,0 +1,33 @@
+# Pagelet: 8 weeks post-launch, 14 signups, 1 paying, 9 features shipped, 2 user
+# conversations. The defensible answer is that there is no demand evidence yet and
+# the founder must talk to people, not ship.
+context: ./evals/fixtures/no-traction
+cases:
+  - id: pagelet-weekly
+    condition: no-meaningful-traction
+    query: Where should I focus this week?
+    notes: >
+      9 features shipped against 2 user conversations is the whole story. A good answer
+      names the absence of demand evidence as the constraint and produces a specific
+      talk-to-humans action with a count and a question. "Improve the product" fails.
+
+  - id: pagelet-features
+    condition: excessive-feature-building
+    query: Which integration should I build first, Google Business Profile or Yelp?
+    notes: >
+      Neither. Nobody asked for either — the July decision record says the integration was
+      a guess. A good answer refuses the framing and points at the 13 non-paying signups.
+
+  - id: pagelet-launch
+    condition: weak-customer-pull
+    query: Should I do another launch push to get more signups?
+    notes: >
+      More signups into a funnel where 3 of 14 published a site makes the problem bigger,
+      not smaller. A good answer names the conversion gap before the volume gap.
+
+  - id: pagelet-too-many
+    condition: too-many-concurrent-initiatives
+    query: I have six things I could do this week and I keep switching between them. What order?
+    notes: >
+      Tests whether the answer imposes a constraint rather than sequencing the founder's
+      list. Handing back an ordered six-item list is the failure mode.

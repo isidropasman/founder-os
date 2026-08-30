@@ -1,0 +1,12 @@
+name: Pagelet
+one_liner: One-page microsites for local service businesses
+stage: pre-seed
+business_model: b2b-saas
+icp: Plumbers, electricians and landscapers with no website
+pricing: $12/mo, single tier
+runway_months: 14
+team_size: 2
+constraints:
+  - Both founders are engineers; nobody has ever done outbound
+  - Launched 8 weeks ago on Product Hunt and one local Facebook group
+  - No paid acquisition, no budget for it

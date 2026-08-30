@@ -1,0 +1,12 @@
+- id: g-raise
+  statement: Close a $3M seed round
+  horizon: 2026-09-30
+  metric: round_closed
+  target: 1
+  status: active
+- id: g-mrr
+  statement: Reach $50k MRR
+  horizon: 2026-12-31
+  metric: mrr
+  target: 50000
+  status: active

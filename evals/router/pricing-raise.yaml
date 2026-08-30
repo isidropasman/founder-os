@@ -1,0 +1,5 @@
+query: We are $19/mo flat. Should we raise to $39?
+expect:
+  skills: [pricing]
+  context_keys_include: [metrics, feedback]
+  better_question: any

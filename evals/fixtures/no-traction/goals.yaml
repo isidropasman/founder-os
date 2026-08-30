@@ -1,0 +1,12 @@
+- id: g-first-10
+  statement: Get 10 paying customers
+  horizon: 2026-10-31
+  metric: paying_customers
+  target: 10
+  status: active
+- id: g-integrations
+  statement: Ship Google Business Profile and Yelp integrations
+  horizon: 2026-09-15
+  metric: integrations_shipped
+  target: 2
+  status: active

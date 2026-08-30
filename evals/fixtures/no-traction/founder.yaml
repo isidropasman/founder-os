@@ -1,0 +1,12 @@
+name: Priya
+role: ceo
+strengths:
+  - Very fast shipper
+  - Comfortable with ambiguity in code
+weak_spots:
+  - Has never cold-called anyone and says she "will get to it next week"
+  - Reads silence from users as "the product is not good enough yet"
+known_biases:
+  - Assumes every problem is a missing feature
+  - Measures progress in features shipped rather than conversations had
+working_style: Codes 10 hours a day, no recurring calls on the calendar

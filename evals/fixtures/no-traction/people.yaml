@@ -1,0 +1,14 @@
+- id: p-tomas
+  name: Tomas Ruiz
+  role: Owner
+  org: Ruiz Plumbing
+  relationship: customer
+  last_touch: 2026-07-08
+  notes: The single paying customer. Signed up from the Facebook group post. Has never been asked why he pays.
+- id: p-alina
+  name: Alina Kerr
+  role: Owner
+  org: Kerr Landscaping
+  relationship: customer
+  last_touch: 2026-06-29
+  notes: Signed up, never published a site. Did not answer the one follow-up email.

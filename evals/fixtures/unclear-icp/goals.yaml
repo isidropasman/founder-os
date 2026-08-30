@@ -1,0 +1,18 @@
+- id: g-arr
+  statement: Reach $600k ARR
+  horizon: 2027-03-31
+  metric: arr
+  target: 600000
+  status: active
+- id: g-segment
+  statement: Decide the primary segment and rewrite positioning around it
+  horizon: 2026-08-31
+  metric: segment_decided
+  target: 1
+  status: active
+- id: g-pilot
+  statement: Close the Vantage Health enterprise pilot
+  horizon: 2026-09-30
+  metric: pilot_closed
+  target: 1
+  status: active

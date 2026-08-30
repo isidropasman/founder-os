@@ -1,0 +1,12 @@
+name: Northbeam
+one_liner: Attribution and reporting for teams that buy paid media
+stage: seed
+business_model: b2b-saas
+icp: Stated as "marketing teams" — in practice three different segments are paying
+pricing: $299/mo standard, three customers on bespoke annual deals
+runway_months: 9
+team_size: 6
+constraints:
+  - Roadmap is split across three segments with incompatible requests
+  - One engineer is permanently absorbed by bespoke work for the largest account
+  - Nine months of runway and no clear expansion motion

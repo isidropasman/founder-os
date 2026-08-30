@@ -1,0 +1,1804 @@
+author:
+  id: paul-graham
+  name: Paul Graham
+  kind: person
+  confidence: high
+  domains:
+    - early-stage
+    - growth
+    - startup-ideas
+    - founder-psychology
+    - product
+  limitations:
+    - Consumer and developer-tool startups; weaker signal for enterprise sales motions
+    - Optimizes for venture-scale outcomes, which is not every founder's goal
+    - Nothing here postdates 2023; says little about AI-era distribution
+sources:
+  - id: 13sentences
+    file: 13sentences.html
+    title: Startups in 13 Sentences
+    kind: essay
+    url: https://paulgraham.com/13sentences.html
+    year: 2009
+    retrieved_at: 2026-08-16
+    checksum: sha256:129e0086a1f5b8384069bcef03a32bc1b38a8f1b21a04a2e65f4094275788bcb
+  - id: 5founders
+    file: 5founders.html
+    title: Five Founders
+    kind: essay
+    url: https://paulgraham.com/5founders.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:d12f0050396ba3370b8649adcce95e479301a3279bef838306fa7abe3e5d06b9
+  - id: "6631327"
+    file: 6631327.html
+    title: 6,631,372
+    kind: essay
+    url: https://paulgraham.com/6631327.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:f6a7455f56ec45722014b09cb83eb81da80cb685f5adf3625cc9c19e74c6ce9f
+  - id: "95"
+    file: 95.html
+    title: Let the Other 95% of Great Programmers In
+    kind: essay
+    url: https://paulgraham.com/95.html
+    year: 2014
+    retrieved_at: 2026-08-26
+    checksum: sha256:a6208492680db43f2334fb162a50c63fe501764c4aca1d59fb1230aa4432f4c5
+  - id: ace
+    file: ace.html
+    title: Billionaires Build
+    kind: essay
+    url: https://paulgraham.com/ace.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:4e4f97d3cf2fb90fcbca2c48a4d3ddbffa1dce2b60c2ea671f1c274fbf670f38
+  - id: addiction
+    file: addiction.html
+    title: The Acceleration of Addictiveness
+    kind: essay
+    url: https://paulgraham.com/addiction.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:528a13898a73d18c9a1f16f128a5d5c1a87e14771bc586c048782c4af80a33a2
+  - id: airbnb
+    file: airbnb.html
+    title: "Subject: Airbnb"
+    kind: essay
+    url: https://paulgraham.com/airbnb.html
+    year: 2011
+    retrieved_at: 2026-08-26
+    checksum: sha256:e74fcc4d7c07cc5ac06f2721e5e1fab25c4f6619e55d68c1dddec10513078ef7
+  - id: airbnbs
+    file: airbnbs.html
+    title: The Airbnbs
+    kind: essay
+    url: https://paulgraham.com/airbnbs.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:d890d173db31cfd23ecd1bcfd7cc460fb65f75cbd4ab2932896523e64e4f6718
+  - id: alien
+    file: alien.html
+    title: Alien Truth
+    kind: essay
+    url: https://paulgraham.com/alien.html
+    year: 2022
+    retrieved_at: 2026-08-26
+    checksum: sha256:d4e6dc7d7b514acbfcc1656590078a4b630c5a673fb416dbad3ae102cdd3995b
+  - id: altair
+    file: altair.html
+    title: What Microsoft Is this the Altair Basic of?
+    kind: essay
+    url: https://paulgraham.com/altair.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:f07186797c85ca450fdf25d7792d911ef8bd3ae28b45a37e6321b6f532e66fa9
+  - id: ambitious
+    file: ambitious.html
+    title: Frighteningly Ambitious Startup Ideas
+    kind: essay
+    url: https://paulgraham.com/ambitious.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:b0d91757b73e19217eae3555a789e36eabe05927f0dd1214153177e001414a82
+  - id: america
+    file: america.html
+    title: Why Startups Condense in America
+    kind: essay
+    url: https://paulgraham.com/america.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:431499f29a84becae5272095eb596af525ac90958e1e015d81e19b74fff4cbd5
+  - id: angelinvesting
+    file: angelinvesting.html
+    title: How to Be an Angel Investor
+    kind: essay
+    url: https://paulgraham.com/angelinvesting.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:53e45b4351d29c9c92596df2d193fbd6a5fc0faf1519d7621fa44be6b2864ba8
+  - id: aord
+    file: aord.html
+    title: Default Alive or Default Dead?
+    kind: essay
+    url: https://paulgraham.com/aord.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:4deaa70b46bc9639a55a299f67e7edee8582bb18d416ff5e4ae07c7b48ee82c0
+  - id: apple
+    file: apple.html
+    title: Apple's Mistake
+    kind: essay
+    url: https://paulgraham.com/apple.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:e78f7ee6877ccc31f2783b33a0e0e664716468b2a4321b5317f4a2053dddf12c
+  - id: artistsship
+    file: artistsship.html
+    title: The Other Half of "Artists Ship"
+    kind: essay
+    url: https://paulgraham.com/artistsship.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:c57a709e96bd81e459a24a1e18967b7f222b93d1f48156dfc0ff4ce635962d36
+  - id: avg
+    file: avg.html
+    title: Beating the Averages
+    kind: essay
+    url: https://paulgraham.com/avg.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:22c8b23baefa60c2b032d2aad4d2c5eb93aa583e4eedbfd04fc30be1f41b0f5a
+  - id: badeconomy
+    file: badeconomy.html
+    title: Why to Start a Startup in a Bad Economy
+    kind: essay
+    url: https://paulgraham.com/badeconomy.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:0a43debddfd056c64facc73f850019158538a602c127d336630209f3634241a6
+  - id: before
+    file: before.html
+    title: Before the Startup
+    kind: essay
+    url: https://paulgraham.com/before.html
+    year: 2014
+    retrieved_at: 2026-08-16
+    checksum: sha256:d9e55526ce4b977a1f0f8ec949cf758b40b9178f36cc12588e0e5c5fc4ac036b
+  - id: best
+    file: best.html
+    title: The Best Essay
+    kind: essay
+    url: https://paulgraham.com/best.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:c976ee9ebd587584f791896c291d58174452103f84a996fd13ab3e1f2026a2c5
+  - id: better
+    file: better.html
+    title: Better Bayesian Filtering
+    kind: essay
+    url: https://paulgraham.com/better.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:bc73dc60d73db9868fe17bbf420650cf954b6e35f23565ab5f25b90a86fff323
+  - id: bias
+    file: bias.html
+    title: A Way to Detect Bias
+    kind: essay
+    url: https://paulgraham.com/bias.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:aaa81a99b3c9947fd77496e040ecec25f29aa961af85b0325ebaab45264500cb
+  - id: boss
+    file: boss.html
+    title: You Weren't Meant to Have a Boss
+    kind: essay
+    url: https://paulgraham.com/boss.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:88db63c483d8200dad97f300d48dc1c06057ae809a74343c132c03d1ca5e1b05
+  - id: brandage
+    file: brandage.html
+    title: The Brand Age
+    kind: essay
+    url: https://paulgraham.com/brandage.html
+    year: 2026
+    retrieved_at: 2026-08-26
+    checksum: sha256:5d4de7f3ec1d5a8b9b278dea96ef01ce69456c37a0eced0d420594a41b2355f7
+  - id: bronze
+    file: bronze.html
+    title: Why Smart People Have Bad Ideas
+    kind: essay
+    url: https://paulgraham.com/bronze.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:0e85cbe60deee08c44157e644f7842ec1d48c631671947c31f049e8c431d78e3
+  - id: bubble
+    file: bubble.html
+    title: What the Bubble Got Right
+    kind: essay
+    url: https://paulgraham.com/bubble.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:3efcc860f41eedeaf30ca1ab656de17f3618b49bd2cbf489aad1faf4c2b8b786
+  - id: charisma
+    file: charisma.html
+    title: It's Charisma, Stupid
+    kind: essay
+    url: https://paulgraham.com/charisma.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:b443322773c9cd8f947c7d077857b984d4c808488ad6dbdc8559f62543fcea09
+  - id: cities
+    file: cities.html
+    title: Cities and Ambition
+    kind: essay
+    url: https://paulgraham.com/cities.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:7f0da5af377155f8565ee4d311b8b8c6c00c5616cdcc42e988da1af0bc03c00f
+  - id: college
+    file: college.html
+    title: Undergraduation
+    kind: essay
+    url: https://paulgraham.com/college.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:1adac6d1cd546efcea9bd83f2df3bb14fa3fa9c8f0368668a059a5be97868e71
+  - id: colleges
+    file: colleges.html
+    title: News from the Front
+    kind: essay
+    url: https://paulgraham.com/colleges.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:8e5ef22f3c927db59730e48521a258628e372ef3372321c88aebe564b6244c28
+  - id: conformism
+    file: conformism.html
+    title: The Four Quadrants of Conformism
+    kind: essay
+    url: https://paulgraham.com/conformism.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:a4eab187c434b7195d62adb3dcde88f08b10522519fbb8bc24659e62e86944ac
+  - id: control
+    file: control.html
+    title: Founder Control
+    kind: essay
+    url: https://paulgraham.com/control.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:d56d9c213c690c48b710e339496095a03c7e8a25075352391c082952f079fa71
+  - id: convergence
+    file: convergence.html
+    title: Why TV Lost
+    kind: essay
+    url: https://paulgraham.com/convergence.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:711c1dbf4f76a368d73f2d99263d1a5f249e703f9c5e57ebcdb0bfca06629f0c
+  - id: convince
+    file: convince.html
+    title: How to Convince Investors
+    kind: essay
+    url: https://paulgraham.com/convince.html
+    year: 2013
+    retrieved_at: 2026-08-26
+    checksum: sha256:d8373f77f5b6eac375ebd8b941d35dddf157bf7a2d6addae38269627467f116d
+  - id: copy
+    file: copy.html
+    title: Copy What You Like
+    kind: essay
+    url: https://paulgraham.com/copy.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:f761eacf8d7039ff51fcf24482a22e67af60057fa6e31b82dcb13fe1a68e8e02
+  - id: corpdev
+    file: corpdev.html
+    title: Don't Talk to Corp Dev
+    kind: essay
+    url: https://paulgraham.com/corpdev.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:af1aa3403ba64b424c38052d768400959be00f1c148857d0b401399f97594327
+  - id: credentials
+    file: credentials.html
+    title: After Credentials
+    kind: essay
+    url: https://paulgraham.com/credentials.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:a573ebe0d0cfc8c902cb0a9347b4ed3c55082a4e8d4a2d3f64cdeba395e24f83
+  - id: desres
+    file: desres.html
+    title: Design and Research
+    kind: essay
+    url: https://paulgraham.com/desres.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:3ddfe5e91500f695667981b1a472907f3384d9b392c90be51d0a412f7da43559
+  - id: determination
+    file: determination.html
+    title: The Anatomy of Determination
+    kind: essay
+    url: https://paulgraham.com/determination.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:9d2b09cb6a1b313322b6600674e9923ecfe9390a4b2f3385f3b603bd19e8e726
+  - id: die
+    file: die.html
+    title: How Not to Die
+    kind: essay
+    url: https://paulgraham.com/die.html
+    year: 2007
+    retrieved_at: 2026-08-16
+    checksum: sha256:cf523ca59bbdba67e182445e002b29004bbeea14bedeac713b04cbf6b6586eee
+  - id: diff
+    file: diff.html
+    title: What Made Lisp Different
+    kind: essay
+    url: https://paulgraham.com/diff.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:739d9f63ba9547aa607024fdb460b04a6cc78dc21b8f63d563ecc6184b8e350c
+  - id: disagree
+    file: disagree.html
+    title: How to Disagree
+    kind: essay
+    url: https://paulgraham.com/disagree.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:16464fea452671c243acc1c58b7e25198d85b9661a07a5f88a02272e92826b09
+  - id: discover
+    file: discover.html
+    title: Persuade xor Discover
+    kind: essay
+    url: https://paulgraham.com/discover.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:ab1c14a07bd15ac0b87233e6bb7b7ff54429a8e551beb7566066d397419f9c5f
+  - id: distraction
+    file: distraction.html
+    title: Disconnecting Distraction
+    kind: essay
+    url: https://paulgraham.com/distraction.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:a0cacefc9c2176284cd5f0d84a159f592c09840b1dba391b48ccfaa71a154381
+  - id: divergence
+    file: divergence.html
+    title: Could VC be a Casualty of the Recession?
+    kind: essay
+    url: https://paulgraham.com/divergence.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:221856cfb43f0a459f4bf18516f545191ff582e29d64f0c3915f507443258bac
+  - id: do
+    file: do.html
+    title: What to Do
+    kind: essay
+    url: https://paulgraham.com/do.html
+    year: 2025
+    retrieved_at: 2026-08-26
+    checksum: sha256:144d8a3adc9ca779cb494da3213f2358e7544607f854ee12b0016a1dd819508e
+  - id: donate
+    file: donate.html
+    title: Donate Unrestricted
+    kind: essay
+    url: https://paulgraham.com/donate.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:674da2504660c39256fad7a8cdd76cd27bde07360c9695e328716a2e9023f25b
+  - id: ds
+    file: ds.html
+    title: Do Things that Don't Scale
+    kind: essay
+    url: https://paulgraham.com/ds.html
+    year: 2013
+    retrieved_at: 2026-08-16
+    checksum: sha256:71b94362fdfbbbdc11ec376c8906ecf78c1a9f3a55d7df7d02bd2055149f5931
+  - id: early
+    file: early.html
+    title: Early Work
+    kind: essay
+    url: https://paulgraham.com/early.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:ce66eace2a08529f966156eb91c3c8ab033c141b69635b44b60161a690adf7c6
+  - id: earn
+    file: earn.html
+    title: How to Earn a Billion Dollars
+    kind: essay
+    url: https://paulgraham.com/earn.html
+    year: 2026
+    retrieved_at: 2026-08-26
+    checksum: sha256:7688b23e14de9c9fa5da6878277d353fda4fe67788ee014bc2441a7a0cec2eac
+  - id: earnest
+    file: earnest.html
+    title: Earnestness
+    kind: essay
+    url: https://paulgraham.com/earnest.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:5d4001f97af54e57a8d22b1c28e86b38be061069d63e63f8f85fc47fddebe49d
+  - id: ecw
+    file: ecw.html
+    title: How to Be an Expert in a Changing World
+    kind: essay
+    url: https://paulgraham.com/ecw.html
+    year: 2014
+    retrieved_at: 2026-08-26
+    checksum: sha256:042bcb1f273b184ca7b040429739192617aafab43afbe14db3d3ee21cbc858c5
+  - id: equity
+    file: equity.html
+    title: The Equity Equation
+    kind: essay
+    url: https://paulgraham.com/equity.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:d4168d6470c11a43de97bd0f75f0ff507c7b2db94299e8df24372ab08d319160
+  - id: essay
+    file: essay.html
+    title: The Age of the Essay
+    kind: essay
+    url: https://paulgraham.com/essay.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:111dc2c8cdc64b1a2cd2bea15ecda963aac9b00059776a61f314e42106851498
+  - id: ffb
+    file: ffb.html
+    title: Filters that Fight Back
+    kind: essay
+    url: https://paulgraham.com/ffb.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:7e5ee43d8cac0d821c961c06c3160e26fe722998915308e2ffec1946838fb3e0
+  - id: fh
+    file: fh.html
+    title: Haters
+    kind: essay
+    url: https://paulgraham.com/fh.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:7858edd3eaaaa30220d1f9b095cd0ebf78963bc311a8e2fb78335d4b438ddd01
+  - id: field
+    file: field.html
+    title: The Shape of the Essay Field
+    kind: essay
+    url: https://paulgraham.com/field.html
+    year: 2025
+    retrieved_at: 2026-08-26
+    checksum: sha256:bdcc624ec2575d1d74120a7770e1ce763640cb1087c05950de978344c6645682
+  - id: fn
+    file: fn.html
+    title: Fierce Nerds
+    kind: essay
+    url: https://paulgraham.com/fn.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:408c6fe8260d40d58425de997a368aa1ae8515cd274c3c1ccc8d47ef2ccc13e8
+  - id: foundermode
+    file: foundermode.html
+    title: Founder Mode
+    kind: essay
+    url: https://paulgraham.com/foundermode.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:34b2fd66b2efeae715e74701f4102ec7439a018a3edd92984932fe0e582beb19
+  - id: founders
+    file: founders.html
+    title: What We Look for in Founders
+    kind: essay
+    url: https://paulgraham.com/founders.html
+    year: 2010
+    retrieved_at: 2026-08-16
+    checksum: sha256:e5581955fb12b5646cd7b8e898109c1b83af4114edaf3429f85664e972aa8178
+  - id: foundersatwork
+    file: foundersatwork.html
+    title: Learning from Founders
+    kind: essay
+    url: https://paulgraham.com/foundersatwork.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:a82dc6a97937305afbb48a4b5b2dbb39ed71a45bf5b735bf36bcfa6117913491
+  - id: foundervisa
+    file: foundervisa.html
+    title: The Founder Visa
+    kind: essay
+    url: https://paulgraham.com/foundervisa.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:b4e8ca99f0c09ea68b1d946e1c3c2a127936169b39d278f2d7e97b01822522c0
+  - id: fr
+    file: fr.html
+    title: How to Raise Money
+    kind: essay
+    url: https://paulgraham.com/fr.html
+    year: 2013
+    retrieved_at: 2026-08-26
+    checksum: sha256:c7f03c99d78485bf701ccba93d767661bb6e5813640ed668494bdc41e35fc4e0
+  - id: fundraising
+    file: fundraising.html
+    title: A Fundraising Survival Guide
+    kind: essay
+    url: https://paulgraham.com/fundraising.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:56095ea010047a682a734cf7171e3007578b8365314a4bbdab0f280d88deabfa
+  - id: future
+    file: future.html
+    title: The Future of Startup Funding
+    kind: essay
+    url: https://paulgraham.com/future.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:14e558baa01dbac0b5f66db0e23fef3f33c29e96dc0331185d221ebb7eeb0d7a
+  - id: gap
+    file: gap.html
+    title: Mind the Gap
+    kind: essay
+    url: https://paulgraham.com/gap.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:62e572482c45d85a6983b27ac2cdefa4f234e458add4ed4dd80b74af3cd1b7bf
+  - id: gba
+    file: gba.html
+    title: The Word "Hacker"
+    kind: essay
+    url: https://paulgraham.com/gba.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:90fc2dc8de42073c535f81907579fbb9967649e804b83febb8df5ba4d54870ad
+  - id: genius
+    file: genius.html
+    title: The Bus Ticket Theory of Genius
+    kind: essay
+    url: https://paulgraham.com/genius.html
+    year: 2019
+    retrieved_at: 2026-08-26
+    checksum: sha256:33eb8f9b322c9b334cb80fb5ed764a3e0981c92b7ffd9757f6a7a9e1eee10c42
+  - id: gh
+    file: gh.html
+    title: Great Hackers
+    kind: essay
+    url: https://paulgraham.com/gh.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:2f02d62dae1f22df41154cadd3acbb6af42cde96736eac8b7e2d15bdaf54164b
+  - id: good
+    file: good.html
+    title: Be Good
+    kind: essay
+    url: https://paulgraham.com/good.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:310404dc391980a9bb4e31be79838bfa08e08fe1ed831bed824b86408431c051
+  - id: goodart
+    file: goodart.html
+    title: How Art Can Be Good
+    kind: essay
+    url: https://paulgraham.com/goodart.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:cc6c986fc71cb65d61530c97c8fc0aa96f852400a7c72784f603b74f87ac0eda
+  - id: goodtaste
+    file: goodtaste.html
+    title: Is There Such a Thing as Good Taste?
+    kind: essay
+    url: https://paulgraham.com/goodtaste.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:0b504fd9c92398e25ea8400e716d01e24b5f8d2b931735646387656cf3982215
+  - id: goodwriting
+    file: goodwriting.html
+    title: Good Writing
+    kind: essay
+    url: https://paulgraham.com/goodwriting.html
+    year: 2025
+    retrieved_at: 2026-08-26
+    checksum: sha256:a831d68d5bae23caecd0ab8746db6be57a008d5e79b02309359d2693f3a89623
+  - id: google
+    file: google.html
+    title: How to Start Google
+    kind: essay
+    url: https://paulgraham.com/google.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:3a9516633ff619c589d763100d01f8f12a15e79ad7893b60670ee2bf1a229719
+  - id: googles
+    file: googles.html
+    title: Why There Aren't More Googles
+    kind: essay
+    url: https://paulgraham.com/googles.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:f962c9c1a3d925fd965e0cbcd06048d1ee74f2b6b89b0d85801f5f112144645a
+  - id: greatwork
+    file: greatwork.html
+    title: How to Do Great Work
+    kind: essay
+    url: https://paulgraham.com/greatwork.html
+    year: 2023
+    retrieved_at: 2026-08-26
+    checksum: sha256:4eb9dbdc60ff9bddf18fa16259ee76aa2f658f6b7c7cbbc7892b5230baa3241c
+  - id: growth
+    file: growth.html
+    title: Startup = Growth
+    kind: essay
+    url: https://paulgraham.com/growth.html
+    year: 2012
+    retrieved_at: 2026-08-16
+    checksum: sha256:77ac56931b0af89c86e64be58a3886837c9a4bc9d7691222cf10535744bbdd21
+  - id: guidetoinvestors
+    file: guidetoinvestors.html
+    title: The Hacker's Guide to Investors
+    kind: essay
+    url: https://paulgraham.com/guidetoinvestors.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:43d6276fc99d73d92f416843940aa29a84ebf085af8e91eba993f8b1a7435c7d
+  - id: hackernews
+    file: hackernews.html
+    title: What I've Learned from Hacker News
+    kind: essay
+    url: https://paulgraham.com/hackernews.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:b6626216036425b7a4a076de7ec3f97a3083f82a0536dab3921cffac6d7871a1
+  - id: head
+    file: head.html
+    title: Holding a Program in One's Head
+    kind: essay
+    url: https://paulgraham.com/head.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:98eded183ebbc93c6360a9c3c7e172c95a424e4bcd5802683228e0afa4fe4d5d
+  - id: herd
+    file: herd.html
+    title: Investor Herd Dynamics
+    kind: essay
+    url: https://paulgraham.com/herd.html
+    year: 2013
+    retrieved_at: 2026-08-26
+    checksum: sha256:a277b55bc63ecc839538c3124e2b7815bf7e6f24eb267c887fba821fd303705f
+  - id: heresy
+    file: heresy.html
+    title: Heresy
+    kind: essay
+    url: https://paulgraham.com/heresy.html
+    year: 2022
+    retrieved_at: 2026-08-26
+    checksum: sha256:6962598385a658917a9bf88c3c8bcc466f91d966dc00268367e0209a8362a493
+  - id: heroes
+    file: heroes.html
+    title: Some Heroes
+    kind: essay
+    url: https://paulgraham.com/heroes.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:949f1e2a8ec2946560ca289f7e501057ffd21a135fa284c4b814ae1151549da2
+  - id: highres
+    file: highres.html
+    title: The High-Res Society
+    kind: essay
+    url: https://paulgraham.com/highres.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:32fbf8b2af39932a09bd9763f12da3f21fe00bf1ac1ee21a3196ae945e6e04a4
+  - id: hiresfund
+    file: hiresfund.html
+    title: High Resolution Fundraising
+    kind: essay
+    url: https://paulgraham.com/hiresfund.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:976a323a092ddfb771ed6fd31fa135e6ba29d5988bc3dc4df43f6f0d0f3bbeb4
+  - id: hiring
+    file: hiring.html
+    title: Hiring is Obsolete
+    kind: essay
+    url: https://paulgraham.com/hiring.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:9b1eb8829a4443a01f0fb007297eaf237c96e8d04f97294fe08865c2f86b05e4
+  - id: hp
+    file: hp.html
+    title: Hackers and Painters
+    kind: essay
+    url: https://paulgraham.com/hp.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:4275e4d54008a61135faa2b2e01048601ef89c3e220681826f3702d38d3f1721
+  - id: hs
+    file: hs.html
+    title: What You'll Wish You'd Known
+    kind: essay
+    url: https://paulgraham.com/hs.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:ce0fb46de8625490d9597180fac1d9c16b7587105d5ef4c8e57e6fcd7a15080d
+  - id: hubs
+    file: hubs.html
+    title: Why Startup Hubs Work
+    kind: essay
+    url: https://paulgraham.com/hubs.html
+    year: 2011
+    retrieved_at: 2026-08-26
+    checksum: sha256:d24833331385b3ad7d91b43ccf546e9be571cf71c67f7e43a34c6eddcc21afb0
+  - id: hundred
+    file: hundred.html
+    title: The Hundred-Year Language
+    kind: essay
+    url: https://paulgraham.com/hundred.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:914ac1c442286c57137f0a5658c2731b2e98234689e1b5167ca38568f79334ab
+  - id: hw
+    file: hw.html
+    title: The Hardware Renaissance
+    kind: essay
+    url: https://paulgraham.com/hw.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:1454b81afbe04547e0d5dce64b47335a6182d8f5acc5ef32f283f8760a2fea8e
+  - id: hwh
+    file: hwh.html
+    title: How to Work Hard
+    kind: essay
+    url: https://paulgraham.com/hwh.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:16fa5c25ca69084927c3d36864abb2015c7ba4ed062cb611a9f1534689fb6cd4
+  - id: icad
+    file: icad.html
+    title: Revenge of the Nerds
+    kind: essay
+    url: https://paulgraham.com/icad.html
+    year: 2002
+    retrieved_at: 2026-08-26
+    checksum: sha256:e14d950599ed73aa631c1fae103194bf8607cc8d311c5ab55306e70b0ab09331
+  - id: ideas
+    file: ideas.html
+    title: Ideas for Startups
+    kind: essay
+    url: https://paulgraham.com/ideas.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:7c3485a8093121c45b2ecd69c50656b3ee1de09b39570462468f9fa6e508c9bf
+  - id: identity
+    file: identity.html
+    title: Keep Your Identity Small
+    kind: essay
+    url: https://paulgraham.com/identity.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:55b8c291e6f76edf1d3f3b7aff27816d06665b06a4a424bd3396ef3fe60ef2bb
+  - id: iflisp
+    file: iflisp.html
+    title: If Lisp is So Great
+    kind: essay
+    url: https://paulgraham.com/iflisp.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:90ea7d0ba060354ac057aed9379a7a415d0e0458d139cc551ffbdfd9c71078ca
+  - id: ineq
+    file: ineq.html
+    title: Economic Inequality
+    kind: essay
+    url: https://paulgraham.com/ineq.html
+    year: 2016
+    retrieved_at: 2026-08-26
+    checksum: sha256:2ea8c696614cd91e236cff22b4fd533d95384d100d61a4bfe4e39e270505da50
+  - id: inequality
+    file: inequality.html
+    title: Inequality and Risk
+    kind: essay
+    url: https://paulgraham.com/inequality.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:462b0cf213324e5c785e8b69bcb97cb85ac96371f7841ee5675da9da823a31b1
+  - id: investors
+    file: investors.html
+    title: How to Present to Investors
+    kind: essay
+    url: https://paulgraham.com/investors.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:f701136a7b31970e73c7f206ff50dfdabd5376d776eb00eaad3bfee78733bd78
+  - id: invtrend
+    file: invtrend.html
+    title: Startup Investing Trends
+    kind: essay
+    url: https://paulgraham.com/invtrend.html
+    year: 2013
+    retrieved_at: 2026-08-26
+    checksum: sha256:fce56529e2cb5e9bdb04a142230dfcdeaf4ca1223045147ac0e168f9338f6aee
+  - id: island
+    file: island.html
+    title: The Island Test
+    kind: essay
+    url: https://paulgraham.com/island.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:ec8aa1dbdfdeee1bfab1c3a8ada60e9af6060e02dd00e22bacf6588791e8b310
+  - id: javacover
+    file: javacover.html
+    title: Java's Cover
+    kind: essay
+    url: https://paulgraham.com/javacover.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:c828a9ef964d4bd12b72f22d50648657ab77720c0d1f075657ee38e9dcffddb3
+  - id: jessica
+    file: jessica.html
+    title: Jessica Livingston
+    kind: essay
+    url: https://paulgraham.com/jessica.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:7d34df39a33833bb5700bd79e55c4c2f60b32b511dfe6c3e64b130732cc0add3
+  - id: judgement
+    file: judgement.html
+    title: Two Kinds of Judgement
+    kind: essay
+    url: https://paulgraham.com/judgement.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:9c6c91212915bc1c04b275c513917e5b46785d16a6e3bad8d433c28438d10c4d
+  - id: kate
+    file: kate.html
+    title: What Kate Saw in Silicon Valley
+    kind: essay
+    url: https://paulgraham.com/kate.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:204a2b77bff63e8355534d92a498198a408a40d484662b9b22d7f86d162246ad
+  - id: kids
+    file: kids.html
+    title: Having Kids
+    kind: essay
+    url: https://paulgraham.com/kids.html
+    year: 2019
+    retrieved_at: 2026-08-26
+    checksum: sha256:679315e2970e83fd93e881467251ab314c42730fe1d0378835256ecc6bcc6012
+  - id: know
+    file: know.html
+    title: How You Know
+    kind: essay
+    url: https://paulgraham.com/know.html
+    year: 2014
+    retrieved_at: 2026-08-26
+    checksum: sha256:6ac6f98ef7d78eb5749b610e651c133584936045b9f1625fdb2802fbc0e75b82
+  - id: ladder
+    file: ladder.html
+    title: After the Ladder
+    kind: essay
+    url: https://paulgraham.com/ladder.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:5b0188b39bc2c9e61bd0dd2afd618159f21b175de2d70e083b33f3921a7f5d76
+  - id: langdes
+    file: langdes.html
+    title: Five Questions about Language Design
+    kind: essay
+    url: https://paulgraham.com/langdes.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:1cc017d4ac00db5299e7b6fc75bb0edf1cd31faafbef02dcf6ece2a1d96a0f4f
+  - id: laundry
+    file: laundry.html
+    title: A Version 1.0
+    kind: essay
+    url: https://paulgraham.com/laundry.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:5df738a229a05c78f1a87df7be382ee56fa965cec81a15ec411e06001ab15aaf
+  - id: lesson
+    file: lesson.html
+    title: The Lesson to Unlearn
+    kind: essay
+    url: https://paulgraham.com/lesson.html
+    year: 2019
+    retrieved_at: 2026-08-26
+    checksum: sha256:53a9201a58018ec096a012232e07efb0fa9a1ab9a7ee90f6d5851adda24a848d
+  - id: lies
+    file: lies.html
+    title: Lies We Tell Kids
+    kind: essay
+    url: https://paulgraham.com/lies.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:c4f0b7169296007644b410cdc5a2c8c1795245a532b6774fde86f3914a05e330
+  - id: love
+    file: love.html
+    title: How to Do What You Love
+    kind: essay
+    url: https://paulgraham.com/love.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:fb736341ac5f55694986b555d643638424dda3a8c78bb805724babd9316b026b
+  - id: mac
+    file: mac.html
+    title: Return of the Mac
+    kind: essay
+    url: https://paulgraham.com/mac.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:c04e35ca76217dae94f36a6a0c763db531545bdee3d0da3a00161b17de586395
+  - id: makersschedule
+    file: makersschedule.html
+    title: Maker's Schedule, Manager's Schedule
+    kind: essay
+    url: https://paulgraham.com/makersschedule.html
+    year: 2009
+    retrieved_at: 2026-08-16
+    checksum: sha256:c23c215d22fbd5965df8c34ad03b48f49735f6a884b5057abe56b6860df2d39a
+  - id: marginal
+    file: marginal.html
+    title: The Power of the Marginal
+    kind: essay
+    url: https://paulgraham.com/marginal.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:f03676d20db20d319b7d9cad4ff99b967b15ca5ca289175f74ecc1aab0edacd4
+  - id: maybe
+    file: maybe.html
+    title: Can You Buy a Silicon Valley?  Maybe.
+    kind: essay
+    url: https://paulgraham.com/maybe.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:153072c9955327277eaaeff02eba10a9a95544ee01f121f92d1d0ec05ca9b3e6
+  - id: mean
+    file: mean.html
+    title: Mean People Fail
+    kind: essay
+    url: https://paulgraham.com/mean.html
+    year: 2014
+    retrieved_at: 2026-08-26
+    checksum: sha256:ff5160f229d3e2724636c97e2813698e1445a23a5afb78675415653684f06d81
+  - id: microsoft
+    file: microsoft.html
+    title: Microsoft is Dead
+    kind: essay
+    url: https://paulgraham.com/microsoft.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:11b116e1e04b4259b71390e6cb9a3bc20afd3ce309409689aca29a33037e8b69
+  - id: mit
+    file: mit.html
+    title: A Student's Guide to Startups
+    kind: essay
+    url: https://paulgraham.com/mit.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:a9324ddf03a028800b6496f81164d82ab5b545cfac1f1bcf14c56c8fd64f33b2
+  - id: mod
+    file: mod.html
+    title: The Two Kinds of Moderate
+    kind: essay
+    url: https://paulgraham.com/mod.html
+    year: 2019
+    retrieved_at: 2026-08-26
+    checksum: sha256:7aa599fee617d444dd1ccaf9e0bd58b80e64e6488921d8713f97e31fa1a8138b
+  - id: name
+    file: name.html
+    title: Change Your Name
+    kind: essay
+    url: https://paulgraham.com/name.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:c17c8612ba713043b137c704688680c6b0099fd3d09c11f9972f6eb76f791b59
+  - id: nerds
+    file: nerds.html
+    title: Why Nerds are Unpopular
+    kind: essay
+    url: https://paulgraham.com/nerds.html
+    year: 2003
+    retrieved_at: 2026-08-26
+    checksum: sha256:d1e82f5e15d924e6b967042a4708dce8ffddc147ee42e0f11fa73b45d56ef2cc
+  - id: newideas
+    file: newideas.html
+    title: Crazy New Ideas
+    kind: essay
+    url: https://paulgraham.com/newideas.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:f0661770b45614cbc8f5b2b4926461ee7dead0ca3abc33dc392c49c4623a88a0
+  - id: newthings
+    file: newthings.html
+    title: Six Principles for Making New Things
+    kind: essay
+    url: https://paulgraham.com/newthings.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:c62f9014228d4d5a71bcb471547d8df428e99a4646a8b6f8e807d4c3e6aa5ddb
+  - id: nft
+    file: nft.html
+    title: An NFT That Saves Lives
+    kind: essay
+    url: https://paulgraham.com/nft.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:80884f842b031b2bfbb2148e4c7e71fef62af1d27992ef4cdfca50873ff0b591
+  - id: noob
+    file: noob.html
+    title: Being a Noob
+    kind: essay
+    url: https://paulgraham.com/noob.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:e972cb788e5875c32b67401cbfa0932e87764718a770d5dcccd93e6c39270ef6
+  - id: noop
+    file: noop.html
+    title: Why Arc Isn't Especially Object-Oriented
+    kind: essay
+    url: https://paulgraham.com/noop.html
+    retrieved_at: 2026-08-26
+    checksum: sha256:8f0a2e3356a16ac9d2dc2668b7899282620470017538f9743b11eb23991959c9
+  - id: notnot
+    file: notnot.html
+    title: Why to Not Not Start a Startup
+    kind: essay
+    url: https://paulgraham.com/notnot.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:a748e9c63287854b1ebd90b093b85ad7ca1c20186c070732a3d17e88fad269e0
+  - id: nov
+    file: nov.html
+    title: Novelty and Heresy
+    kind: essay
+    url: https://paulgraham.com/nov.html
+    year: 2019
+    retrieved_at: 2026-08-26
+    checksum: sha256:8d57741c438ea484958c0988f06fd703fec9d0e2a47122b9f8ff0b14d03f3b0e
+  - id: nthings
+    file: nthings.html
+    title: The List of N Things
+    kind: essay
+    url: https://paulgraham.com/nthings.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:784085e0f3ebaf7b2bb70a6d1e52116571d0b860a2ea1919c96047b3e5afff86
+  - id: opensource
+    file: opensource.html
+    title: What Business Can Learn from Open Source
+    kind: essay
+    url: https://paulgraham.com/opensource.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:e20dc02517d94d089d7fc8d67cea88b24547744913ca4278842cd553637cf46e
+  - id: organic
+    file: organic.html
+    title: Organic Startup Ideas
+    kind: essay
+    url: https://paulgraham.com/organic.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:e36cc9e21249d3c6f9a5969bdcd5f2a6273f735dd50b58c31e08413120c4145d
+  - id: orth
+    file: orth.html
+    title: Orthodox Privilege
+    kind: essay
+    url: https://paulgraham.com/orth.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:3cc14c354b815af184d3ec30fe15281d0f588667f8680ec01b69717a9ef2d9af
+  - id: own
+    file: own.html
+    title: A Project of One's Own
+    kind: essay
+    url: https://paulgraham.com/own.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:34c3d8d8622a1792d6134d84cb5aa94c663015b987c3d71ed5551f9a4d6880de
+  - id: patentpledge
+    file: patentpledge.html
+    title: The Patent Pledge
+    kind: essay
+    url: https://paulgraham.com/patentpledge.html
+    year: 2011
+    retrieved_at: 2026-08-26
+    checksum: sha256:71bb74e495a3543deacb0430872bbfa9e4c4e80bf24156bfc2bc548495ea6b0f
+  - id: persistence
+    file: persistence.html
+    title: The Right Kind of Stubborn
+    kind: essay
+    url: https://paulgraham.com/persistence.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:74172b1c04ceef41db18fb0a5615cf54a96db0d159cd09aa37f2c0ea77019949
+  - id: pgh
+    file: pgh.html
+    title: How to Make Pittsburgh a Startup Hub
+    kind: essay
+    url: https://paulgraham.com/pgh.html
+    year: 2016
+    retrieved_at: 2026-08-26
+    checksum: sha256:055676bb33951e392da6860f9a8a16b42f3ef021c966b02e82218e56827bb4d7
+  - id: philosophy
+    file: philosophy.html
+    title: How to Do Philosophy
+    kind: essay
+    url: https://paulgraham.com/philosophy.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:49d3ec62f91b5fd17fef160505159bb6529b5a0da896174599304e3d6794f189
+  - id: pinch
+    file: pinch.html
+    title: The Fatal Pinch
+    kind: essay
+    url: https://paulgraham.com/pinch.html
+    year: 2014
+    retrieved_at: 2026-08-26
+    checksum: sha256:2351f18849ffdc30a08b6c8d6f98a5e0a745e916f052525589362e547413ee9a
+  - id: polls
+    file: polls.html
+    title: Bradley's Ghost
+    kind: essay
+    url: https://paulgraham.com/polls.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:9b2bdc1e091a5769b98b2b8601c8f71bad29287904dc1325ade7f80d3d647042
+  - id: popular
+    file: popular.html
+    title: Being Popular
+    kind: essay
+    url: https://paulgraham.com/popular.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:f2ee3602012ba9ef12c75a591034e1ca8cdc2d2ff79c669c485f0c978c738351
+  - id: power
+    file: power.html
+    title: Succinctness is Power
+    kind: essay
+    url: https://paulgraham.com/power.html
+    year: 2002
+    retrieved_at: 2026-08-26
+    checksum: sha256:c36f7f527fbcb9fe161a70ad57cdb0a6c17f451a0e7405bbd717b9f86fe2947d
+  - id: prcmc
+    file: prcmc.html
+    title: The Pooled-Risk Company Management Company
+    kind: essay
+    url: https://paulgraham.com/prcmc.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:34964ae08adc0e3e210ff0a8b3e03eae3295f15a5c945e3b377b223cce378aaa
+  - id: prepare
+    file: prepare.html
+    title: How Universities Should Prepare Founders
+    kind: essay
+    url: https://paulgraham.com/prepare.html
+    year: 2026
+    retrieved_at: 2026-08-26
+    checksum: sha256:21e314fc06ddb191b5842b77b95b896943453319b76996bcd6383810857abc0d
+  - id: procrastination
+    file: procrastination.html
+    title: Good and Bad Procrastination
+    kind: essay
+    url: https://paulgraham.com/procrastination.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:fd623e5bc45b81dbeca25b0ac9252be2cd94f2cfc15f088662e8eeb0a4723bae
+  - id: progbot
+    file: progbot.html
+    title: Programming Bottom-Up
+    kind: essay
+    url: https://paulgraham.com/progbot.html
+    retrieved_at: 2026-08-26
+    checksum: sha256:f1b663bcc97fe1261554c34e2ae84d549ecd5e65916f77e2ba34919439b48611
+  - id: property
+    file: property.html
+    title: Defining Property
+    kind: essay
+    url: https://paulgraham.com/property.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:564f2c83ed9d7594c45fa75cb0e29f06898f7da6005e9265d15a6a05c6759b11
+  - id: publishing
+    file: publishing.html
+    title: Post-Medium Publishing
+    kind: essay
+    url: https://paulgraham.com/publishing.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:3ed534320ba9e9a24f05c6e441964422d3c03f8a96a4677f8b2def9c34561139
+  - id: pypar
+    file: pypar.html
+    title: The Python Paradox
+    kind: essay
+    url: https://paulgraham.com/pypar.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:9e2caff3a65019df743d9923d3097771c7b15fe2197240942b0c5431633e2be9
+  - id: quo
+    file: quo.html
+    title: Quotes
+    kind: essay
+    url: https://paulgraham.com/quo.html
+    retrieved_at: 2026-08-26
+    checksum: sha256:3d116df33482dec9042b3e786dceb53fa6cf759e43477f7307ac53d3fae28135
+  - id: ramenprofitable
+    file: ramenprofitable.html
+    title: Ramen Profitable
+    kind: essay
+    url: https://paulgraham.com/ramenprofitable.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:bfd4dbc9cb1178dce55db0a9a79ca66772ec5ec1f3a052b8d8483cc305d98e4f
+  - id: randomness
+    file: randomness.html
+    title: See Randomness
+    kind: essay
+    url: https://paulgraham.com/randomness.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:ef8f6f096c40f34b4d18e04230e7e431b4960ec8b92c1548e54bc9600310be5d
+  - id: raq
+    file: raq.html
+    title: RAQs
+    kind: essay
+    url: https://paulgraham.com/raq.html
+    retrieved_at: 2026-08-26
+    checksum: sha256:cf65aabf2cc57a9a87df2a83f920a1c9bdb404dcd433ba3cb234692df051ab9c
+  - id: re
+    file: re.html
+    title: The Refragmentation
+    kind: essay
+    url: https://paulgraham.com/re.html
+    year: 2016
+    retrieved_at: 2026-08-26
+    checksum: sha256:009edc2f9e6ce21b25478b5707bb0d2297a867aa5e427d9ca1f300f450aedc18
+  - id: read
+    file: read.html
+    title: The Need to Read
+    kind: essay
+    url: https://paulgraham.com/read.html
+    year: 2022
+    retrieved_at: 2026-08-26
+    checksum: sha256:b1a32693adaaada65c40640c08dde9d2db0c6dae56b29c468ee8da9af2103b58
+  - id: real
+    file: real.html
+    title: The Real Reason to End the Death Penalty
+    kind: essay
+    url: https://paulgraham.com/real.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:fe25c92506085051f399b95f0ccdbe015cd2ae82d0e03b17d136e6a0a5d2cf74
+  - id: really
+    file: really.html
+    title: What Startups Are Really Like
+    kind: essay
+    url: https://paulgraham.com/really.html
+    year: 2009
+    retrieved_at: 2026-08-16
+    checksum: sha256:8bfc2f6704a9f069af456fa859dcd75ac035433a0d3975235d1311b0efdcbcde
+  - id: reddits
+    file: reddits.html
+    title: The Reddits
+    kind: essay
+    url: https://paulgraham.com/reddits.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:f8740853690c300e187384aceb32a1014383a9922ce2fef255eff5cacd9121e7
+  - id: relres
+    file: relres.html
+    title: Relentlessly Resourceful
+    kind: essay
+    url: https://paulgraham.com/relres.html
+    year: 2009
+    retrieved_at: 2026-08-16
+    checksum: sha256:f919e56b68e0883e1dd098e2718de2a338f326da5f0dcff0b51fefd15da6002a
+  - id: revolution
+    file: revolution.html
+    title: A Local Revolution?
+    kind: essay
+    url: https://paulgraham.com/revolution.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:bb67a3d43b412f6deff238ce7da94bbeff844a1c1a34cd9723dfde26d3f8b750
+  - id: richnow
+    file: richnow.html
+    title: How People Get Rich Now
+    kind: essay
+    url: https://paulgraham.com/richnow.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:8d8b462492e474fae8e1168267725ee15d85016849618da2daa93a1f24857114
+  - id: road
+    file: road.html
+    title: The Other Road Ahead
+    kind: essay
+    url: https://paulgraham.com/road.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:5fb7da31d911c03b4a11073041c9233e8f4b2248fadd24248bb0e7244bf0c4ec
+  - id: ronco
+    file: ronco.html
+    title: The Ronco Principle
+    kind: essay
+    url: https://paulgraham.com/ronco.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:aeecc1ba97ffef05e05d410d7e14bd2109ee7eb9a98cf7e8aba4c5055b7e51ef
+  - id: rootsoflisp
+    file: rootsoflisp.html
+    title: The Roots of Lisp
+    kind: essay
+    url: https://paulgraham.com/rootsoflisp.html
+    year: 2001
+    retrieved_at: 2026-08-26
+    checksum: sha256:743f8f883e87d435189a1958dde33f13cf575a70d7984bcdc0789cd71c98a752
+  - id: safe
+    file: safe.html
+    title: Why It's Safe for Founders to Be Nice
+    kind: essay
+    url: https://paulgraham.com/safe.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:d2816368cda86c323a969614c4247b6fd1b03e8f674ffd52d77541a78457b00d
+  - id: say
+    file: say.html
+    title: What You Can't Say
+    kind: essay
+    url: https://paulgraham.com/say.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:f99dcbe6a7fa5c09e828167e3359260a17bf3b31e36d0cddaa8d3065d663c1fd
+  - id: schlep
+    file: schlep.html
+    title: Schlep Blindness
+    kind: essay
+    url: https://paulgraham.com/schlep.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:7415f0ce5062a7fbf7108d290d151037502dcbbb5b02fc201b4fb03e52079bb6
+  - id: seesv
+    file: seesv.html
+    title: Where to See Silicon Valley
+    kind: essay
+    url: https://paulgraham.com/seesv.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:700dfa9a0951ff3b305605b20ac0b35882789369ea0c2873c34371602d5ecf8f
+  - id: segway
+    file: segway.html
+    title: The Trouble with the Segway
+    kind: essay
+    url: https://paulgraham.com/segway.html
+    year: 2009
+    retrieved_at: 2026-08-26
+    checksum: sha256:50a20b2d39fd12cd0653b2b5300ebfbbc650be83b89d662e710e95650b9170ea
+  - id: selfindulgence
+    file: selfindulgence.html
+    title: How to Lose Time and Money
+    kind: essay
+    url: https://paulgraham.com/selfindulgence.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:2a92c47787d47c7c460d0fb0314b58cdf18b5c6919e1bc73cda2d6d5648d51d1
+  - id: sfp
+    file: sfp.html
+    title: What I Did this Summer
+    kind: essay
+    url: https://paulgraham.com/sfp.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:f2f2628e0a4a2268bb2c27ca7a04f3606c6eea4c794c4b29625a10eaaef263ab
+  - id: siliconvalley
+    file: siliconvalley.html
+    title: How to Be Silicon Valley
+    kind: essay
+    url: https://paulgraham.com/siliconvalley.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:1f20afd9ab6aa67acc37b2668aa9ae92553370414e1495f45e260eb93e871175
+  - id: simply
+    file: simply.html
+    title: Write Simply
+    kind: essay
+    url: https://paulgraham.com/simply.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:5c92a2ff6e9e1d95e882fba28d6a1c22d4561d94cf0514ae9b6cdec3b59d255c
+  - id: smart
+    file: smart.html
+    title: Beyond Smart
+    kind: essay
+    url: https://paulgraham.com/smart.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:0da31096105f14f4c91281eb0d2d347e67da71594a55eb1abf2049611359e0f8
+  - id: softwarepatents
+    file: softwarepatents.html
+    title: Are Software Patents Evil?
+    kind: essay
+    url: https://paulgraham.com/softwarepatents.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:cdcbd5cfc8cfadaa26347e709cdd3a9b7858a3883aab15d4367ef72111e1036e
+  - id: spam
+    file: spam.html
+    title: A Plan for Spam
+    kind: essay
+    url: https://paulgraham.com/spam.html
+    year: 2002
+    retrieved_at: 2026-08-26
+    checksum: sha256:966f59afeaf0e24c9b5c305cc408cc157acbf55026ce567ed46e74f313391f44
+  - id: speak
+    file: speak.html
+    title: Writing and Speaking
+    kind: essay
+    url: https://paulgraham.com/speak.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:bf901cd4f5bcccd6621ad17ceaa0e7be009de4d53049ef0aa76b29897f76cac5
+  - id: start
+    file: start.html
+    title: How to Start a Startup
+    kind: essay
+    url: https://paulgraham.com/start.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:9c38bd65f2fb49d821c88cc6c0305698152d203cceac3d20ebd5cff85fd1f139
+  - id: startupfunding
+    file: startupfunding.html
+    title: How to Fund a Startup
+    kind: essay
+    url: https://paulgraham.com/startupfunding.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:c0e65324e1dc0f8082d4b85de51644e50e15b13a2d63c933622ff688acb5ac8e
+  - id: startuphubs
+    file: startuphubs.html
+    title: Why to Move to a Startup Hub
+    kind: essay
+    url: https://paulgraham.com/startuphubs.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:d9d75e78cf7ff64eddd9498505e57dfe3f54921ba85772dd1013244e9372090c
+  - id: startupideas
+    file: startupideas.html
+    title: How to Get Startup Ideas
+    kind: essay
+    url: https://paulgraham.com/startupideas.html
+    year: 2012
+    retrieved_at: 2026-08-16
+    checksum: sha256:6820d15f9c9e77d1efcf6d05407119da59bd74271cdfc78bb41c3ecdfa8f870a
+  - id: startuplessons
+    file: startuplessons.html
+    title: The Hardest Lessons for Startups to Learn
+    kind: essay
+    url: https://paulgraham.com/startuplessons.html
+    year: 2006
+    retrieved_at: 2026-08-16
+    checksum: sha256:5b0db063bd2ce2b6fa7e2ee5ad912cea23e3f8aa0daeb169be669a5e07f29a4f
+  - id: startupmistakes
+    file: startupmistakes.html
+    title: The 18 Mistakes That Kill Startups
+    kind: essay
+    url: https://paulgraham.com/startupmistakes.html
+    year: 2006
+    retrieved_at: 2026-08-16
+    checksum: sha256:905f6160c0532160fa7d4f5eb3c25fee2749e56b43b6652963422a574eac7bc8
+  - id: stuff
+    file: stuff.html
+    title: Stuff
+    kind: essay
+    url: https://paulgraham.com/stuff.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:f149c5bc30de2bf65f3d074fb1d4c163dc8b7f10d5821932fb55632526f795cf
+  - id: submarine
+    file: submarine.html
+    title: The Submarine
+    kind: essay
+    url: https://paulgraham.com/submarine.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:0c535b48befca3c9479bb944eafb9c38946b9d6a43a280b8e7d8c91e5469f2b8
+  - id: sun
+    file: sun.html
+    title: General and Surprising
+    kind: essay
+    url: https://paulgraham.com/sun.html
+    year: 2017
+    retrieved_at: 2026-08-26
+    checksum: sha256:2acbb3a2af976bf2debbd8641f41b325ca622c3bfe537372fac5fb2c4f2f131b
+  - id: superangels
+    file: superangels.html
+    title: The New Funding Landscape
+    kind: essay
+    url: https://paulgraham.com/superangels.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:da8efbe414d5d5080b7a98e8957b7ae1320ddfce42b379a8efce4cbc585c0bfd
+  - id: superlinear
+    file: superlinear.html
+    title: Superlinear Returns
+    kind: essay
+    url: https://paulgraham.com/superlinear.html
+    year: 2023
+    retrieved_at: 2026-08-16
+    checksum: sha256:91ab4eb0113abeb24f1e217e38053b0822e3a2e59cf501457bf9cc1bc9013609
+  - id: swan
+    file: swan.html
+    title: Black Swan Farming
+    kind: essay
+    url: https://paulgraham.com/swan.html
+    year: 2012
+    retrieved_at: 2026-08-16
+    checksum: sha256:a9c739af26de927f3498a2201aa8a3b84f616df038f267fed2e9a17439a2593d
+  - id: tablets
+    file: tablets.html
+    title: Tablets
+    kind: essay
+    url: https://paulgraham.com/tablets.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:f9ee78151460d7ba6f7b37d535a833b3002b01f2bbf141fb68cd12fc1a551470
+  - id: talk
+    file: talk.html
+    title: Write Like You Talk
+    kind: essay
+    url: https://paulgraham.com/talk.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:9be80cf85908a7b22013573fe14c55860c0cb6b6917cedc39ea6e8b9328e884a
+  - id: taste
+    file: taste.html
+    title: Taste for Makers
+    kind: essay
+    url: https://paulgraham.com/taste.html
+    year: 2002
+    retrieved_at: 2026-08-26
+    checksum: sha256:e0a852e54fd6c769caa57f568d9481e2183a97123c1fe3640a5983ee364ddae6
+  - id: think
+    file: think.html
+    title: How to Think for Yourself
+    kind: essay
+    url: https://paulgraham.com/think.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:2e4b64777c39af8925cd72bb1210bd10c25c91945cc59fb6d574d82f4cc051aa
+  - id: top
+    file: top.html
+    title: The Top Idea in Your Mind
+    kind: essay
+    url: https://paulgraham.com/top.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:45d3ea1fb9ce1d19dead4fb6c098e9398f7ed1e2ca3c627636b4dc1e8371a840
+  - id: trolls
+    file: trolls.html
+    title: Trolls
+    kind: essay
+    url: https://paulgraham.com/trolls.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:999943f8145572d1ce9bef44f68cb122bad0969e6049186b4a8a93b5f2a945b9
+  - id: unions
+    file: unions.html
+    title: An Alternative Theory of Unions
+    kind: essay
+    url: https://paulgraham.com/unions.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:a9bc23c39cbdd119f5050fb132d6c62eb6e021adb13d38d4e7cb1024035ef36c
+  - id: usa
+    file: usa.html
+    title: Made in USA
+    kind: essay
+    url: https://paulgraham.com/usa.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:797cb3662644cc0b7230103816e189fd0c387e9fad92f62faa7cf0976736595e
+  - id: useful
+    file: useful.html
+    title: How to Write Usefully
+    kind: essay
+    url: https://paulgraham.com/useful.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:54ea3db52e8514557bd9fe4564f7bb89ceefbe0b2f2e782421319fcc7fbd6efa
+  - id: users
+    file: users.html
+    title: What I've Learned from Users
+    kind: essay
+    url: https://paulgraham.com/users.html
+    year: 2022
+    retrieved_at: 2026-08-26
+    checksum: sha256:e95238c15b65bf46e559c6bd023215546163cd9fb500b48955dd8b6f9f99da5f
+  - id: vb
+    file: vb.html
+    title: Life is Short
+    kind: essay
+    url: https://paulgraham.com/vb.html
+    year: 2016
+    retrieved_at: 2026-08-26
+    checksum: sha256:d9fcafb25ef9bd35cb009153972c5d63735a203d3b9dd85b4c7b629eea1b5ab8
+  - id: vcsqueeze
+    file: vcsqueeze.html
+    title: The Venture Capital Squeeze
+    kind: essay
+    url: https://paulgraham.com/vcsqueeze.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:1051cae5391f61a8760d652e833092eb4ee43206fb970a692d0c5ee54348c5d7
+  - id: venturecapital
+    file: venturecapital.html
+    title: A Unified Theory of VC Suckage
+    kind: essay
+    url: https://paulgraham.com/venturecapital.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:c7a77979da74e4ed769c1fc8a708daa20bc7411411b200e7c98dff54c469d26b
+  - id: vw
+    file: vw.html
+    title: "Snapshot: Viaweb, June 1998"
+    kind: essay
+    url: https://paulgraham.com/vw.html
+    year: 1998
+    retrieved_at: 2026-08-26
+    checksum: sha256:400556ced575074130dea68cecf7f2f49d2f99fb1305a7b06a60dbdb1ab64ed8
+  - id: want
+    file: want.html
+    title: What You (Want to)* Want
+    kind: essay
+    url: https://paulgraham.com/want.html
+    year: 2022
+    retrieved_at: 2026-08-26
+    checksum: sha256:4f6fd80f77f2ca692faaee8ab2386a7902a22b6e17f759146e53b998c0fab3db
+  - id: wealth
+    file: wealth.html
+    title: How to Make Wealth
+    kind: essay
+    url: https://paulgraham.com/wealth.html
+    year: 2004
+    retrieved_at: 2026-08-26
+    checksum: sha256:30b2b8337569bfe98deafd13b0956082032ee6ed9fe8fc98c561dbe9a7c32b9f
+  - id: web20
+    file: web20.html
+    title: Web 2.0
+    kind: essay
+    url: https://paulgraham.com/web20.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:be52d34ae2fa4926bd6fc7c9102560a1919d8da093b8771fbc1451c49e736e31
+  - id: webstartups
+    file: webstartups.html
+    title: The Future of Web Startups
+    kind: essay
+    url: https://paulgraham.com/webstartups.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:4fdf071477ec0a7d652cf63de4cac7988ce2a071549543097c007a96ca18a612
+  - id: weird
+    file: weird.html
+    title: Weird Languages
+    kind: essay
+    url: https://paulgraham.com/weird.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:998b229e3a3129ac8f0e1066d0803d9499c39ebd4a0fd8339cba8d67468a5605
+  - id: when
+    file: when.html
+    title: When To Do What You Love
+    kind: essay
+    url: https://paulgraham.com/when.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:92eb393e1a5e2459256581dd9ddfb45f33b20ea4abf8b29ceb5e013664235e2a
+  - id: whyyc
+    file: whyyc.html
+    title: Why YC
+    kind: essay
+    url: https://paulgraham.com/whyyc.html
+    year: 2006
+    retrieved_at: 2026-08-26
+    checksum: sha256:25459a89c66274a2156df162ef7df223b09a52f47ced992b27eb901125deeb0f
+  - id: winc
+    file: winc.html
+    title: How to Convert Between Wealth and Income Tax
+    kind: essay
+    url: https://paulgraham.com/winc.html
+    year: 2026
+    retrieved_at: 2026-08-26
+    checksum: sha256:44a4d7c49cc5f72e6971c7101d6f7c37af27c05a425f81b1f80fb24c536ccb35
+  - id: wisdom
+    file: wisdom.html
+    title: Is It Worth Being Wise?
+    kind: essay
+    url: https://paulgraham.com/wisdom.html
+    year: 2007
+    retrieved_at: 2026-08-26
+    checksum: sha256:2f7c552e935be89c872318adc0ec8ef27de2a250e25a003b44ef416a49057710
+  - id: woke
+    file: woke.html
+    title: The Origins of Wokeness
+    kind: essay
+    url: https://paulgraham.com/woke.html
+    year: 2025
+    retrieved_at: 2026-08-26
+    checksum: sha256:6b32404cc7c3ec82238123268a5bdfe53fdb697257a4ce20d27308e9c704b306
+  - id: word
+    file: word.html
+    title: A Word to the Resourceful
+    kind: essay
+    url: https://paulgraham.com/word.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:ef128d6bfe7e38f8cdf53a061a8d1318ac9d76c02fc7323c8666d8dc63219233
+  - id: words
+    file: words.html
+    title: Putting Ideas into Words
+    kind: essay
+    url: https://paulgraham.com/words.html
+    year: 2022
+    retrieved_at: 2026-08-26
+    checksum: sha256:de89c205a2052cde4dfa659730ef062aa98e94f96beb63ba83012d3a4850c3a9
+  - id: work
+    file: work.html
+    title: What Doesn't Seem Like Work?
+    kind: essay
+    url: https://paulgraham.com/work.html
+    year: 2015
+    retrieved_at: 2026-08-26
+    checksum: sha256:22d1b6a4f6fe579bc3ef62e1b3689bd41b9195cf5630ff564d38802228959a76
+  - id: worked
+    file: worked.html
+    title: What I Worked On
+    kind: essay
+    url: https://paulgraham.com/worked.html
+    year: 2021
+    retrieved_at: 2026-08-26
+    checksum: sha256:88afa26e8f4487b9eb6fa13b9ee1813b8e31d59b03627930fe43e0504a08cd50
+  - id: writes
+    file: writes.html
+    title: Writes and Write-Nots
+    kind: essay
+    url: https://paulgraham.com/writes.html
+    year: 2024
+    retrieved_at: 2026-08-26
+    checksum: sha256:e6566b090a8265f4c7d692104ceeeffb1b97a543d221b1404ac31e0ff9e6c2c0
+  - id: writing44
+    file: writing44.html
+    title: Writing,  Briefly
+    kind: essay
+    url: https://paulgraham.com/writing44.html
+    year: 2005
+    retrieved_at: 2026-08-26
+    checksum: sha256:f97aa47127df7279065ff255c1c05d9aed0466015918f58d5c4bdb3c47823f55
+  - id: wtax
+    file: wtax.html
+    title: Modeling a Wealth Tax
+    kind: essay
+    url: https://paulgraham.com/wtax.html
+    year: 2020
+    retrieved_at: 2026-08-26
+    checksum: sha256:60e6497d541c69e130bf9b987d0b8fe7decaa5bcd7819a9cb54d1b092779c171
+  - id: yahoo
+    file: yahoo.html
+    title: What Happened to Yahoo
+    kind: essay
+    url: https://paulgraham.com/yahoo.html
+    year: 2010
+    retrieved_at: 2026-08-26
+    checksum: sha256:3e44f5d317aa031257b1133e0b76a3185d9a6280a7f67b5ad8d70b5045f8cd00
+  - id: ycombinator
+    file: ycombinator.html
+    title: A New Venture Animal
+    kind: essay
+    url: https://paulgraham.com/ycombinator.html
+    year: 2008
+    retrieved_at: 2026-08-26
+    checksum: sha256:1bd2ff50106c74ccc1e42ba2b54211db4e49e92c11ef24c85afa48f3997a7002
+  - id: ycstart
+    file: ycstart.html
+    title: How Y Combinator Started
+    kind: essay
+    url: https://paulgraham.com/ycstart.html
+    year: 2012
+    retrieved_at: 2026-08-26
+    checksum: sha256:4e97c7e320a565bc8fcb843c9d925374849f9435cbcf7dc2d1232f197140fab8

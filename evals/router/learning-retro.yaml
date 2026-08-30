@@ -1,0 +1,5 @@
+query: The onboarding reminder email experiment just ended. What did we learn?
+expect:
+  skills: [learning]
+  context_keys_include: [experiments]
+  better_question: any
