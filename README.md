@@ -1,30 +1,119 @@
 # FounderOS
 
-**A decision system for founders who want to be challenged by reality, not flattered by a chatbot.**
+**An evidence-driven decision system for founders who would rather be corrected than comforted.**
 
-FounderOS turns a frontier model into a disciplined operating layer for one startup: it loads the facts you have recorded, applies an explicit procedure, retrieves real source material, challenges its own recommendation, and leaves a trace you can inspect.
+Most AI advice is polished pattern-matching: it cannot show which company fact it used, whether a quote is real, or where its recommendation breaks. FounderOS treats a founder-facing LLM system like an engineering system: explicit inputs, constrained procedures, adversarial review, and an execution trace.
 
-It is built around one falsifiable product hypothesis:
+> **Product hypothesis:** FounderOS should improve a founder's judgment compared with giving the same model the same company context in one prompt.
 
-> FounderOS should produce better founder judgment than giving the same model the same company context in a prompt.
+That is a testable claim, not a slogan. The repository includes a `context-dump` control arm, a mechanism-by-mechanism ablation ladder, frozen fixtures, recorded runs, and a deletion rule: if a layer does not earn its cost in evaluation, it is baggage.
 
-That is not a slogan. The repository includes the control arm (`context-dump`), an ablation ladder for every major layer, frozen evaluation fixtures, and a rule: if a layer does not improve outcomes, it is a candidate for deletion.
+```mermaid
+flowchart LR
+  Q[Founder question] --> R[Route<br/>skill + bounded context]
+  R --> G[Ground<br/>memory + sources + signals]
+  G --> A[Answer<br/>structured brief]
+  A --> V{Evidence valid?}
+  V -- no --> A
+  V -- yes --> C[Challenge<br/>independent critique]
+  C --> T[Trace<br/>inputs, versions, outputs]
+  T --> O[Decision-ready answer]
+```
 
-## Why this exists
+## Why this is a serious project
 
-Generic AI advice is cheap because it is unconstrained. It does not know which metric moved, which decision is still unproven, what a customer actually said, or what you have been avoiding. It also has no cost for agreeing with you.
+FounderOS treats model output as an untrusted boundary, not a product primitive.
 
-FounderOS adds five concrete constraints:
+| Property | Concrete mechanism |
+| --- | --- |
+| **Company context is auditable** | Private startup memory is typed YAML and Markdown. The selected subset is hashed and saved with every run. |
+| **Advice follows a procedure** | Nine versioned skills declare required context, output schema, source vocabulary, and failure modes. |
+| **Source claims have receipts** | Every principle marked as a quote is located in the fetched corpus during `pnpm verify`. |
+| **A confident draft is not final** | A separate challenger critiques the draft and can revise it; an unsourced revision is discarded. |
+| **Paid inference becomes test input** | Raw responses in a trace can be saved as fixtures and replayed end to end without credentials. |
+| **Missing infrastructure degrades honestly** | No API key or unavailable corpus yields a useful, labelled offline brief — never simulated model synthesis. |
 
-| Layer | What it contributes |
-|---|---|
-| **Startup Memory** | Your goals, metrics, decisions, customers, feedback, experiments, and meetings — private, structured, file-backed. |
-| **Skills** | Nine explicit procedures for recurring founder work. A skill is a checklist with failure modes, not a persona prompt. |
-| **Knowledge Base** | Source-grounded principles and passages in Postgres + pgvector, searched lexically and semantically when embeddings are configured. |
-| **Challenger** | A separate pass that tries to invalidate the recommendation before you see it. |
-| **Trace + evals** | The route, selected context, prompts, citations, and final result are recorded; the architecture is measured against simpler alternatives. |
+This is not multi-agent theatre. The default pipeline is deliberately small: route, reason, challenge. Each stage is a measurable intervention that can be removed, replayed, and evaluated.
 
-The output is intentionally short: one constraint, up to three priorities, what to ignore, the biggest uncertainty, a next action, and — when it would change the call — a question back to you.
+## The engineering, up close
+
+### Provider weirdness is quarantined at the boundary
+
+Structured output fails in ways normal applications rarely see: a valid object wrapped in `{"body": ...}`, an enum double-encoded as JSON, or a response that is semantically correct but rejected by the SDK schema parser. FounderOS normalizes those observed deformations at the provider boundary rather than leaking provider-specific workarounds across the product.
+
+```text
+provider response
+      │
+      ├─ schema parses ──────────────────────────────► use it
+      └─ schema mismatch
+            │
+            ├─ unwrap a single-key envelope (depth ≤ 2)
+            ├─ decode only valid JSON string literals
+            ├─ validate again against the exact Zod schema
+            └─ retry once with a precise format nudge
+```
+
+[`src/provider.ts`](src/provider.ts) preserves ordinary prose, salvages only schema-valid data, and does not retry auth, billing, or rate-limit errors. It keeps the rest of the system provider-agnostic while handling the failures that actually occurred in production-like runs.
+
+### AI-assisted ingestion has a quote gate, not blind writes
+
+`context ingest` creates a deterministic merge plan before writing private startup memory. Nothing is written without `--apply`; a proposed fact needs a verbatim source span; low-confidence items are kept as unresolved; replacing founder-authored values requires `--overwrite`.
+
+```mermaid
+flowchart TD
+  N[Note] --> X[Extract proposals]
+  X --> Q{Quote occurs verbatim?}
+  Q -- no --> Reject[Reject]
+  Q -- yes --> C{Confidence >= 0.50?}
+  C -- no --> U[unresolved.yaml]
+  C -- yes --> M{Matches existing fact?}
+  M -- no --> Add[Add on --apply]
+  M -- yes, no field change --> D[Deterministic no-op]
+  M -- yes, empty field --> Update[Update on --apply]
+  M -- yes, replacement --> Conflict[Needs --overwrite]
+```
+
+Every applied entity carries provenance: source, source type, import date, and original quote. The planner is pure, so the same note and workspace produce the same merge plan — a pragmatic way to test an LLM-shaped workflow without paying for an LLM on every test.
+
+### Citations are build artifacts, not decoration
+
+The knowledge layer keeps private company memory separate from shared source-grounded material. It uses PostgreSQL + pgvector when available, lexical retrieval when embeddings are absent, and reciprocal-rank fusion when both are available. More importantly, a quotation has to survive local verification against the corpus before it is trusted.
+
+```text
+source manifest + SHA-256
+           │
+           ▼
+fetched source text ──► contiguous chunks ──► claims / principles
+           │                                      │
+           └──── quote lookup during verify ◄─────┘
+                                                  │
+question + skill vocabulary ──► retrieval ──► citable passage IDs
+```
+
+The repository distinguishes verified quotations from paraphrases whose original source has not yet been established. A missing source is a visible limit, not an invitation to manufacture authority.
+
+### Answers can be replayed and challenged
+
+Every run records the selected context hash, skill and expert versions, corpus passage IDs, prompts, raw model outputs, timings, and final result. A paid run can become a zero-cost regression fixture. Replay validates routing, context selection, citations, challenger handoff, tracing, and rendering without provider credentials.
+
+The challenger receives the context and the draft, but not the reasoning chain that generated it. If its revision cites support that was never retrieved, FounderOS keeps the already-validated draft rather than shipping an impressive-sounding fabrication.
+
+## The evaluation is part of the product
+
+The architecture is not assumed to create value. The project is designed to test which layer, if any, produces a better answer.
+
+```mermaid
+flowchart LR
+  V[Vanilla model] --> D[Context dump]
+  D --> S[Selected context]
+  S --> K[Skill procedure]
+  K --> E[Skill + experts]
+  E --> F[FounderOS + challenger]
+```
+
+Comparisons are blind and position-randomized. A win over `context-dump` is attributed only to a closed mechanism: context selection, procedure, expert knowledge, challenger, provenance, action structure, or decision memory. A win over an empty chat is not evidence that the system works.
+
+The harness also reports losses, ties, cost, latency, and broken rungs in the ladder. Live behavioral superiority is therefore still an open claim, not a marketing claim. See [the validation plan](docs/v0-validation.md).
 
 ## Try it in three minutes
 
@@ -35,17 +124,15 @@ git clone <your-fork-or-clone-url> founderos
 cd founderos
 nvm use 22
 ./scripts/setup.sh
-```
 
-The setup script installs dependencies, prepares Postgres + pgvector when available, migrates and ingests the knowledge base, fetches the reproducible source corpus, creates `.env`, and ends with a diagnosis.
-
-```bash
 pnpm founderos doctor
 pnpm founderos status
 pnpm founderos ask "Where should I focus this week?" --offline
 ```
 
-The offline answer is useful on purpose: it is a deterministic brief containing your blocking signals, the selected procedure, failure modes, and real source passages. It does not pretend to be model synthesis.
+The setup script installs dependencies, prepares Postgres + pgvector when available, migrates and ingests the knowledge base, fetches the reproducible source corpus, creates `.env`, and ends with a diagnosis.
+
+The offline answer is deliberately honest: a deterministic brief with blocking signals, the selected procedure, failure modes, and real source passages. It does not pretend to be model synthesis.
 
 For the full pipeline, add an Anthropic key to `.env`:
 
@@ -53,23 +140,9 @@ For the full pipeline, add an Anthropic key to `.env`:
 ANTHROPIC_API_KEY=... pnpm founderos ask "Where should I focus this week?"
 ```
 
-Every non-ready component is diagnosed with the exact command to fix it and what still works without it. Run `pnpm founderos doctor` instead of guessing.
+Run `pnpm founderos doctor` rather than guessing. Every non-ready component reports the exact repair command and what remains usable without it.
 
-## What a run does
-
-```text
-question
-  │
-  ├─ 1. Route          Selects a skill, expert packs, and closed context keys
-  ├─ 2. Ground         Loads only the relevant startup memory and source material
-  ├─ 3. Reason         Produces a structured, concise recommendation
-  ├─ 4. Challenge      Attacks the draft and may replace it with a revision
-  └─ 5. Trace          Saves inputs, versions, provenance, and outputs to disk
-```
-
-The system owns the orchestration. The model provider is behind a small local interface in [`src/provider.ts`](src/provider.ts); Vercel AI SDK is an implementation detail, not the architecture.
-
-### Ask the work you actually do
+## Work the decisions you actually have
 
 ```bash
 pnpm founderos ask "What should I focus on this week?"
@@ -78,96 +151,35 @@ pnpm founderos ask "How should I prepare for my call with Priya?" --skill meetin
 pnpm founderos ask "Is this ready to ship?" --skill product-review
 ```
 
-The router can select a skill, or you can pin one to remove routing from the equation. The built-in set covers:
+The router selects a skill, or you can pin one to remove routing from the equation. The built-in set covers:
 
 `focus` · `decision` · `pricing` · `positioning` · `customer-discovery` · `founder-sales` · `product-review` · `meeting-prep` · `learning`
 
-Use `--no-challenge`, `--no-experts`, or `--no-corpus` to run a controlled ablation of a real question. Use `--save-run <name>` to turn a paid run into an offline regression fixture.
+Use `--no-challenge`, `--no-experts`, or `--no-corpus` to run a controlled ablation. Use `--save-run <name>` to turn a paid run into an offline regression fixture.
 
-## Two memories, kept separate
-
-FounderOS does not turn your company notes into a shared database, and it does not treat public knowledge as private memory.
+## Two memories, deliberately separate
 
 | | Startup Memory | Knowledge Base |
-|---|---|---|
+| --- | --- | --- |
 | Purpose | What is true about your company | What an author actually wrote |
 | Storage | YAML + Markdown | PostgreSQL + pgvector |
 | Scope | Private, small, founder-specific | Shared, source-grounded, expandable |
 | Retrieval | Explicit closed context keys | Hybrid lexical + semantic retrieval with RRF |
 | Change model | Files you can diff and review | Corpus manifest, migration, deterministic ingest |
 
-That boundary is a product decision. Startup memory stays inspectable and easy to back up; the knowledge layer gets the indexing and scale it actually needs.
+That boundary is a product choice. Private company context stays small, inspectable, and easy to back up. Shared knowledge gets indexing and provenance without becoming a hidden system of record for the startup.
 
-## Capture context without becoming a YAML operator
+## Product direction — not shipped claims
 
-```bash
-# Paste a note or pipe one in.
-pnpm founderos context add "Priya said onboarding was confusing. MRR is 3620 now."
-
-# Preview a file or an entire directory before anything is written.
-pnpm founderos context import notes/customer-call.md
-pnpm founderos context import notes/customer-call.md --apply
-
-# Process the inbox, then archive successfully handled notes.
-pnpm founderos context ingest --apply --archive
-pnpm founderos context show --full
-```
-
-Ingestion is designed to be reviewable rather than magical:
-
-- nothing is written without `--apply`;
-- a fact must carry a verbatim quote from the input or it is rejected;
-- conflicts with founder-authored data require `--overwrite`;
-- low-confidence decisions are held in `unresolved.yaml`, not asserted as fact;
-- re-ingesting the same content is a deterministic no-op, even under a new filename.
-
-You can start with a scaffold instead of the example workspace:
-
-```bash
-pnpm founderos init ~/my-company
-export FOUNDEROS_CONTEXT=~/my-company
-pnpm founderos context show
-```
-
-## Knowledge with receipts
-
-The knowledge layer is not “act like Paul Graham.” It stores sources, verbatim claims, contributor-authored principles, frameworks, and the evidence joining them. A principle marked `quoted` must resolve to an exact span of a fetched source document or verification fails.
-
-```bash
-pnpm knowledge search "recruit users manually"
-pnpm knowledge search "make a few users love you" --kind framework
-pnpm knowledge search "how should I think about what to charge" --semantic
-pnpm knowledge verify
-```
-
-The corpus itself is fetched locally rather than redistributed. Its committed manifest contains source metadata and SHA-256 checksums; a changed document forces explicit re-verification before its citations are trusted.
-
-The Paul Graham pack contains verified quoted principles. The Michael Seibel pack is deliberately marked paraphrase-only and low confidence until source material can be verified. Missing evidence is represented as a limit, not filled with plausible text.
-
-## Build choices worth inspecting
+The next version of FounderOS should make decision quality compound over time instead of generating a stronger one-off answer:
 
 ```text
-app/                  Next.js interface: setup, context, ask, knowledge
-src/context.ts        Startup-memory schema, validation, hashing, file boundary
-src/router.ts         Skill/context/expert selection
-src/pipeline.ts       Route → ground → reason → challenge → trace
-src/provider.ts       Provider boundary and structured-output normalization
-src/knowledge/        Corpus, ingest, retrieval, embeddings, provenance checks
-src/ingest/           Preview, conflict handling, quote gate, apply flow
-src/eval.ts           Ablations, blind judging, attribution, partial recovery
-skills/               Versioned procedures and failure modes
-experts/              Versioned expert packs and principle IDs
-context/example/      Inspectable starter startup memory
-evals/                Frozen fixtures, router cases, behavioral cases
+decision ──► assumption ──► evidence ──► test ──► outcome ──► learning
+    │                                                        │
+    └────────────────── revisit with new evidence ◄─────────┘
 ```
 
-Some deliberate non-features matter as much as the code:
-
-- no multi-agent theater — one strong model, with at most route/reason/challenge calls;
-- no opaque vector store for your company memory;
-- no expert quote accepted on model confidence alone;
-- no final answer without an actionable next step;
-- no complexity considered sacred once the evals say it is not earning its cost.
+A decision graph like this could reveal which belief carries the most risk, which decision deserves review, and whether a recommendation helped after the fact. This is product direction, not a claim that those capabilities exist today.
 
 ## Verify before you trust it
 
@@ -175,26 +187,24 @@ Some deliberate non-features matter as much as the code:
 pnpm verify
 ```
 
-This runs TypeScript checking, verifies every quoted principle against the fetched corpus, and executes the offline test suite. The pipeline also supports recorded provider responses, so routing, context selection, provenance, challenger handoff, tracing, and rendering can be regression-tested without credentials.
+This runs TypeScript checking, quote verification against the fetched corpus, and the offline suite. Recorded provider responses let core orchestration be regression-tested without credentials.
 
-Behavioral quality is intentionally a separate claim. The evaluation harness runs both basic references and an ablation ladder:
+## Repository map
 
 ```text
-Claude / GPT vanilla
-        ↓
-context-dump → context-selected → skill → skill + experts → FounderOS
-                                                               + challenger
+app/                  Next.js interface: setup, context, ask, knowledge
+src/context.ts        Startup-memory schema, validation, hashing, file boundary
+src/router.ts         Skill/context/expert selection
+src/pipeline.ts       Route → ground → reason → challenge → trace
+src/provider.ts       Provider boundary and structured-output recovery
+src/knowledge/        Corpus, ingest, retrieval, embeddings, provenance checks
+src/ingest/           Preview, quote gate, conflict handling, apply flow
+src/eval.ts           Ablations, blind judging, attribution, partial recovery
+skills/               Versioned procedures and failure modes
+experts/              Versioned expert packs and principle IDs
+context/example/      Inspectable starter startup memory
+evals/                Frozen fixtures, router cases, behavioral cases
 ```
-
-Each comparison is blind and position-randomized. When FounderOS wins against `context-dump`, the judge attributes the advantage to a closed mechanism such as context selection, procedure, expert knowledge, challenger, provenance, action structure, or decision memory. A win against a blank chat is not treated as proof.
-
-```bash
-pnpm eval --estimate
-pnpm eval:router
-pnpm eval --limit 2 --arms context-dump
-```
-
-Live behavioral results are still pending a funded evaluation run. The project does not claim model-quality superiority before that experiment exists; see [`docs/v0-validation.md`](docs/v0-validation.md).
 
 ## Documentation
 
@@ -213,6 +223,6 @@ Live behavioral results are still pending a funded evaluation run. The project d
 - Full reasoning and live context extraction require an Anthropic API key.
 - Semantic retrieval requires an OpenAI key and embeddings; lexical search works without them.
 - The first complete judged eval suite has not run, so superiority over `context-dump` remains unproven.
-- The shared source corpus is strongest for Paul Graham today; partner packs remain constrained by source availability and the provenance bar.
+- The shared corpus is strongest for Paul Graham today; partner packs remain constrained by source availability and the provenance bar.
 
-Those limits are part of the design, not a footnote. A system that makes claims about judgment should be unusually precise about where its evidence ends.
+FounderOS is deliberately precise about these limits. A system making claims about judgment should be unusually clear about where its evidence ends.
