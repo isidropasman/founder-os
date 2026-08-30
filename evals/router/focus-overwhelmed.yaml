@@ -1,0 +1,5 @@
+query: I'm spread across five things and none of them are moving. Help.
+expect:
+  skills: [focus]
+  context_keys_include: [goals, metrics, founder]
+  better_question: any

@@ -1,0 +1,5 @@
+query: Should we pause the invoice editor rebuild and fix onboarding instead?
+expect:
+  skills: [decision]
+  context_keys_include: [company, goals, decisions_recent]
+  better_question: any

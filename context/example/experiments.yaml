@@ -1,0 +1,9 @@
+- id: exp-onboarding-email
+  hypothesis: A day-one reminder email will push more signups to send a first invoice
+  method: Send a templated reminder 24h after signup to all new accounts
+  metric: activated_pct_first_invoice_sent
+  started: 2026-07-05
+  ends: 2026-08-05
+  status: concluded
+  result: Activation moved from 21% to 22%. Within noise.
+  learning: The blocker is inside the product, not the reminder cadence.

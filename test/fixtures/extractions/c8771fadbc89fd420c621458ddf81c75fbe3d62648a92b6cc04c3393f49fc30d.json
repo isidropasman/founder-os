@@ -1,0 +1,108 @@
+{
+  "summary": "Notes from a customer call with a prospective studio customer, plus an MRR update and an unformed thought about the roadmap.",
+  "source_type": "customer-interview",
+  "proposals": [
+    {
+      "target": "person",
+      "fields": {
+        "id": "p-priya",
+        "name": "Priya Nandakumar",
+        "role": "Founder",
+        "org": "Nandakumar Design",
+        "relationship": "customer",
+        "last_touch": "2026-08-14",
+        "notes": "Three-person studio billing ~$8k/mo. Referred by Marcus. Blocked on logo/branding during onboarding."
+      },
+      "confidence": 0.9,
+      "quote": "She runs a three-person studio, bills around $8k/mo.",
+      "reasoning": "A named counterparty with a role and org."
+    },
+    {
+      "target": "feedback",
+      "fields": {
+        "id": "fb-priya-branding",
+        "date": "2026-08-14",
+        "person_id": "p-priya",
+        "channel": "call",
+        "verbatim": "I spent forty minutes trying to figure out how to add my logo and then gave up and sent the invoice from Wave instead.",
+        "theme": "onboarding",
+        "sentiment": "negative"
+      },
+      "confidence": 0.95,
+      "quote": "I spent forty minutes trying to figure out how to add my logo and then\ngave up and sent the invoice from Wave instead.",
+      "reasoning": "Direct quoted words from the customer."
+    },
+    {
+      "target": "feedback",
+      "fields": {
+        "id": "fb-marcus-editor-dup",
+        "date": "2026-08-14",
+        "person_id": "p-marcus",
+        "channel": "call",
+        "verbatim": "The invoice editor feels sluggish when I have more than twenty line items. Not a dealbreaker, just annoying.",
+        "theme": "performance",
+        "sentiment": "negative"
+      },
+      "confidence": 0.7,
+      "quote": "the invoice editor feels sluggish when I have more than twenty\nline items",
+      "reasoning": "Restates feedback already recorded from Marcus in July."
+    },
+    {
+      "target": "meeting",
+      "fields": {
+        "id": "mtg-priya-intro",
+        "date": "2026-08-14",
+        "person_id": "p-priya",
+        "purpose": "Intro call with referred studio",
+        "outcome": "Interested at $49/mo if recurring retainers are supported. Blocked on branding during trial.",
+        "open_threads": ["Ask whether recurring retainers would actually close her"]
+      },
+      "confidence": 0.8,
+      "quote": "Call with Priya Nandakumar, Nandakumar Design — 14 Aug",
+      "reasoning": "A dated conversation with a named person."
+    },
+    {
+      "target": "metric",
+      "fields": {
+        "name": "mrr",
+        "value": 3620,
+        "as_of": "2026-08-14",
+        "trend": "up",
+        "source": "founder_notes"
+      },
+      "confidence": 0.85,
+      "quote": "MRR is at 3620 now, up from last month.",
+      "reasoning": "An explicit metric value with a stated direction."
+    },
+    {
+      "target": "decision",
+      "fields": {
+        "id": "d-2026-08-14-stop-redesign",
+        "date": "2026-08-14",
+        "question": "Should we stop the redesign and work on onboarding instead?",
+        "options": ["Stop the redesign and fix onboarding", "Continue the redesign"],
+        "decision": "Undecided — founder wants to sleep on it",
+        "confidence": 0.3,
+        "status": "open"
+      },
+      "confidence": 0.35,
+      "quote": "I think we should probably stop the redesign and do onboarding, but I want to\nsleep on it.",
+      "reasoning": "A decision is forming but has not been made; the founder said so explicitly."
+    },
+    {
+      "target": "feedback",
+      "fields": {
+        "id": "fb-invented",
+        "date": "2026-08-14",
+        "person_id": "p-priya",
+        "channel": "call",
+        "verbatim": "The pricing is far too expensive for what you get.",
+        "theme": "pricing",
+        "sentiment": "negative"
+      },
+      "confidence": 0.9,
+      "quote": "She told me the pricing is far too expensive for what you get.",
+      "reasoning": "Deliberately fabricated: this sentence does not appear in the note, and the quote gate must reject it."
+    }
+  ]
+}

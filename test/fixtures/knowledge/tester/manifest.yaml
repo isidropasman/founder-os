@@ -1,0 +1,18 @@
+author:
+  id: tester
+  name: Test Author
+  kind: person
+  confidence: low
+  domains: [testing]
+  limitations: [synthetic corpus, exists only for retrieval tests]
+sources:
+  - id: pricing
+    file: pricing.txt
+    title: On Pricing
+    kind: note
+    retrieved_at: 2026-08-16
+  - id: hiring
+    file: hiring.txt
+    title: On Hiring
+    kind: note
+    retrieved_at: 2026-08-16

@@ -1,0 +1,14 @@
+name: Sam
+role: ceo
+strengths:
+  - Deep product taste
+  - Ships fast alone
+  - Writes well
+weak_spots:
+  - Avoids sales calls and reschedules them
+  - Rewrites working code when anxious about the business
+  - Treats a redesign as progress
+known_biases:
+  - Prefers building over talking to users
+  - Reads churn as a product-quality problem before checking whether it is a pricing or onboarding problem
+working_style: Deep work 8am-12pm, roughly 4 focus hours a day, calendar is otherwise reactive

@@ -1,0 +1,18 @@
+- id: g-revenue
+  statement: Reach $10k MRR
+  horizon: 2026-12-31
+  metric: mrr
+  target: 10000
+  status: active
+- id: g-retention
+  statement: Get monthly logo churn under 4%
+  horizon: 2026-10-31
+  metric: monthly_logo_churn_pct
+  target: 4
+  status: active
+- id: g-redesign
+  statement: Ship the redesigned invoice editor
+  horizon: 2026-09-30
+  metric: redesign_shipped
+  target: 1
+  status: active

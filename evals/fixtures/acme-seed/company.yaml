@@ -1,0 +1,12 @@
+name: Acme
+one_liner: Invoicing and payment chasing for freelance designers
+stage: seed
+business_model: b2b-saas
+icp: Solo designers and 2-3 person studios billing over $5k/mo
+pricing: $19/mo flat, single tier, no annual plan
+runway_months: 11
+team_size: 4
+constraints:
+  - Two engineers, no designer, no one doing sales but the founder
+  - No marketing budget beyond $400/mo
+  - Founder is the only person who has ever spoken to a churned customer

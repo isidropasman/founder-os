@@ -1,0 +1,23 @@
+- id: p-rina
+  name: Rina Patel
+  role: Founder
+  org: Halo Media (agency, 22 clients)
+  relationship: customer
+  last_touch: 2026-08-06
+  notes: Expanded twice. Wants multi-client rollups. Has referred four other agencies.
+- id: p-jonah
+  name: Jonah Feld
+  role: Head of Growth
+  org: Lumen Goods (ecommerce)
+  relationship: customer
+  last_touch: 2026-07-25
+  notes: Wants Shopify-native cohorts. Explicitly said agency rollups are useless to him.
+- id: p-vantage
+  name: Priya Raman
+  role: VP Marketing
+  org: Vantage Health
+  relationship: customer
+  last_touch: 2026-08-11
+  notes: >
+    Enterprise pilot, $40k first year, would be the largest deal ever. Healthcare, a fourth
+    segment. Requires SOC 2, SSO and a HIPAA BAA, none of which exist. Wants a decision this month.

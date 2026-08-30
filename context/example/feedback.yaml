@@ -1,0 +1,28 @@
+- id: fb-dana-churn
+  date: 2026-06-11
+  person_id: p-dana
+  channel: churn-interview
+  verbatim: I signed up, stared at the empty dashboard, and never got a first invoice out. I went back to a Google Doc template.
+  theme: onboarding
+  sentiment: negative
+- id: fb-marcus-editor
+  date: 2026-07-02
+  person_id: p-marcus
+  channel: email
+  verbatim: The invoice editor feels sluggish when I have more than twenty line items. Not a dealbreaker, just annoying.
+  theme: performance
+  sentiment: negative
+- id: fb-anon-price
+  date: 2026-07-19
+  person_id: null
+  channel: support
+  verbatim: Honestly for what this does nineteen dollars is nothing. I expected to pay more.
+  theme: pricing
+  sentiment: positive
+- id: fb-signup-confusion
+  date: 2026-07-28
+  person_id: null
+  channel: support
+  verbatim: Do I need to connect a bank account before I can send anything? I could not tell so I stopped.
+  theme: onboarding
+  sentiment: negative

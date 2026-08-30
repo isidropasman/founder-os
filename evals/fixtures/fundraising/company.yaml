@@ -1,0 +1,12 @@
+name: Cadence
+one_liner: Automated bookkeeping close for small accounting firms
+stage: seed
+business_model: b2b-saas
+icp: Accounting firms with 5-30 staff doing monthly close for SMB clients
+pricing: $450/mo per firm
+runway_months: 7
+team_size: 5
+constraints:
+  - Founder is the only person who sells, and has been in fundraising mode for seven weeks
+  - Two engineers idle-ish, working on internal tooling with no roadmap owner
+  - Seven months of runway and a raise that has not closed

@@ -1,0 +1,6 @@
+# Previously routed to [] because meeting-prep did not exist. It does now.
+query: I have a call with Jane Roe on Thursday. What should I prepare?
+expect:
+  skills: [meeting-prep]
+  context_keys_include: [people, meetings]
+  better_question: any

@@ -1,0 +1,15 @@
+- id: mtg-jane-seed
+  date: 2026-07-20
+  person_id: p-jane
+  purpose: Seed round pitch
+  outcome: Passed. Asked for three consecutive months of improving retention before re-engaging.
+  open_threads:
+    - Send retention cohort data when it exists
+    - She offered an intro to a design contractor, never followed up
+- id: mtg-marcus-checkin
+  date: 2026-07-02
+  person_id: p-marcus
+  purpose: Check-in with largest account
+  outcome: Raised editor performance. Renewed anyway.
+  open_threads:
+    - Promised him a status update on editor performance

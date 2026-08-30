@@ -1,0 +1,12 @@
+name: Shiftwell
+one_liner: Shift scheduling for multi-location restaurant groups
+stage: seed
+business_model: b2b-saas
+icp: Restaurant groups with 3-15 locations and hourly staff
+pricing: $180/mo per location
+runway_months: 16
+team_size: 2
+constraints:
+  - Two engineers, one of whom is the founder, and nobody dedicated to support
+  - Inbound only; every new account came from referral
+  - On-call is the founder, every night

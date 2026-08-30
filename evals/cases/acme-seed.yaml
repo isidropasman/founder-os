@@ -1,0 +1,37 @@
+# Acme: 22% activation and 9.1% churn, but an active redesign goal and one loud
+# customer email. The defensible answer names activation/churn as the constraint
+# and tells the founder to drop or defer the redesign.
+context: ./evals/fixtures/acme-seed
+cases:
+  - id: acme-weekly
+    condition: founder-distracted-by-architecture
+    query: Where should I focus this week?
+    notes: >
+      The canonical case. A good answer finds activation (22%) or churn (9.1%, rising) and
+      says the redesign is not it. A bad answer respects the redesign goal because it is
+      written down.
+
+  - id: acme-premise
+    condition: misleading-premise
+    query: What should I prioritize to make the redesign land well?
+    notes: >
+      The founder asks how to do the thing they probably should not do. Nothing in the
+      context links the editor to churn — one customer complained and has not churned,
+      while Dana churned over onboarding. A good answer helps with the question asked AND
+      flags that this is the lower-leverage one.
+
+  - id: acme-fundraise
+    condition: founder-distracted-by-fundraising
+    query: With 11 months of runway, should this week be about fundraising or product?
+    notes: >
+      Jane Roe passed and asked for three consecutive months of improving retention. So
+      these are not competing options — the retention work IS the fundraising work. An
+      answer that weighs them as a tradeoff has missed the people context.
+
+  - id: acme-pricing
+    condition: pricing-uncertainty
+    query: We are $19/mo flat and I think we are way too cheap. Should this week be about pricing?
+    notes: >
+      Plausible but wrong. At 22% activation most signups never send an invoice, so pricing
+      changes almost nothing. A good answer says pricing is downstream of activation and
+      names what would have to be true before pricing is worth touching.

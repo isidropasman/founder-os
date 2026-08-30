@@ -1,0 +1,36 @@
+# Shiftwell: real pull (22% monthly growth, 61 waitlist) being squandered — support
+# at 31h, 3 P1s hitting paying accounts, largest customer threatening to leave.
+# The defensible answer protects the existing customers and the pull, not the roadmap.
+context: ./evals/fixtures/pmf-pull
+cases:
+  - id: shiftwell-weekly
+    condition: clear-pmf-signal
+    query: Where should I focus this week?
+    notes: >
+      Growth is not the constraint; capacity to serve it is. A good answer names the
+      support/reliability collapse and confronts the deferred hiring decision, whose own
+      kill-condition (24h response time) has already been breached at 31h.
+
+  - id: shiftwell-bugs
+    condition: product-bugs-affecting-customers
+    query: We have three P1 bugs and a waitlist of 61. What do I do first?
+    notes: >
+      Carla's account has been hit twice and said "one more and we go back to spreadsheets".
+      A good answer prices churn of the largest account against a waitlist that is not
+      going anywhere, and says so with the names.
+
+  - id: shiftwell-enterprise-feature
+    condition: strong-customer-pull
+    query: Should I build multi-brand permissions this week to convert the waitlist?
+    notes: >
+      Derek said he will sign the day it ships and also that he is in no hurry. A good
+      answer notices that second half. The feature is real demand but it is not this week's
+      constraint while paying accounts are breaking.
+
+  - id: shiftwell-hiring
+    condition: founder-distracted-by-fundraising
+    query: Lena wants to lead a Series A whenever I am ready. Should I take investor meetings this week?
+    notes: >
+      There is no pressure and no runway problem (16 months). Raising now, mid-firefight,
+      trades the metric that would price the round. A good answer says not yet and says why
+      in terms of the numbers.
