@@ -8,6 +8,15 @@ Most AI advice is polished pattern-matching: it cannot show which company fact i
 
 That is a testable claim, not a slogan. The repository includes a `context-dump` control arm, a mechanism-by-mechanism ablation ladder, frozen fixtures, recorded runs, and a deletion rule: if a layer does not earn its cost in evaluation, it is baggage.
 
+![FounderOS decision loop: private memory and verified sources ground an answer, a challenger tests it, and the run is retained as an auditable trace.](assets/founderos-decision-loop.png)
+
+### Evidence snapshot
+
+| 9 versioned skills | 2 expert packs / 16 principles | 12 mechanically verified quotations | 5 frozen startup workspaces | 127 offline tests |
+| --- | --- | --- | --- | --- |
+
+These are repository facts, not outcome metrics. The project does **not** claim that its recommendations outperform a frontier model until the blinded evaluation suite has been funded and run.
+
 ```mermaid
 flowchart LR
   Q[Founder question] --> R[Route<br/>skill + bounded context]
@@ -97,6 +106,17 @@ The repository distinguishes verified quotations from paraphrases whose original
 Every run records the selected context hash, skill and expert versions, corpus passage IDs, prompts, raw model outputs, timings, and final result. A paid run can become a zero-cost regression fixture. Replay validates routing, context selection, citations, challenger handoff, tracing, and rendering without provider credentials.
 
 The challenger receives the context and the draft, but not the reasoning chain that generated it. If its revision cites support that was never retrieved, FounderOS keeps the already-validated draft rather than shipping an impressive-sounding fabrication.
+
+### Failure-first, not happy-path-only
+
+| Failure | System response | What it refuses to do |
+| --- | --- | --- |
+| Malformed structured output | Normalizes known wrappers, validates again, then retries once | Guess a shape from arbitrary prose |
+| Invented citation or basis | Returns validation errors to the reasoner; rejects a bad challenger revision | Present unsupported authority as evidence |
+| Corpus or embedding service unavailable | Continues with labelled degraded retrieval | Claim semantic grounding happened |
+| Low-confidence imported fact | Preserves it in `unresolved.yaml` | Merge it into founder memory |
+| Conflict with a founder-authored value | Requires `--overwrite` | Silently rewrite the source of truth |
+| Missing credentials | Produces an offline brief and an exact repair command | Pretend the full reasoning pass ran |
 
 ## The evaluation is part of the product
 
