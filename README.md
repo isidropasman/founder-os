@@ -49,7 +49,7 @@ This is not multi-agent theatre. The default pipeline is deliberately small: **r
 
 ### Evidence snapshot
 
-| 9 versioned skills | 2 expert packs / 16 principles | 12 mechanically verified quotations | 5 frozen startup workspaces | 127 offline tests |
+| 9 versioned skills | 2 expert packs / 16 principles | 12 mechanically verified quotations | 5 frozen startup workspaces | Offline regression suite |
 | --- | --- | --- | --- | --- |
 
 These are repository facts, not outcome metrics. FounderOS does **not** claim to beat a frontier model until the blinded evaluation suite proves it.
