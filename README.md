@@ -233,16 +233,14 @@ Requires Node 22+ and pnpm.
 ```bash
 ./scripts/setup.sh
 pnpm founderos doctor
-pnpm founderos status
-pnpm founderos ask "Where should I focus this week?" --offline
+pnpm founderos init ~/my-company
+FOUNDEROS_CONTEXT=~/my-company pnpm founderos ask "What should I decide first?" --offline
 ```
 
-For a full provider-backed run, configure the required API key and ask normally:
+The offline command produces a procedure, your context, and verified source material without calling a model. For a provider-backed run, configure `ANTHROPIC_API_KEY`; the completed run prints its trace path:
 
 ```bash
-pnpm founderos ask "Should we raise prices now?" --skill pricing
-pnpm founderos ask "How should I prepare for this customer call?" --skill meeting-prep
-pnpm founderos ask "Is this ready to ship?" --skill product-review
+FOUNDEROS_CONTEXT=~/my-company pnpm founderos ask "Should we raise prices now?" --skill pricing
 ```
 
 Useful ablations:

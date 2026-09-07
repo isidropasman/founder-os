@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { after, test } from 'node:test'
 import { parse as parseYaml } from 'yaml'
-import { openWorkspace, selectContext } from '../src/context.ts'
+import { initWorkspace } from '../src/init.ts'
+import { CONTEXT_KEYS, openWorkspace, selectContext } from '../src/context.ts'
 import { isConfigured, progress, saveStep, STEPS } from '../src/setup.ts'
 
 const roots: string[] = []
@@ -115,4 +116,28 @@ test('a workspace with only step 1 is usable, not broken', async () => {
 
   const { detectSignals } = await import('../src/signals.ts')
   assert.deepEqual(detectSignals(ws, NOW), [], 'no data means no findings, not a crash')
+})
+
+test('a newly initialized workspace can load every declared context key', () => {
+  const root = workspace()
+  initWorkspace(root)
+
+  const selected = selectContext(openWorkspace(root), CONTEXT_KEYS)
+
+  assert.deepEqual(Object.keys(selected).sort(), [...CONTEXT_KEYS].sort())
+})
+
+test('initialization keeps editable list scaffolds as YAML comments', () => {
+  const root = workspace()
+  initWorkspace(root)
+
+  const goals = readFileSync(join(root, 'goals.yaml'), 'utf8')
+  assert.match(goals, /# - id: g-example/)
+  assert.match(goals, /#   statement: ""/)
+  assert.match(goals, /#   metric: ""/)
+  assert.deepEqual(parseYaml(goals), [])
+
+  const meetings = readFileSync(join(root, 'meetings.yaml'), 'utf8')
+  assert.match(meetings, /#   purpose: ""/)
+  assert.deepEqual(parseYaml(meetings), [])
 })

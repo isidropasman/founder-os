@@ -59,10 +59,10 @@ export function explainProviderError(spec: string, error: unknown): string {
   const hint = CREDENTIAL_HINT[vendor]
 
   if (/api key/i.test(message) && hint) {
-    return `No ${vendor} credentials.\n  Set ${hint}\n  Meanwhile these still work with no key: founderos status, context show, knowledge search`
+    return `No ${vendor} credentials.\n  Set ${hint}\n  Meanwhile these still work with no key: pnpm founderos status, pnpm founderos context show, pnpm founderos knowledge search`
   }
   if (/credit balance|quota|billing/i.test(message)) {
-    return `Your ${vendor} account is out of credit.\n  Top up, then retry.\n  Meanwhile these still work: founderos status, context show, knowledge search`
+    return `Your ${vendor} account is out of credit.\n  Top up, then retry.\n  Meanwhile these still work: pnpm founderos status, pnpm founderos context show, pnpm founderos knowledge search`
   }
   if (/model|not_found|404/i.test(message) && /gpt|openai/.test(spec)) {
     return `The model id "${spec}" was rejected.\n  Check the current list and set FOUNDEROS_MODEL_VANILLA_GPT in .env.\n  ${message}`

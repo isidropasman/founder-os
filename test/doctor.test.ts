@@ -43,7 +43,24 @@ test('a missing workspace points at init rather than a stack trace', async () =>
   const workspace = checks.find((c) => c.name === 'Your company')
   assert.ok(workspace)
   assert.equal(workspace.status, 'missing')
-  assert.match(workspace.fix ?? '', /founderos init/)
+  assert.match(workspace.fix ?? '', /^pnpm founderos init/)
+})
+
+test('missing Anthropic credentials leave ask available offline', async () => {
+  const saved = process.env.ANTHROPIC_API_KEY
+  try {
+    delete process.env.ANTHROPIC_API_KEY
+    const checks = await diagnose('./context/example')
+    const anthropic = checks.find((check) => check.name === 'ANTHROPIC_API_KEY')
+
+    assert.ok(anthropic)
+    assert.equal(anthropic.status, 'degraded')
+    assert.match(anthropic.without ?? '', /pnpm founderos ask.*offline/i)
+    assert.match(anthropic.without ?? '', /model.*synthesis.*trace/i)
+  } finally {
+    if (saved) process.env.ANTHROPIC_API_KEY = saved
+    else delete process.env.ANTHROPIC_API_KEY
+  }
 })
 
 test('provider errors are translated into something actionable', async () => {

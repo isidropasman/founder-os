@@ -53,8 +53,8 @@ test('keyword retrieval is labelled as such, so nobody reads a near-miss as an o
 test('it always says what the reasoning pass would have added', async () => {
   const rendered = renderOfflineBrief(await brief(), openWorkspace(WORKSPACE), NOW)
   assert.match(rendered, /WHAT THE REASONING PASS WOULD HAVE ADDED/)
-  assert.match(rendered, /founderos ask/)
-  assert.match(rendered, /founderos doctor/)
+  assert.match(rendered, /pnpm founderos ask/)
+  assert.match(rendered, /pnpm founderos doctor/)
 })
 
 test('every skill can produce an offline brief', async () => {

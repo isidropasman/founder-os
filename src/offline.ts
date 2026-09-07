@@ -117,7 +117,7 @@ export function renderOfflineBrief(brief: OfflineBrief, workspace: Workspace, no
         : '  Retrieved by keyword, not meaning. Read the titles: a passage can match your\n' +
           '  words and be about something else entirely — "raising prices" and "raising\n' +
           '  money" are indistinguishable to this search. Semantic retrieval fixes it:\n' +
-          '  set OPENAI_API_KEY, then `founderos knowledge embed`.',
+          '  set OPENAI_API_KEY, then `pnpm founderos knowledge embed`.',
       '',
     )
     for (const p of brief.passages) {
@@ -149,8 +149,8 @@ export function renderOfflineBrief(brief: OfflineBrief, workspace: Workspace, no
     '  priorities, an explicit list of what to drop, and a next action — then a',
     '  second pass would attack that answer before you saw it.',
     '',
-    '  founderos ask "..."   once ANTHROPIC_API_KEY is set and funded',
-    '  founderos doctor      to see exactly what is missing',
+    '  pnpm founderos ask "..."   once ANTHROPIC_API_KEY is set and funded',
+    '  pnpm founderos doctor      to see exactly what is missing',
   )
 
   return lines.join('\n')

@@ -30,14 +30,14 @@ say "5/5  Your workspace"
 [ -f .env ] || { cp .env.example .env; echo "  created .env — add your ANTHROPIC_API_KEY"; }
 
 say "Where you stand"
-pnpm -s founderos doctor || true
+pnpm founderos doctor || true
 
 cat <<'NEXT'
 
 Next:
-  founderos status                              what needs attention (no model, free)
-  founderos knowledge search "do things that don't scale"
-  founderos ask "Where should I focus this week?"
+  pnpm founderos status                         what needs attention (no model, free)
+  pnpm founderos knowledge search "do things that don't scale"
+  pnpm founderos ask "Where should I focus this week?"
 
 Read docs/guide.md — the whole product in one page.
 NEXT

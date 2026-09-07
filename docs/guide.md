@@ -37,13 +37,20 @@ The last step is the one no other tool asks. Without `weak_spots`, "talk to more
 customers" is advice. With it, "you have moved this call twice; here is the
 smallest version of it" is a second opinion.
 
-Prefer files? `founderos init ~/my-company` scaffolds the same thing as commented
-YAML.
+Prefer files? create a workspace, then set it once for the rest of this shell:
+
+```bash
+pnpm founderos init ~/my-company
+export FOUNDEROS_CONTEXT=~/my-company
+```
+
+This scaffolds the same thing as commented YAML. The commands below now operate on
+that workspace.
 
 Everything else goes in by talking:
 
 ```bash
-founderos context add "Call with Priya. She said onboarding is confusing and gave
+pnpm founderos context add "Call with Priya. She said onboarding is confusing and gave
 up before sending an invoice. MRR is 3620 now."
 ```
 
@@ -51,7 +58,7 @@ You get a preview. Nothing is written until you pass `--apply`.
 
 ## Without an API key
 
-`founderos ask --offline` answers with no model at all:
+`pnpm founderos ask "<question>" --offline` answers with no model at all:
 
 - the blocking findings from your own context
 - the skill's procedure, as a checklist you walk yourself
@@ -67,7 +74,7 @@ the whole product.
 ## Every day: two commands
 
 ```bash
-founderos status
+pnpm founderos status
 ```
 
 Rule-based, no model, costs nothing. It tells you what is overdue, unmeasured, or
@@ -76,7 +83,7 @@ metric moving away from its target, an assumption you never tested, an investor
 with an open thread and three weeks of silence.
 
 ```bash
-founderos ask "Where should I focus this week?"
+pnpm founderos ask "Where should I focus this week?"
 ```
 
 The full pipeline. Roughly two minutes and a few cents.
@@ -87,8 +94,8 @@ Drop notes — call transcripts, meeting scribbles, a voice memo transcription �
 into `~/my-company/inbox/` as `.md` or `.txt`, then:
 
 ```bash
-founderos context ingest            # preview everything unprocessed
-founderos context ingest --apply --archive
+pnpm founderos context ingest            # preview everything unprocessed
+pnpm founderos context ingest --apply --archive
 ```
 
 FounderOS classifies each note, extracts people, feedback, metrics, meetings and
@@ -158,15 +165,15 @@ Every id resolves. `paul-graham/P5` is a curated principle; `paul-graham/ds#0002
 is a verbatim passage. Look either up:
 
 ```bash
-founderos knowledge search "recruit users manually"
+pnpm founderos knowledge search "recruit users manually"
 ```
 
 ## Searching the corpus directly
 
 ```bash
-founderos knowledge search "the best startup ideas seem like bad ideas"
-founderos knowledge search "make a few users love you" --kind framework
-founderos knowledge search "growth rate" --author paul-graham --limit 5
+pnpm founderos knowledge search "the best startup ideas seem like bad ideas"
+pnpm founderos knowledge search "make a few users love you" --kind framework
+pnpm founderos knowledge search "growth rate" --author paul-graham --limit 5
 ```
 
 Free — lexical search needs no model. `--semantic` adds vector search once
