@@ -14,7 +14,7 @@ import { recordFromTrace } from './replay.ts'
 import { buildOfflineBrief, hasReasoningCredentials, renderOfflineBrief } from './offline.ts'
 import { runKnowledgeCommand } from './knowledge/cli.ts'
 
-const USAGE = `founderos <command>
+const USAGE = `pnpm founderos <command>
 
   doctor               What is configured, what is missing, and the exact fix
   ask "<question>"     Answer a founder question through the full pipeline
@@ -199,7 +199,7 @@ async function main(): Promise<void> {
   // quotes in it are the author's rather than an imitation of them.
   if (values.offline || !hasReasoningCredentials()) {
     if (!values.offline) {
-      process.stderr.write('No model credentials — answering offline. `founderos doctor` for the fix.\n\n')
+      process.stderr.write('No model credentials — answering offline. `pnpm founderos doctor` for the fix.\n\n')
     }
     const brief = await buildOfflineBrief({
       query,

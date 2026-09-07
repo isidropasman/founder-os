@@ -243,7 +243,7 @@ export function renderSignals(signals: Signal[]): string {
     for (const signal of group) {
       lines.push(`  ${MARKS[signal.severity]} ${signal.title}`)
       lines.push(`       ${signal.detail}`)
-      if (signal.skill) lines.push(`       → founderos ask "..." --skill ${signal.skill}`)
+      if (signal.skill) lines.push(`       → pnpm founderos ask "..." --skill ${signal.skill}`)
     }
     lines.push('')
   }

@@ -8,7 +8,7 @@ import { search, stats, type Kind } from './retrieve.ts'
 import { syncManifest } from './sync.ts'
 import { verifyQuotes } from './verify.ts'
 
-const USAGE = `founderos knowledge <command>
+const USAGE = `pnpm founderos knowledge <command>
 
   verify              Check every quoted principle against the fetched corpus (no DB, no network)
   status              Show database, extension and row counts

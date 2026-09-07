@@ -41,7 +41,7 @@ function checkWorkspace(dir: string): CheckResult {
       name: 'Your company',
       status: 'missing',
       detail: error instanceof Error ? error.message.split('\n')[0]! : String(error),
-      fix: `founderos init ${dir}`,
+      fix: `pnpm founderos init ${dir}`,
     }
   }
 }
@@ -71,7 +71,7 @@ function checkCorpus(): CheckResult {
       name: 'Corpus on disk',
       status: 'missing',
       detail: 'no source documents fetched',
-      fix: './scripts/fetch-paul-graham.sh && founderos knowledge sync paul-graham --url "https://paulgraham.com/{id}.html"',
+      fix: './scripts/fetch-paul-graham.sh && pnpm founderos knowledge sync paul-graham --url "https://paulgraham.com/{id}.html"',
       without: 'answers still work, but cite nothing from the authors themselves',
     }
   }
@@ -87,7 +87,7 @@ function checkCorpus(): CheckResult {
         name: 'Corpus on disk',
         status: 'degraded',
         detail: `${errors.length} quote(s) no longer locatable`,
-        fix: 'founderos knowledge verify',
+        fix: 'pnpm founderos knowledge verify',
       }
 }
 
@@ -101,7 +101,7 @@ async function checkDatabase(): Promise<CheckResult[]> {
           name: 'Knowledge base',
           status: 'missing',
           detail: health.reason.split('\n')[0]!,
-          fix: './scripts/db-setup.sh && founderos knowledge migrate && founderos knowledge ingest',
+          fix: './scripts/db-setup.sh && pnpm founderos knowledge migrate && pnpm founderos knowledge ingest',
           without: 'answers lose the corpus passages; everything else works',
         },
       ]
@@ -120,7 +120,7 @@ async function checkDatabase(): Promise<CheckResult[]> {
           name: 'Knowledge base',
           status: 'missing',
           detail: 'reachable, but the schema is not migrated',
-          fix: 'founderos knowledge migrate && founderos knowledge ingest',
+          fix: 'pnpm founderos knowledge migrate && pnpm founderos knowledge ingest',
         },
       ]
     }
@@ -134,7 +134,7 @@ async function checkDatabase(): Promise<CheckResult[]> {
             name: 'Knowledge base',
             status: 'missing',
             detail: 'migrated but empty',
-            fix: 'founderos knowledge ingest',
+            fix: 'pnpm founderos knowledge ingest',
           }
         : {
             name: 'Knowledge base',
@@ -147,7 +147,7 @@ async function checkDatabase(): Promise<CheckResult[]> {
             name: 'Semantic search',
             status: 'degraded',
             detail: 'no embeddings — retrieval is lexical only',
-            fix: 'set OPENAI_API_KEY, then: FOUNDEROS_EMBEDDINGS=openai founderos knowledge embed',
+            fix: 'set OPENAI_API_KEY, then: FOUNDEROS_EMBEDDINGS=openai pnpm founderos knowledge embed',
             without:
               'search works but is weak on ambiguous wording ("raise prices" drifts to "raise money")',
           },
@@ -167,10 +167,10 @@ function checkCredentials(): CheckResult[] {
       ? { name: 'ANTHROPIC_API_KEY', status: 'ok', detail: 'set' }
       : {
           name: 'ANTHROPIC_API_KEY',
-          status: 'missing',
+          status: 'degraded',
           detail: envFile ? 'not in .env' : 'no .env file',
           fix: 'cp .env.example .env, then add the key from console.anthropic.com',
-          without: '`founderos ask` cannot run. status, context and knowledge search still work',
+          without: '`pnpm founderos ask` still works offline. Add the key for model synthesis and a trace.',
         },
     openai
       ? { name: 'OPENAI_API_KEY', status: 'ok', detail: 'set' }
@@ -193,7 +193,7 @@ function checkRecordings(): CheckResult {
         name: 'Offline replay',
         status: 'degraded',
         detail: 'no recordings',
-        fix: 'founderos ask "..." --save-run <name>',
+        fix: 'pnpm founderos ask "..." --save-run <name>',
       }
 }
 
@@ -230,7 +230,7 @@ export function renderDiagnosis(results: CheckResult[]): string {
 
   lines.push('')
   if (missing.length === 0 && degraded.length === 0) {
-    lines.push('Everything is configured. Try: founderos ask "Where should I focus this week?"')
+    lines.push('Everything is configured. Try: pnpm founderos ask "Where should I focus this week?"')
   } else if (missing.length === 0) {
     lines.push(
       `Usable. ${degraded.length} thing(s) degraded — see above for what each one costs you.`,
