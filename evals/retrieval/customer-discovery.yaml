@@ -1,0 +1,7 @@
+id: customer-discovery
+query: minimum viable product right customers pricing features
+expectedPassageIds:
+  - steve-blank/hypotheses-experiments-insights#0009
+filters:
+  authors:
+    - steve-blank

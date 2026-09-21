@@ -1,0 +1,28 @@
+author:
+  id: tomasz-tunguz
+  name: Tomasz Tunguz
+  kind: person
+  confidence: high
+  domains:
+    - pricing
+    - gtm
+  limitations:
+    - Investor and operator perspective; advice is not a pricing experiment result for this company
+  source_policy:
+    retrieval:
+      method: direct_html
+      status: approved
+      retrieved_at: 2026-09-08
+    redistribution: citation_only
+sources:
+  - id: how-to-price-your-startup
+    file: how-to-price-your-startup.html
+    title: The 7 Factors to Consider When Pricing Your Startup's Product
+    kind: post
+    url: https://tomtunguz.com/how-to-price-your-startups-product/
+    year: 2014
+    topics:
+      - pricing
+      - gtm
+    retrieved_at: 2026-09-08
+    checksum: sha256:5c2c920cf65e72c5ed46a874c7d0e429422a55fdfb3fba499cd95ecf0cd3b1ef

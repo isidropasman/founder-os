@@ -1,16 +1,25 @@
 'use server'
 
 import { collectBasis, resolveAll, type ResolvedBasis } from '../../src/basis.ts'
+import { answerBrainQuestion, type BrainResponse } from '../../src/brain/answer.ts'
 import { openWorkspace, selectContext } from '../../src/context.ts'
 import { loadExperts, selectExperts } from '../../src/experts.ts'
+import { consult } from '../../src/knowledge/consult.ts'
+import { configuredSemanticEmbedder } from '../../src/knowledge/embed.ts'
 import { loadSkills, requireSkill } from '../../src/skills.ts'
 import { buildOfflineBrief, hasReasoningCredentials } from '../../src/offline.ts'
 import { run } from '../../src/pipeline.ts'
-import { explainProviderError, modelForRole } from '../../src/provider.ts'
+import { createProvider, explainProviderError, modelForRole, providerIsReady } from '../../src/provider.ts'
 import type { Passage } from '../../src/knowledge/consult.ts'
 import type { Signal } from '../../src/signals.ts'
 
 export type Counsel =
+  | {
+      mode: 'brain'
+      query: string
+      skill: string
+      response: BrainResponse
+    }
   | {
       mode: 'reasoned'
       query: string
@@ -74,6 +83,45 @@ export async function counselOffline(query: string, skillId: string): Promise<Co
       semantic: brief.semantic,
       reason: brief.corpusUnavailable ?? '',
     }
+  } catch (error) {
+    return { mode: 'error', message: error instanceof Error ? error.message : String(error) }
+  }
+}
+
+export async function askBrain(query: string, skillId: string): Promise<Counsel> {
+  if (!query.trim()) return { mode: 'error', message: 'Ask something.' }
+
+  try {
+    const ws = workspace()
+    const skill = requireSkill(loadSkills(), skillId)
+    const semanticEmbedder = configuredSemanticEmbedder()
+    const consultation = await consult({
+      query,
+      domain: skill.corpusTerms.join(' ') || skill.purpose,
+      ...(skill.experts.length ? { authors: skill.experts } : {}),
+      ...(semanticEmbedder ? { embedder: semanticEmbedder } : {}),
+    })
+    if (!consultation.ok) {
+      return {
+        mode: 'brain',
+        query,
+        skill: skill.id,
+        response: {
+          mode: 'retrieval_only', passages: [], reason: consultation.reason,
+          timing: { retrievalMs: 0, assemblyMs: 0, modelMs: 0, totalMs: 0 },
+        },
+      }
+    }
+    const model = modelForRole('reason')
+    const response = await answerBrainQuestion({
+      question: query,
+      workspace: ws,
+      contextKeys: skill.requiresContext,
+      passages: consultation.passages,
+      retrievalMs: consultation.timing.totalMs,
+      ...((await providerIsReady(model)) ? { provider: createProvider(model) } : {}),
+    })
+    return { mode: 'brain', query, skill: skill.id, response }
   } catch (error) {
     return { mode: 'error', message: error instanceof Error ? error.message : String(error) }
   }

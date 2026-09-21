@@ -1,0 +1,17 @@
+author:
+  id: review-required
+  name: Review Required
+  kind: person
+  confidence: low
+  source_policy:
+    retrieval:
+      method: local_text
+      status: review_required
+      retrieved_at: 2026-09-07
+    redistribution: citation_only
+sources:
+  - id: draft
+    file: draft.txt
+    title: Draft transcript
+    kind: transcript
+    retrieved_at: 2026-09-07

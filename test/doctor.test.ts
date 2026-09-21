@@ -63,6 +63,23 @@ test('missing Anthropic credentials leave ask available offline', async () => {
   }
 })
 
+test('missing local harnesses are degraded rather than fatal', async () => {
+  const checks = await diagnose('./context/example', { PATH: '' })
+  const harnesses = checks.filter((check) => /local harness$/.test(check.name))
+
+  assert.deepEqual(
+    harnesses.map((check) => ({ name: check.name, status: check.status })),
+    [
+      { name: 'Codex local harness', status: 'degraded' },
+      { name: 'Claude local harness', status: 'degraded' },
+    ],
+  )
+  for (const harness of harnesses) {
+    assert.ok(harness.fix)
+    assert.match(harness.without ?? '', /retrieval_only/)
+  }
+})
+
 test('provider errors are translated into something actionable', async () => {
   const { explainProviderError } = await import('../src/provider.ts')
 

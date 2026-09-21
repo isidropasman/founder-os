@@ -288,6 +288,68 @@ a.row:hover {
   gap: 0.5rem;
 }
 
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.filter-grid .input {
+  font-size: 0.86rem;
+  padding: 0.52rem 0.65rem;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.ingest-form .quiet {
+  margin: 0.85rem 0 0;
+}
+
+.ingest-preview {
+  margin-top: 0.85rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.ingest-preview .meta {
+  margin: 0.25rem 0;
+  overflow-wrap: anywhere;
+}
+
+.ingest-preview__skip {
+  color: var(--alert);
+}
+
+.passage-link {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--ink-3);
+}
+
+.excerpt__meta {
+  margin: 0.65rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.excerpt__source {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.84rem;
+}
+
+.eval-rows .row__note {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
 .input {
   flex: 1;
   min-width: 0;
@@ -330,6 +392,12 @@ a.row:hover {
 
 .btn:hover {
   opacity: 0.84;
+}
+
+.btn--quiet {
+  color: var(--ink);
+  background: var(--surface);
+  border-color: var(--line);
 }
 
 .btn:disabled {
@@ -470,6 +538,16 @@ ol.numbered li::before {
 @media (prefers-reduced-motion: no-preference) {
   .in {
     animation: in var(--t) backwards;
+  }
+}
+
+@media (max-width: 38rem) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search {
+    flex-direction: column;
   }
 }
 

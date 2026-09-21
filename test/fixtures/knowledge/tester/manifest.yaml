@@ -5,6 +5,12 @@ author:
   confidence: low
   domains: [testing]
   limitations: [synthetic corpus, exists only for retrieval tests]
+  source_policy:
+    retrieval:
+      method: local_text
+      status: approved
+      retrieved_at: 2026-08-16
+    redistribution: permitted
 sources:
   - id: pricing
     file: pricing.txt

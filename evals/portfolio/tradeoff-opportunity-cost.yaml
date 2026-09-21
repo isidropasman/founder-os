@@ -1,0 +1,19 @@
+id: tradeoff-opportunity-cost
+question: Should the founder spend this week shipping Orbit analytics or closing the paid Harbor pilot?
+portfolio:
+  founderId: isidro
+  projects:
+    - { id: orbit, name: Orbit, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1 }
+    - { id: harbor, name: Harbor, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1 }
+  records:
+    - { id: weekly-capacity, kind: constraint, scope: founder, projectId: null, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: The founder can complete only one major task this week., numericValue: 1, sourceStatus: approved, causal: false }
+    - { id: orbit-mrr, kind: metric, scope: project, projectId: orbit, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: Orbit has USD 1000 MRR., numericValue: 1000, sourceStatus: approved, causal: false }
+    - { id: orbit-analytics-request, kind: signal, scope: project, projectId: orbit, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.6, evidenceIds: [], text: Two Orbit customers requested analytics without agreeing to pay more., numericValue: 2, sourceStatus: approved, causal: false }
+    - { id: harbor-mrr, kind: metric, scope: project, projectId: harbor, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: Harbor has no current revenue., numericValue: 0, sourceStatus: approved, causal: false }
+    - { id: harbor-paid-pilot, kind: signal, scope: project, projectId: harbor, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.9, evidenceIds: [], text: A Harbor prospect offered a USD 3000 paid pilot if scoped by Friday., numericValue: 3000, sourceStatus: approved, causal: false }
+  relations:
+    - { id: one-major-task, type: cross_project, fromProjectId: orbit, toProjectId: harbor, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [weekly-capacity] }
+  packets: []
+  decisions: []
+  actions: []
+  outcomes: []

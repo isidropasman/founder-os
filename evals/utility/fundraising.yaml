@@ -1,0 +1,17 @@
+id: fundraising-fixture
+category: fundraising
+evidence:
+  passages:
+    sam-altman/startup-advice#0002: "When working on a deal—raising money, trying to get a partnership, etc.—it’s important to create a competitive situation."
+answer:
+  assertions:
+    - text: "Run a bounded investor process instead of relying on one-off meetings."
+      basis:
+        - kind: source
+          passageId: sam-altman/startup-advice#0002
+          quote: "important to create a competitive situation"
+        - kind: inference
+expectations:
+  minAssertions: 1
+  requiredText: ["bounded", "investor process"]
+  requiredBasisKinds: [source, inference]

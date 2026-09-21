@@ -10,6 +10,11 @@ export type Embedder = {
   embed(texts: string[]): Promise<number[][]>
 }
 
+export type EmbeddingEnvironment = {
+  OPENAI_API_KEY?: string | undefined
+  FOUNDEROS_EMBEDDINGS?: string | undefined
+}
+
 /**
  * A hashed bag-of-words projection. NOT semantic: "cheap" and "inexpensive" land
  * nowhere near each other. It exists so the retrieval SQL, the fusion maths and
@@ -56,6 +61,17 @@ export function embedderFor(spec = process.env.FOUNDEROS_EMBEDDINGS ?? 'openai')
   if (spec === 'openai') return openaiEmbedder
   throw new Error(`Unknown embedder "${spec}". Use "openai" or "hash".`)
 }
+
+export function configuredSemanticEmbedder(
+  environment: EmbeddingEnvironment = {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    FOUNDEROS_EMBEDDINGS: process.env.FOUNDEROS_EMBEDDINGS,
+  },
+): Embedder | null {
+  const embedder = embedderFor(environment.FOUNDEROS_EMBEDDINGS ?? 'openai')
+  return embedder.semantic && environment.OPENAI_API_KEY ? embedder : null
+}
+
 
 export function toVectorLiteral(vector: number[]): string {
   return `[${vector.join(',')}]`

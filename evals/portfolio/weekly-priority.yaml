@@ -1,0 +1,6 @@
+question: What is the one priority this week?
+expect:
+  evidence_integrity: true
+  project_contamination: false
+  concrete_data: true
+  action_clarity: true

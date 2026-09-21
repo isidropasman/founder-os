@@ -1,5 +1,6 @@
 import type { ResolvedBasis } from '../../src/basis.ts'
 import type { Counsel } from './actions.ts'
+import { PassageLink } from '../knowledge/passage.tsx'
 
 const KIND_LABEL: Record<ResolvedBasis['kind'], string> = {
   'your-data': 'Your data',
@@ -186,6 +187,64 @@ function Offline({ result }: { result: Extract<Counsel, { mode: 'offline' }> }) 
   )
 }
 
+function Brain({ result }: { result: Extract<Counsel, { mode: 'brain' }> }) {
+  if (result.response.mode === 'error') {
+    return <p className="quiet quiet--alert in" style={{ marginTop: '1rem' }}>{result.response.message}</p>
+  }
+
+  if (result.response.mode === 'retrieval_only') {
+    return (
+      <div className="in" style={{ marginTop: '1rem' }}>
+        <p className="quiet">{result.response.reason}</p>
+        <section style={{ marginTop: '2.25rem' }}>
+          <h2>Retrieved evidence</h2>
+          {result.response.passages.length === 0 ? (
+            <p className="sub" style={{ marginTop: '0.5rem' }}>No approved passage matched this question.</p>
+          ) : (
+            <div style={{ marginTop: '0.75rem' }}>
+              {result.response.passages.map((passage) => (
+                <div className="excerpt" key={passage.id}>
+                  <div className="excerpt__head">
+                    <span className="excerpt__title">{passage.author} — {passage.title}</span>
+                    <span className="excerpt__id">{passage.id}</span>
+                  </div>
+                  <p className="excerpt__text">{passage.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
+    )
+  }
+
+  return (
+    <div className="in" style={{ marginTop: '1rem' }}>
+      {result.response.assertions.map((assertion, index) => (
+        <section key={`${assertion.text}-${index}`} style={{ marginTop: index === 0 ? 0 : '1.5rem' }}>
+          <p className="sub">{assertion.text}</p>
+          <p className="basis">
+            {assertion.basis.map((basis, basisIndex) => (
+              <span className="basis__item" key={basisIndex} data-kind={basis.kind}>
+                <span className="basis__kind">
+                  {basis.kind === 'startup_data' ? 'Your data' : basis.kind === 'source' ? 'Source' : basis.kind === 'rule' ? 'Rule' : 'Inference'}
+                </span>
+                {basis.kind === 'source'
+                  ? <><PassageLink passageId={basis.passageId} sourceVersionId={basis.passageId.replace(/#\d+$/, '')} />: “{basis.quote}”</>
+                  : ''}
+                {basis.kind === 'startup_data' ? ` ${basis.path}` : ''}
+              </span>
+            ))}
+          </p>
+        </section>
+      ))}
+      <p className="meta" style={{ marginTop: '2rem' }}>
+        Retrieval {result.response.timing.retrievalMs.toFixed(1)}ms · assembly {result.response.timing.assemblyMs.toFixed(1)}ms · model {result.response.timing.modelMs.toFixed(1)}ms · total {result.response.timing.totalMs.toFixed(1)}ms
+      </p>
+    </div>
+  )
+}
+
 export function Answer({ result }: { result: Counsel }) {
   if (result.mode === 'error') {
     return (
@@ -194,5 +253,6 @@ export function Answer({ result }: { result: Counsel }) {
       </p>
     )
   }
+  if (result.mode === 'brain') return <Brain result={result} />
   return result.mode === 'reasoned' ? <Reasoned result={result} /> : <Offline result={result} />
 }

@@ -1,0 +1,7 @@
+id: pmf
+query: few users love your product product market fit
+expectedPassageIds:
+  - sam-altman/startup-advice#0004
+filters:
+  authors:
+    - sam-altman

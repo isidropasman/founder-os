@@ -1,0 +1,16 @@
+author:
+  id: tester
+  name: Tester
+  kind: person
+  confidence: high
+sources:
+  - id: escaped
+    file: ../outside.txt
+    title: Escaped source
+    kind: essay
+    retrieved_at: 2026-09-07
+    retrieval:
+      method: local_text
+      status: approved
+      retrieved_at: 2026-09-07
+    redistribution: citation_only

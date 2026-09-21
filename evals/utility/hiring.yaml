@@ -1,0 +1,19 @@
+id: hiring-fixture
+category: hiring
+evidence:
+  startupPaths: ["team.open_roles"]
+  passages:
+    sam-altman/startup-advice#0001: "Hiring is the most important thing you do; spend at least a third of your time on it."
+answer:
+  assertions:
+    - text: "Reserve founder time for the open roles and use a structured hiring loop."
+      basis:
+        - kind: source
+          passageId: sam-altman/startup-advice#0001
+          quote: "Hiring is the most important thing you do"
+        - kind: startup_data
+          path: team.open_roles
+expectations:
+  minAssertions: 1
+  requiredText: ["founder time", "hiring loop"]
+  requiredBasisKinds: [source, startup_data]

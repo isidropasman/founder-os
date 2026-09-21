@@ -1,0 +1,17 @@
+id: gtm-fixture
+category: gtm
+evidence:
+  passages:
+    andrew-chen/growth-team#0007: "Ultimately, the goal is to define the problem based on your insights and hypotheses, and staff the team to solve that particular problem."
+answer:
+  assertions:
+    - text: "Choose one distribution hypothesis and assign an owner before adding channels."
+      basis:
+        - kind: source
+          passageId: andrew-chen/growth-team#0007
+          quote: "define the problem based on your insights and hypotheses"
+        - kind: inference
+expectations:
+  minAssertions: 1
+  requiredText: ["distribution hypothesis", "owner"]
+  requiredBasisKinds: [source, inference]

@@ -1,0 +1,7 @@
+id: fundraising
+query: raising money create competitive situation
+expectedPassageIds:
+  - sam-altman/startup-advice#0002
+filters:
+  authors:
+    - sam-altman

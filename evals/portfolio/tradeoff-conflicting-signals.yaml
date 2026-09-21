@@ -1,0 +1,19 @@
+id: tradeoff-conflicting-signals
+question: Should Northstar prioritize the onboarding fix or the enterprise integration this week?
+portfolio:
+  founderId: isidro
+  projects:
+    - { id: northstar, name: Northstar, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1 }
+    - { id: studio, name: Studio, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1 }
+  records:
+    - { id: northstar-mrr, kind: metric, scope: project, projectId: northstar, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: Northstar has USD 2500 MRR., numericValue: 2500, sourceStatus: approved, causal: false }
+    - { id: onboarding-friction, kind: signal, scope: project, projectId: northstar, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.9, evidenceIds: [], text: Five trial users failed to finish onboarding., numericValue: 5, sourceStatus: approved, causal: false }
+    - { id: integration-request, kind: signal, scope: project, projectId: northstar, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.7, evidenceIds: [], text: One enterprise prospect says an integration is required before a pilot., numericValue: 1, sourceStatus: approved, causal: false }
+    - { id: studio-mrr, kind: metric, scope: project, projectId: studio, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: Studio has USD 600 MRR., numericValue: 600, sourceStatus: approved, causal: false }
+    - { id: studio-stable, kind: signal, scope: project, projectId: studio, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.8, evidenceIds: [], text: Studio had no support requests this week., numericValue: 0, sourceStatus: approved, causal: false }
+  relations:
+    - { id: northstar-conflict, type: contradicts, fromProjectId: northstar, toProjectId: northstar, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.8, evidenceIds: [onboarding-friction, integration-request] }
+  packets: []
+  decisions: []
+  actions: []
+  outcomes: []

@@ -93,12 +93,13 @@ export function locateQuote(
   corpus: Corpus,
   sourceId: string,
   quote: string,
+  claimSourceId = sourceId,
 ): { claimId: string; ordinal: number } | null {
   const source = corpus.sources.get(sourceId)
   if (!source) return null
   for (const c of source.chunks) {
     if (containsQuote(c.text, quote)) {
-      return { claimId: `${sourceId}#${String(c.ordinal).padStart(4, '0')}`, ordinal: c.ordinal }
+      return { claimId: `${claimSourceId}#${String(c.ordinal).padStart(4, '0')}`, ordinal: c.ordinal }
     }
   }
   return null
