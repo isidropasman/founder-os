@@ -5,6 +5,11 @@ import { join } from 'node:path'
 import { test } from 'node:test'
 import { z } from 'zod'
 import {
+  readProviderSelection,
+  writeProviderSelection,
+} from '../src/providers/connection.ts'
+import { localCliSessionStatus } from '../src/providers/local-cli.ts'
+import {
   coerceToSchema,
   decodeDoubleEncoded,
   modelForRole,
@@ -14,6 +19,7 @@ import {
   rejectedValue,
   unwrapEnvelope,
   createProvider,
+  modelForWorkspaceRole,
 } from '../src/provider.ts'
 import { inputForLocalCli } from '../src/providers/local-cli.ts'
 
@@ -54,6 +60,47 @@ test('the rejected value is recovered from either the cause or the raw text', ()
 test('model roles resolve from the environment with a documented default', () => {
   assert.match(modelForRole('router'), /:/)
   assert.match(modelForRole('reason'), /:/)
+})
+
+test('a workspace can opt into its local Codex subscription without storing a credential', async (context) => {
+  const root = await mkdtemp(join(tmpdir(), 'founderos-provider-selection-'))
+  context.after(async () => rm(root, { recursive: true, force: true }))
+
+  assert.equal(readProviderSelection(root), null)
+  writeProviderSelection(root, { provider: 'codex-cli' })
+
+  assert.deepEqual(readProviderSelection(root), { provider: 'codex-cli' })
+  assert.equal(modelForWorkspaceRole(root, 'reason'), 'codex-cli')
+  assert.equal(modelForWorkspaceRole(root, 'judge'), 'codex-cli')
+
+  writeProviderSelection(root, null)
+  assert.equal(readProviderSelection(root), null)
+})
+
+test('an installed but signed-out Codex CLI is not ready as a subscription connection', async (context) => {
+  const directory = await mkdtemp(join(tmpdir(), 'founderos-codex-session-'))
+  const executable = join(directory, 'codex')
+  await writeFile(executable, '#!/bin/sh\nprintf "%s\\n" "Not logged in"\nexit 1\n')
+  await chmod(executable, 0o755)
+  context.after(async () => rm(directory, { recursive: true, force: true }))
+
+  assert.deepEqual(await localCliSessionStatus('codex-cli', { PATH: directory }), {
+    ok: false,
+    reason: 'Codex CLI is not signed in',
+  })
+})
+
+test('a ChatGPT-authenticated Codex CLI is ready as a subscription connection', async (context) => {
+  const directory = await mkdtemp(join(tmpdir(), 'founderos-codex-session-'))
+  const executable = join(directory, 'codex')
+  await writeFile(executable, '#!/bin/sh\nprintf "%s\\n" "Logged in using ChatGPT" >&2\n')
+  await chmod(executable, 0o755)
+  context.after(async () => rm(directory, { recursive: true, force: true }))
+
+  assert.deepEqual(await localCliSessionStatus('codex-cli', { PATH: directory }), {
+    ok: true,
+    label: 'ChatGPT subscription',
+  })
 })
 
 test('reports an unavailable local codex harness without invoking it', async () => {

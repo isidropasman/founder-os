@@ -97,6 +97,7 @@ test('server actions are marked and typed', () => {
   assert.match(actions, /^'use server'/)
   assert.match(actions, /mode: 'offline'/, 'the no-credential path must be a first-class result')
   assert.match(actions, /mode: 'reasoned'/)
+  assert.match(actions, /modelForWorkspaceRole/, 'Ask must respect the workspace subscription selection')
 })
 
 test('the offline path is reachable from the web action', async () => {

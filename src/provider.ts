@@ -5,11 +5,13 @@ import type { ZodType } from 'zod'
 import {
   isLocalCliSpec,
   localCliAvailability,
+  localCliSessionStatus,
   runLocalCli,
   type LocalCliEnvironment,
   type LocalCliSpec,
   type ProviderAvailability,
 } from './providers/local-cli.ts'
+import { readProviderSelection } from './providers/connection.ts'
 
 export type { ProviderAvailability } from './providers/local-cli.ts'
 
@@ -70,6 +72,10 @@ export function modelForRole(role: ModelRole): string {
   return process.env[`FOUNDEROS_MODEL_${role.toUpperCase()}`] ?? ROLE_DEFAULTS[role]
 }
 
+export function modelForWorkspaceRole(root: string, role: ModelRole): string {
+  return readProviderSelection(root)?.provider ?? modelForRole(role)
+}
+
 export async function providerAvailability(
   spec: string,
   environment: LocalCliEnvironment = { PATH: process.env.PATH },
@@ -105,7 +111,7 @@ export async function providerIsReady(
   spec: string,
   environment: ProviderEnvironment = currentProviderEnvironment(),
 ): Promise<boolean> {
-  if (isLocalCliSpec(spec)) return (await localCliAvailability(spec, environment)).ok
+  if (isLocalCliSpec(spec)) return (await localCliSessionStatus(spec, environment)).ok
   return providerHasCredentials(spec, environment)
 }
 
@@ -117,6 +123,9 @@ const CREDENTIAL_HINT: Record<string, string> = {
 /** Raw provider errors are unreadable to someone meeting this tool for the first time. */
 export function explainProviderError(spec: string, error: unknown): string {
   const message = error instanceof Error ? error.message : String(error)
+  if (spec === 'codex-cli' && /not logged in|sign.?in|auth/i.test(message)) {
+    return 'Codex CLI is not signed in. Run `codex login`, then choose Codex in FounderOS Models. No API key is required.'
+  }
   const vendor = spec.split(':')[0] ?? ''
   const hint = CREDENTIAL_HINT[vendor]
 

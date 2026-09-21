@@ -3,7 +3,7 @@
 import { buildPortfolioPacket, challengePortfolioPacket } from '../../src/portfolio/advisor.ts'
 import { consult } from '../../src/knowledge/consult.ts'
 import { generatePortfolioPacket as generateGroundedPortfolioPacket } from '../../src/portfolio/reason.ts'
-import { createProvider, modelForRole, providerIsReady } from '../../src/provider.ts'
+import { createProvider, modelForWorkspaceRole, providerIsReady } from '../../src/provider.ts'
 import {
   approvePacket,
   modifyPacket,
@@ -41,7 +41,7 @@ export async function recordPortfolioEvidence(input: FounderRecordInput): Promis
 export async function generatePortfolioPacket(question: string): Promise<PortfolioAction> {
   try {
     const portfolio = loadPortfolio()
-    const model = modelForRole('reason')
+    const model = modelForWorkspaceRole(process.env.FOUNDEROS_CONTEXT ?? './context/example', 'reason')
     const packet = (await providerIsReady(model))
       ? await (async () => {
           const narrowedKnowledge = await consult({ query: question, domain: 'startup prioritization customer discovery opportunity cost focus', limit: 4 })

@@ -6,6 +6,7 @@ import { loadExperts } from './experts.ts'
 import { loadSkills } from './skills.ts'
 import { verifyQuotes } from './knowledge/verify.ts'
 import { providerAvailability } from './provider.ts'
+import { localCliSessionStatus } from './providers/local-cli.ts'
 
 export type CheckStatus = 'ok' | 'degraded' | 'missing'
 
@@ -192,33 +193,32 @@ function checkCredentials(environment: DiagnosisEnvironment): CheckResult[] {
 }
 
 async function checkLocalHarnesses(environment: DiagnosisEnvironment): Promise<CheckResult[]> {
-  const harnesses = [
-    {
-      spec: 'codex-cli',
-      name: 'Codex local harness',
-      fix: 'Install Codex CLI, then authenticate interactively: codex login',
-    },
-    {
-      spec: 'claude-cli',
-      name: 'Claude local harness',
-      fix: 'Install Claude Code, then authenticate interactively: claude auth login',
-    },
-  ] as const
+  const [codex, claude] = await Promise.all([
+    localCliSessionStatus('codex-cli', environment),
+    providerAvailability('claude-cli', environment),
+  ])
+  const without = 'Brain remains usable with an API provider or retrieval_only answers.'
 
-  return Promise.all(
-    harnesses.map(async (harness) => {
-      const availability = await providerAvailability(harness.spec, environment)
-      return availability.ok
-        ? { name: harness.name, status: 'ok' as const, detail: 'available on PATH' }
-        : {
-            name: harness.name,
-            status: 'degraded' as const,
-            detail: availability.reason,
-            fix: harness.fix,
-            without: 'Brain remains usable with an API provider or retrieval_only answers.',
-          }
-    }),
-  )
+  return [
+    codex.ok
+      ? { name: 'Codex local harness', status: 'ok' as const, detail: `${codex.label} ready` }
+      : {
+          name: 'Codex local harness',
+          status: 'degraded' as const,
+          detail: codex.reason,
+          fix: 'Install Codex CLI if needed, then authenticate interactively: codex login',
+          without,
+        },
+    claude.ok
+      ? { name: 'Claude local harness', status: 'ok' as const, detail: 'available on PATH' }
+      : {
+          name: 'Claude local harness',
+          status: 'degraded' as const,
+          detail: claude.reason,
+          fix: 'Install Claude Code, then authenticate interactively: claude auth login',
+          without,
+        },
+  ]
 }
 
 function checkRecordings(): CheckResult {

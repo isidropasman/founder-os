@@ -7,9 +7,9 @@ import { loadExperts, selectExperts } from '../../src/experts.ts'
 import { consult } from '../../src/knowledge/consult.ts'
 import { configuredSemanticEmbedder } from '../../src/knowledge/embed.ts'
 import { loadSkills, requireSkill } from '../../src/skills.ts'
-import { buildOfflineBrief, hasReasoningCredentials } from '../../src/offline.ts'
+import { buildOfflineBrief } from '../../src/offline.ts'
 import { run } from '../../src/pipeline.ts'
-import { createProvider, explainProviderError, modelForRole, providerIsReady } from '../../src/provider.ts'
+import { createProvider, explainProviderError, modelForWorkspaceRole, providerIsReady } from '../../src/provider.ts'
 import type { Passage } from '../../src/knowledge/consult.ts'
 import type { Signal } from '../../src/signals.ts'
 
@@ -112,7 +112,7 @@ export async function askBrain(query: string, skillId: string): Promise<Counsel>
         },
       }
     }
-    const model = modelForRole('reason')
+    const model = modelForWorkspaceRole(ws.root, 'reason')
     const response = await answerBrainQuestion({
       question: query,
       workspace: ws,
@@ -129,11 +129,26 @@ export async function askBrain(query: string, skillId: string): Promise<Counsel>
 
 export async function counsel(query: string, skillId: string, offline: boolean): Promise<Counsel> {
   if (!query.trim()) return { mode: 'error', message: 'Ask something.' }
-  if (offline || !hasReasoningCredentials()) return counselOffline(query, skillId)
 
   try {
     const ws = workspace()
-    const result = await run({ query, workspace: ws, pinnedSkill: skillId })
+    const models = {
+      route: modelForWorkspaceRole(ws.root, 'router'),
+      reason: modelForWorkspaceRole(ws.root, 'reason'),
+      challenge: modelForWorkspaceRole(ws.root, 'challenge'),
+    }
+    const ready = await Promise.all(Object.values(models).map((model) => providerIsReady(model)))
+    if (offline || ready.some((value) => !value)) return counselOffline(query, skillId)
+    const result = await run({
+      query,
+      workspace: ws,
+      pinnedSkill: skillId,
+      providers: {
+        route: createProvider(models.route),
+        reason: createProvider(models.reason),
+        challenge: createProvider(models.challenge),
+      },
+    })
 
     // Resolve every ref to something a person can read and follow. This is the
     // answer to "who is suggesting this", and it belongs next to the claim.
@@ -157,7 +172,7 @@ export async function counsel(query: string, skillId: string, offline: boolean):
   } catch (error) {
     // A billing or credential failure should still leave the founder with the
     // material, not a dead end.
-    const explained = explainProviderError(modelForRole('reason'), error)
+    const explained = explainProviderError(modelForWorkspaceRole(workspace().root, 'reason'), error)
     const fallback = await counselOffline(query, skillId)
     return fallback.mode === 'offline' ? { ...fallback, reason: explained } : fallback
   }

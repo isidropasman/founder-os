@@ -25,6 +25,10 @@ export type LocalCliRun =
   | { ok: true; output: string; ms: number }
   | { ok: false; reason: string }
 
+export type LocalCliSessionStatus =
+  | { ok: true; label: string }
+  | { ok: false; reason: string }
+
 const COMMANDS: Record<LocalCliSpec, { executable: string; label: string }> = {
   'codex-cli': { executable: 'codex', label: 'codex' },
   'claude-cli': { executable: 'claude', label: 'claude' },
@@ -58,6 +62,68 @@ export function localCliAvailability(
   return commandOnPath(command.executable, environment.PATH)
     ? { ok: true, provider: spec }
     : { ok: false, reason: `${command.label} CLI not found on PATH` }
+}
+
+function runStatusCommand(executable: string, args: string[], pathValue: string | undefined): Promise<LocalCliRun> {
+  const started = Date.now()
+  return new Promise((resolve) => {
+    const child = spawn(executable, args, {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      env: { ...process.env, ...(pathValue === undefined ? {} : { PATH: pathValue }) },
+    })
+    const output: Buffer[] = []
+    const errors: Buffer[] = []
+    let outputBytes = 0
+    let settled = false
+    const timeout = setTimeout(() => {
+      child.kill()
+      settle({ ok: false, reason: `${executable} status timed out` })
+    }, 5_000)
+
+    function settle(result: LocalCliRun): void {
+      if (settled) return
+      settled = true
+      clearTimeout(timeout)
+      resolve(result)
+    }
+
+    child.stdout.on('data', (chunk: Buffer) => {
+      outputBytes += chunk.byteLength
+      if (outputBytes > MAX_OUTPUT_BYTES) {
+        child.kill()
+        settle({ ok: false, reason: `${executable} status exceeded the ${MAX_OUTPUT_BYTES}-byte output limit` })
+        return
+      }
+      output.push(chunk)
+    })
+    child.stderr.on('data', (chunk: Buffer) => errors.push(chunk))
+    child.on('error', (error) => settle({ ok: false, reason: error.message }))
+    child.on('close', (code) => {
+      if (code !== 0) {
+        const detail = Buffer.concat(errors).toString('utf8').trim() || Buffer.concat(output).toString('utf8').trim()
+        settle({ ok: false, reason: detail || `${executable} status exited with code ${code ?? 'unknown'}` })
+        return
+      }
+      // `codex login status` reports a successful ChatGPT session on stderr.
+      // Exit status alone is not an authentication claim, so inspect both streams.
+      settle({ ok: true, output: Buffer.concat([...output, ...errors]).toString('utf8'), ms: Date.now() - started })
+    })
+  })
+}
+
+export async function localCliSessionStatus(
+  spec: LocalCliSpec,
+  environment: LocalCliEnvironment = { PATH: process.env.PATH },
+): Promise<LocalCliSessionStatus> {
+  const available = localCliAvailability(spec, environment)
+  if (!available.ok) return available
+  if (spec !== 'codex-cli') return { ok: false, reason: 'Subscription status is not supported for this local CLI' }
+
+  const status = await runStatusCommand(COMMANDS[spec].executable, ['login', 'status'], environment.PATH)
+  if (!status.ok || !/logged in|authenticated/i.test(status.output)) {
+    return { ok: false, reason: 'Codex CLI is not signed in' }
+  }
+  return { ok: true, label: 'ChatGPT subscription' }
 }
 
 function commandFor(spec: LocalCliSpec, request: LocalCliRequest, outputPath: string | null, schemaPath: string | null): { executable: string; args: string[] } {

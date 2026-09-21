@@ -97,6 +97,10 @@ test('provider errors are translated into something actionable', async () => {
   const badModel = explainProviderError('openai:gpt-5', new Error('model not_found'))
   assert.match(badModel, /FOUNDEROS_MODEL_VANILLA_GPT/)
 
+  const signedOutCodex = explainProviderError('codex-cli', new Error('not logged in'))
+  assert.match(signedOutCodex, /codex login/)
+  assert.match(signedOutCodex, /No API key is required/)
+
   // Anything unrecognized must pass through untouched rather than be swallowed.
   assert.equal(explainProviderError('anthropic:x', new Error('socket hang up')), 'socket hang up')
 })
