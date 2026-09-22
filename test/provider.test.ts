@@ -1,13 +1,27 @@
 import assert from 'node:assert/strict'
+import { chmod, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { test } from 'node:test'
 import { z } from 'zod'
+import {
+  readProviderSelection,
+  writeProviderSelection,
+} from '../src/providers/connection.ts'
+import { localCliSessionStatus } from '../src/providers/local-cli.ts'
 import {
   coerceToSchema,
   decodeDoubleEncoded,
   modelForRole,
+  providerHasCredentials,
+  providerIsReady,
+  providerAvailability,
   rejectedValue,
   unwrapEnvelope,
+  createProvider,
+  modelForWorkspaceRole,
 } from '../src/provider.ts'
+import { inputForLocalCli } from '../src/providers/local-cli.ts'
 
 const Schema = z.object({
   verdict: z.enum(['keep', 'revise']),
@@ -48,6 +62,65 @@ test('model roles resolve from the environment with a documented default', () =>
   assert.match(modelForRole('reason'), /:/)
 })
 
+test('a workspace can opt into its local Codex subscription without storing a credential', async (context) => {
+  const root = await mkdtemp(join(tmpdir(), 'founderos-provider-selection-'))
+  context.after(async () => rm(root, { recursive: true, force: true }))
+
+  assert.equal(readProviderSelection(root), null)
+  writeProviderSelection(root, { provider: 'codex-cli' })
+
+  assert.deepEqual(readProviderSelection(root), { provider: 'codex-cli' })
+  assert.equal(modelForWorkspaceRole(root, 'reason'), 'codex-cli')
+  assert.equal(modelForWorkspaceRole(root, 'judge'), 'codex-cli')
+
+  writeProviderSelection(root, null)
+  assert.equal(readProviderSelection(root), null)
+})
+
+test('an installed but signed-out Codex CLI is not ready as a subscription connection', async (context) => {
+  const directory = await mkdtemp(join(tmpdir(), 'founderos-codex-session-'))
+  const executable = join(directory, 'codex')
+  await writeFile(executable, '#!/bin/sh\nprintf "%s\\n" "Not logged in"\nexit 1\n')
+  await chmod(executable, 0o755)
+  context.after(async () => rm(directory, { recursive: true, force: true }))
+
+  assert.deepEqual(await localCliSessionStatus('codex-cli', { PATH: directory }), {
+    ok: false,
+    reason: 'Codex CLI is not signed in',
+  })
+})
+
+test('a ChatGPT-authenticated Codex CLI is ready as a subscription connection', async (context) => {
+  const directory = await mkdtemp(join(tmpdir(), 'founderos-codex-session-'))
+  const executable = join(directory, 'codex')
+  await writeFile(executable, '#!/bin/sh\nprintf "%s\\n" "Logged in using ChatGPT" >&2\n')
+  await chmod(executable, 0o755)
+  context.after(async () => rm(directory, { recursive: true, force: true }))
+
+  assert.deepEqual(await localCliSessionStatus('codex-cli', { PATH: directory }), {
+    ok: true,
+    label: 'ChatGPT subscription',
+  })
+})
+
+test('reports an unavailable local codex harness without invoking it', async () => {
+  const result = await providerAvailability('codex-cli', { PATH: '' })
+
+  assert.deepEqual(result, { ok: false, reason: 'codex CLI not found on PATH' })
+})
+
+test('reports an unavailable local Claude harness without invoking it', async () => {
+  const result = await providerAvailability('claude-cli', { PATH: '' })
+
+  assert.deepEqual(result, { ok: false, reason: 'claude CLI not found on PATH' })
+})
+
+test('a configured provider must match its own credential or local harness', async () => {
+  assert.equal(providerHasCredentials('anthropic:claude-opus-5', { OPENAI_API_KEY: 'x' }), false)
+  assert.equal(providerHasCredentials('openai:gpt-5', { OPENAI_API_KEY: 'x' }), true)
+  assert.equal(await providerIsReady('codex-cli', { PATH: '' }), false)
+})
+
 test('double-encoded strings are decoded, ordinary prose is not', () => {
   // Observed live: the model answered the enum correctly but shipped it as a
   // JSON string literal, so validation rejected a correct answer.
@@ -68,6 +141,57 @@ test('coerceToSchema recovers an answer that is both wrapped and double-encoded'
   const deformed = { body: { verdict: '"revise"', flags: ['x'], reversible: true } }
   assert.deepEqual(coerceToSchema(deformed, Schema), { verdict: 'revise', flags: ['x'], reversible: true })
   assert.equal(coerceToSchema({ verdict: 'nonsense', flags: [], reversible: true }, Schema), null)
+})
+
+test('local harnesses receive the Brain system contract in their native input channel', () => {
+  const request = { system: 'Return only JSON.', prompt: 'Question: What should I do?' }
+  assert.match(inputForLocalCli('codex-cli', request), /Return only JSON/)
+  assert.match(inputForLocalCli('codex-cli', request), /What should I do/)
+  assert.deepEqual(JSON.parse(inputForLocalCli('claude-cli', request)), request)
+})
+
+test('Codex object calls read the final response despite CLI event output', async (context) => {
+  const directory = await mkdtemp(join(tmpdir(), 'founderos-codex-cli-'))
+  const executable = join(directory, 'codex')
+  await writeFile(
+    executable,
+    `#!/bin/sh
+output=''
+schema=''
+while [ "$#" -gt 0 ]; do
+  if [ "$1" = '--output-last-message' ]; then
+    output="$2"
+    shift 2
+  elif [ "$1" = '--output-schema' ]; then
+    schema="$2"
+    shift 2
+  else
+    shift
+  fi
+done
+if [ -n "$output" ] && [ -n "$schema" ] && grep -q '"reversible"' "$schema"; then
+  printf '%s' '{"verdict":"revise","flags":["a","b"],"reversible":true}' > "$output"
+else
+  printf '%s\\n' 'missing output schema'
+fi
+`,
+  )
+  await chmod(executable, 0o755)
+  const previousPath = process.env.PATH
+  process.env.PATH = `${directory}:${previousPath ?? ''}`
+  context.after(async () => {
+    process.env.PATH = previousPath
+    await rm(directory, { recursive: true, force: true })
+  })
+
+  const completion = await createProvider('codex-cli').object({
+    system: 'Return only JSON.',
+    prompt: 'Return the schema object.',
+    schema: Schema,
+  })
+
+  assert.deepEqual(completion.value, VALID)
+  assert.equal(completion.raw, JSON.stringify(VALID))
 })
 
 test('the challenger header says whether the objection still applies', async () => {

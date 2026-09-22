@@ -2,8 +2,18 @@ import { pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
 import { loadCorpus } from './corpus.ts'
 import { check, connect, databaseUrl, migrate, reset } from './db.ts'
-import { embedderFor, hashEmbedder } from './embed.ts'
+import { configuredSemanticEmbedder, embedderFor, hashEmbedder } from './embed.ts'
 import { embedAll, ingest } from './ingest.ts'
+import {
+  evaluateRetrievalGate,
+  evaluateUtilityScores,
+  loadDeterministicUtilityCases,
+  loadRetrievalBaseline,
+  loadRetrievalEvalCases,
+  loadUtilityScores,
+  runDeterministicUtilityEvals,
+  runRetrievalEvals,
+} from './evals.ts'
 import { search, stats, type Kind } from './retrieve.ts'
 import { syncManifest } from './sync.ts'
 import { verifyQuotes } from './verify.ts'
@@ -16,6 +26,7 @@ const USAGE = `pnpm founderos knowledge <command>
   reset               Drop and recreate the public schema (destructive)
   sync <author>       Rebuild an author's manifest from the files on disk
   ingest              Load corpus + expert packs into Postgres (deterministic, no model)
+  eval                Run retrieval plus deterministic citation and utility contract evaluations
   embed [--allow-hash]  Embed everything not yet embedded (needs OPENAI_API_KEY)
   embed --clear       Null out every embedding (do this before switching embedders)
   search <query> [--kind claim|principle|framework] [--author id] [--limit n] [--semantic]
@@ -127,10 +138,15 @@ export async function runKnowledgeCommand(argv?: string[]): Promise<void> {
     }
 
     if (command === 'ingest') {
-      const report = await ingest(db)
+      const result = await ingest(db)
+      if (!result.ok) fail(`Ingestion failed: ${result.reason}`)
+      const report = result.report
       for (const [label, value] of Object.entries(report)) {
-        if (label === 'unlocatedQuotes') continue
+        if (label === 'unlocatedQuotes' || label === 'skipped') continue
         process.stdout.write(`  ${label.padEnd(12)} ${value}\n`)
+      }
+      for (const skipped of report.skipped) {
+        process.stdout.write(`  skipped ${skipped.sourceId} — ${skipped.reason}\n`)
       }
       if (report.unlocatedQuotes.length) {
         fail(`\nQuotes not locatable in any claim: ${report.unlocatedQuotes.join(', ')}`)
@@ -157,6 +173,51 @@ export async function runKnowledgeCommand(argv?: string[]): Promise<void> {
       if (!embedder.semantic) {
         process.stdout.write('  NOTE: hash embeddings are lexical, not semantic. Test use only.\n')
       }
+      return
+    }
+
+    if (command === 'eval') {
+      const configuredEmbedder = configuredSemanticEmbedder()
+      const embedded = configuredEmbedder ? ((await stats(db)).claims_embedded ?? 0) > 0 : false
+      const report = await runRetrievalEvals(db, loadRetrievalEvalCases(), {
+        ...(configuredEmbedder && embedded ? { embedder: configuredEmbedder } : {}),
+      })
+      process.stdout.write(`retrieval mode: ${configuredEmbedder && embedded ? 'hybrid lexical + semantic' : 'lexical only'}\n`)
+      for (const evaluation of report.cases) {
+        process.stdout.write(
+          `${evaluation.id.padEnd(20)} RR ${evaluation.reciprocalRank.toFixed(3)}  ` +
+            `recall@10 ${evaluation.recallAt10.toFixed(3)}  ${evaluation.latencyMs.toFixed(1)}ms\n`,
+        )
+      }
+      process.stdout.write(
+        `\nMRR ${report.aggregate.mrr.toFixed(3)}  recall@10 ${report.aggregate.recallAt10.toFixed(3)}  ` +
+          `p50 ${report.aggregate.p50Ms.toFixed(1)}ms  p95 ${report.aggregate.p95Ms.toFixed(1)}ms\n`,
+      )
+      const retrievalGate = evaluateRetrievalGate(report, loadRetrievalBaseline())
+      process.stdout.write(
+        retrievalGate.passed
+          ? 'retrieval gate: PASS\n'
+          : `retrieval gate: FAIL\n${retrievalGate.failures.map((failure) => `  ${failure}`).join('\n')}\n`,
+      )
+      const deterministicUtility = runDeterministicUtilityEvals(loadDeterministicUtilityCases())
+      process.stdout.write(
+        deterministicUtility.passed
+          ? `fixture utility gate: PASS — citation fidelity ${deterministicUtility.aggregate.citationFidelity.toFixed(3)}, ` +
+            `utility signals ${deterministicUtility.aggregate.utilitySignalRate.toFixed(3)}\n`
+          : `fixture utility gate: FAIL\n${deterministicUtility.cases
+              .filter((evaluation) => !evaluation.passed)
+              .flatMap((evaluation) => evaluation.failures.map((failure) => `  ${evaluation.category}: ${failure}`))
+              .join('\n')}\n`,
+      )
+      const utilityGate = evaluateUtilityScores(loadUtilityScores())
+      process.stdout.write(
+        utilityGate.blockedCategories.length
+          ? `human utility gate: BLOCKED — no real scored answer for ${utilityGate.blockedCategories.join(', ')}\n`
+          : utilityGate.passed
+            ? 'human utility gate: PASS\n'
+            : `human utility gate: FAIL\n${utilityGate.failures.map((failure) => `  ${failure}`).join('\n')}\n`,
+      )
+      if (!retrievalGate.passed || !deterministicUtility.passed) process.exitCode = 1
       return
     }
 

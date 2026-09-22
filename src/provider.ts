@@ -1,9 +1,34 @@
 import { anthropic } from '@ai-sdk/anthropic'
 import { openai } from '@ai-sdk/openai'
-import { generateObject, generateText, type LanguageModel } from 'ai'
+import { generateObject, generateText, zodSchema, type LanguageModel } from 'ai'
 import type { ZodType } from 'zod'
+import {
+  isLocalCliSpec,
+  localCliAvailability,
+  localCliSessionStatus,
+  runLocalCli,
+  type LocalCliEnvironment,
+  type LocalCliSpec,
+  type ProviderAvailability,
+} from './providers/local-cli.ts'
+import { readProviderSelection } from './providers/connection.ts'
+
+export type { ProviderAvailability } from './providers/local-cli.ts'
 
 export type ModelRole = 'router' | 'reason' | 'challenge' | 'judge'
+
+export type ProviderEnvironment = LocalCliEnvironment & {
+  ANTHROPIC_API_KEY?: string | undefined
+  OPENAI_API_KEY?: string | undefined
+}
+
+function currentProviderEnvironment(): ProviderEnvironment {
+  return {
+    PATH: process.env.PATH,
+    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  }
+}
 
 export type CompletionRequest = {
   system: string
@@ -47,6 +72,49 @@ export function modelForRole(role: ModelRole): string {
   return process.env[`FOUNDEROS_MODEL_${role.toUpperCase()}`] ?? ROLE_DEFAULTS[role]
 }
 
+export function modelForWorkspaceRole(root: string, role: ModelRole): string {
+  return readProviderSelection(root)?.provider ?? modelForRole(role)
+}
+
+export async function providerAvailability(
+  spec: string,
+  environment: LocalCliEnvironment = { PATH: process.env.PATH },
+): Promise<ProviderAvailability> {
+  if (isLocalCliSpec(spec)) return localCliAvailability(spec, environment)
+
+  const resolved = SHORTHAND[spec] ?? spec
+  const separator = resolved.indexOf(':')
+  if (separator === -1) {
+    return { ok: false, reason: `Model spec "${spec}" must name a supported provider` }
+  }
+  const vendor = resolved.slice(0, separator)
+  return vendor === 'anthropic' || vendor === 'openai'
+    ? { ok: true, provider: resolved }
+    : { ok: false, reason: `Unknown provider "${vendor}" in model spec "${spec}"` }
+}
+
+export function providerHasCredentials(
+  spec: string,
+  environment: ProviderEnvironment = currentProviderEnvironment(),
+): boolean {
+  if (isLocalCliSpec(spec)) return false
+  const resolved = SHORTHAND[spec] ?? spec
+  const vendor = resolved.split(':')[0]
+  return vendor === 'anthropic'
+    ? Boolean(environment.ANTHROPIC_API_KEY)
+    : vendor === 'openai'
+      ? Boolean(environment.OPENAI_API_KEY)
+      : false
+}
+
+export async function providerIsReady(
+  spec: string,
+  environment: ProviderEnvironment = currentProviderEnvironment(),
+): Promise<boolean> {
+  if (isLocalCliSpec(spec)) return (await localCliSessionStatus(spec, environment)).ok
+  return providerHasCredentials(spec, environment)
+}
+
 const CREDENTIAL_HINT: Record<string, string> = {
   anthropic: 'ANTHROPIC_API_KEY — get one at console.anthropic.com, then put it in .env',
   openai: 'OPENAI_API_KEY — get one at platform.openai.com, then put it in .env',
@@ -55,6 +123,9 @@ const CREDENTIAL_HINT: Record<string, string> = {
 /** Raw provider errors are unreadable to someone meeting this tool for the first time. */
 export function explainProviderError(spec: string, error: unknown): string {
   const message = error instanceof Error ? error.message : String(error)
+  if (spec === 'codex-cli' && /not logged in|sign.?in|auth/i.test(message)) {
+    return 'Codex CLI is not signed in. Run `codex login`, then choose Codex in FounderOS Models. No API key is required.'
+  }
   const vendor = spec.split(':')[0] ?? ''
   const hint = CREDENTIAL_HINT[vendor]
 
@@ -154,7 +225,48 @@ export const DEFAULT_MAX_OUTPUT_TOKENS = 8000
 const RETRY_NUDGE =
   '\n\nReturn the object itself. Do not wrap it in an outer key such as "parameters", "body" or "result".'
 
+function localCliProvider(spec: LocalCliSpec): Provider {
+  return {
+    id: spec,
+
+    async text(req) {
+      const result = await runLocalCli(spec, req)
+      if (!result.ok) throw new Error(result.reason)
+      return {
+        value: result.output,
+        raw: result.output,
+        model: spec,
+        tokensIn: 0,
+        tokensOut: 0,
+        ms: result.ms,
+      }
+    },
+
+    async object(req) {
+      const result = await runLocalCli(spec, { ...req, outputSchema: zodSchema(req.schema).jsonSchema })
+      if (!result.ok) throw new Error(result.reason)
+      let parsed: unknown
+      try {
+        parsed = JSON.parse(result.output)
+      } catch {
+        throw new Error(`${spec} did not return a JSON object`)
+      }
+      const value = coerceToSchema(parsed, req.schema)
+      if (value === null) throw new Error(`${spec} did not return an object matching the requested schema`)
+      return {
+        value,
+        raw: result.output,
+        model: spec,
+        tokensIn: 0,
+        tokensOut: 0,
+        ms: result.ms,
+      }
+    },
+  }
+}
+
 export function createProvider(spec: string): Provider {
+  if (isLocalCliSpec(spec)) return localCliProvider(spec)
   const model = resolve(spec)
 
   return {

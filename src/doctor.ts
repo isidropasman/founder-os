@@ -5,6 +5,8 @@ import { check, connect } from './knowledge/db.ts'
 import { loadExperts } from './experts.ts'
 import { loadSkills } from './skills.ts'
 import { verifyQuotes } from './knowledge/verify.ts'
+import { providerAvailability } from './provider.ts'
+import { localCliSessionStatus } from './providers/local-cli.ts'
 
 export type CheckStatus = 'ok' | 'degraded' | 'missing'
 
@@ -16,6 +18,12 @@ export type CheckResult = {
   fix?: string
   /** What still works without it — so a founder knows whether to stop or continue. */
   without?: string
+}
+
+type DiagnosisEnvironment = {
+  PATH?: string | undefined
+  ANTHROPIC_API_KEY?: string | undefined
+  OPENAI_API_KEY?: string | undefined
 }
 
 const MARKS: Record<CheckStatus, string> = { ok: '✓', degraded: '~', missing: '✗' }
@@ -71,7 +79,7 @@ function checkCorpus(): CheckResult {
       name: 'Corpus on disk',
       status: 'missing',
       detail: 'no source documents fetched',
-      fix: './scripts/fetch-paul-graham.sh && pnpm founderos knowledge sync paul-graham --url "https://paulgraham.com/{id}.html"',
+      fix: './scripts/fetch-initial-cohort.sh && pnpm knowledge ingest',
       without: 'answers still work, but cite nothing from the authors themselves',
     }
   }
@@ -157,9 +165,9 @@ async function checkDatabase(): Promise<CheckResult[]> {
   }
 }
 
-function checkCredentials(): CheckResult[] {
-  const anthropic = Boolean(process.env.ANTHROPIC_API_KEY)
-  const openai = Boolean(process.env.OPENAI_API_KEY)
+function checkCredentials(environment: DiagnosisEnvironment): CheckResult[] {
+  const anthropic = Boolean(environment.ANTHROPIC_API_KEY)
+  const openai = Boolean(environment.OPENAI_API_KEY)
   const envFile = existsSync('.env')
 
   return [
@@ -184,6 +192,35 @@ function checkCredentials(): CheckResult[] {
   ]
 }
 
+async function checkLocalHarnesses(environment: DiagnosisEnvironment): Promise<CheckResult[]> {
+  const [codex, claude] = await Promise.all([
+    localCliSessionStatus('codex-cli', environment),
+    providerAvailability('claude-cli', environment),
+  ])
+  const without = 'Brain remains usable with an API provider or retrieval_only answers.'
+
+  return [
+    codex.ok
+      ? { name: 'Codex local harness', status: 'ok' as const, detail: `${codex.label} ready` }
+      : {
+          name: 'Codex local harness',
+          status: 'degraded' as const,
+          detail: codex.reason,
+          fix: 'Install Codex CLI if needed, then authenticate interactively: codex login',
+          without,
+        },
+    claude.ok
+      ? { name: 'Claude local harness', status: 'ok' as const, detail: 'available on PATH' }
+      : {
+          name: 'Claude local harness',
+          status: 'degraded' as const,
+          detail: claude.reason,
+          fix: 'Install Claude Code, then authenticate interactively: claude auth login',
+          without,
+        },
+  ]
+}
+
 function checkRecordings(): CheckResult {
   const dir = 'test/fixtures/runs'
   const count = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')).length : 0
@@ -197,14 +234,22 @@ function checkRecordings(): CheckResult {
       }
 }
 
-export async function diagnose(workspaceDir: string): Promise<CheckResult[]> {
+export async function diagnose(
+  workspaceDir: string,
+  environment: DiagnosisEnvironment = {
+    PATH: process.env.PATH,
+    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  },
+): Promise<CheckResult[]> {
   return [
     checkRuntime(),
     checkWorkspace(workspaceDir),
     checkSkills(),
     checkCorpus(),
     ...(await checkDatabase()),
-    ...checkCredentials(),
+    ...(await checkLocalHarnesses(environment)),
+    ...checkCredentials(environment),
     checkRecordings(),
   ]
 }

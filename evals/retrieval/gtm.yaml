@@ -1,0 +1,7 @@
+id: gtm
+query: growth team insights hypotheses solve problem
+expectedPassageIds:
+  - andrew-chen/how-to-build-a-growth-team#0007
+filters:
+  authors:
+    - andrew-chen

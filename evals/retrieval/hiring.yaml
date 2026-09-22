@@ -1,0 +1,7 @@
+id: hiring
+query: hire slow fire fast hiring startup
+expectedPassageIds:
+  - sam-altman/startup-advice#0001
+filters:
+  authors:
+    - sam-altman

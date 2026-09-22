@@ -63,6 +63,23 @@ test('missing Anthropic credentials leave ask available offline', async () => {
   }
 })
 
+test('missing local harnesses are degraded rather than fatal', async () => {
+  const checks = await diagnose('./context/example', { PATH: '' })
+  const harnesses = checks.filter((check) => /local harness$/.test(check.name))
+
+  assert.deepEqual(
+    harnesses.map((check) => ({ name: check.name, status: check.status })),
+    [
+      { name: 'Codex local harness', status: 'degraded' },
+      { name: 'Claude local harness', status: 'degraded' },
+    ],
+  )
+  for (const harness of harnesses) {
+    assert.ok(harness.fix)
+    assert.match(harness.without ?? '', /retrieval_only/)
+  }
+})
+
 test('provider errors are translated into something actionable', async () => {
   const { explainProviderError } = await import('../src/provider.ts')
 
@@ -79,6 +96,10 @@ test('provider errors are translated into something actionable', async () => {
 
   const badModel = explainProviderError('openai:gpt-5', new Error('model not_found'))
   assert.match(badModel, /FOUNDEROS_MODEL_VANILLA_GPT/)
+
+  const signedOutCodex = explainProviderError('codex-cli', new Error('not logged in'))
+  assert.match(signedOutCodex, /codex login/)
+  assert.match(signedOutCodex, /No API key is required/)
 
   // Anything unrecognized must pass through untouched rather than be swallowed.
   assert.equal(explainProviderError('anthropic:x', new Error('socket hang up')), 'socket hang up')

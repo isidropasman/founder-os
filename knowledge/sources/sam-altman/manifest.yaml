@@ -1,0 +1,32 @@
+author:
+  id: sam-altman
+  name: Sam Altman
+  kind: person
+  confidence: high
+  domains:
+    - pmf
+    - hiring
+    - fundraising
+    - gtm
+  limitations:
+    - Early-stage, venture-backed startup guidance; not a substitute for company-specific evidence
+  source_policy:
+    retrieval:
+      method: direct_html
+      status: approved
+      retrieved_at: 2026-09-08
+    redistribution: citation_only
+sources:
+  - id: startup-advice
+    file: startup-advice.html
+    title: Startup Advice
+    kind: essay
+    url: https://blog.samaltman.com/startup-advice
+    year: 2014
+    topics:
+      - pmf
+      - hiring
+      - fundraising
+      - gtm
+    retrieved_at: 2026-09-08
+    checksum: sha256:f4b5ca7470e20d66e1d7b5d8348255bc8b422dcbbe986fee177bef5603f32d6f

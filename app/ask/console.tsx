@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { counsel, type Counsel as Result } from './actions.ts'
+import { askBrain, type Counsel as Result } from './actions.ts'
 import { Answer } from './brief.tsx'
 
 type SkillCard = { id: string; purpose: string }
@@ -10,12 +10,10 @@ export function Console({
   skills,
   initialQuery,
   initialSkill,
-  credentialed,
 }: {
   skills: SkillCard[]
   initialQuery: string
   initialSkill: string
-  credentialed: boolean
 }) {
   const [query, setQuery] = useState(initialQuery)
   const [skill, setSkill] = useState(initialSkill)
@@ -33,7 +31,7 @@ export function Console({
         <form
           onSubmit={(event) => {
             event.preventDefault()
-            start(async () => setResult(await counsel(query, skill, !credentialed)))
+            start(async () => setResult(await askBrain(query, skill)))
           }}
           style={{ marginTop: '2rem' }}
         >

@@ -1,0 +1,19 @@
+id: pricing-fixture
+category: pricing
+evidence:
+  startupPaths: ["metrics.gross_margin_pct"]
+  passages:
+    tomasz-tunguz/pricing#0005: "Your pricing plan has to enable the company to become profitable at some point."
+answer:
+  assertions:
+    - text: "Run a price test with one customer segment and measure gross margin."
+      basis:
+        - kind: source
+          passageId: tomasz-tunguz/pricing#0005
+          quote: "pricing plan has to enable the company to become profitable"
+        - kind: startup_data
+          path: metrics.gross_margin_pct
+expectations:
+  minAssertions: 1
+  requiredText: ["price test", "gross margin"]
+  requiredBasisKinds: [source, startup_data]

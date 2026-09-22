@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { hashEmbedder, EMBEDDING_DIMENSIONS } from '../src/knowledge/embed.ts'
+import { configuredSemanticEmbedder, hashEmbedder, EMBEDDING_DIMENSIONS } from '../src/knowledge/embed.ts'
 import { chunk, containsQuote, htmlToText, normalizeForMatch } from '../src/knowledge/text.ts'
 
 test('htmlToText strips markup, decodes entities and keeps paragraphs', () => {
@@ -71,4 +71,10 @@ test('the hash embedder puts shared vocabulary closer than disjoint vocabulary',
   assert.ok(base && overlapping && disjoint)
   const dot = (x: number[], y: number[]) => x.reduce((s, v, i) => s + v * y[i]!, 0)
   assert.ok(dot(base, overlapping) > dot(base, disjoint))
+})
+
+test('enables the semantic embedder only with the matching API credential', () => {
+  assert.equal(configuredSemanticEmbedder({ FOUNDEROS_EMBEDDINGS: 'openai' }), null)
+  assert.equal(configuredSemanticEmbedder({ FOUNDEROS_EMBEDDINGS: 'hash', OPENAI_API_KEY: 'present' }), null)
+  assert.equal(configuredSemanticEmbedder({ FOUNDEROS_EMBEDDINGS: 'openai', OPENAI_API_KEY: 'present' })?.semantic, true)
 })

@@ -1,0 +1,19 @@
+id: pmf-fixture
+category: pmf
+evidence:
+  startupPaths: ["metrics.activation_rate"]
+  passages:
+    sam-altman/startup-advice#0004: "It’s better to have a few users love your product than for a lot of users to sort of like it."
+answer:
+  assertions:
+    - text: "Interview the users who love the product before broadening acquisition."
+      basis:
+        - kind: source
+          passageId: sam-altman/startup-advice#0004
+          quote: "few users love your product"
+        - kind: startup_data
+          path: metrics.activation_rate
+expectations:
+  minAssertions: 1
+  requiredText: ["interview", "users who love"]
+  requiredBasisKinds: [source, startup_data]

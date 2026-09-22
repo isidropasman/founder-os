@@ -1,0 +1,17 @@
+id: tradeoff-prioritization
+question: 'Which project deserves the founder''s next five working days: Atlas or Relay?'
+portfolio:
+  founderId: isidro
+  projects:
+    - { id: atlas, name: Atlas, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1 }
+    - { id: relay, name: Relay, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1 }
+  records:
+    - { id: atlas-mrr, kind: metric, scope: project, projectId: atlas, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: Atlas has USD 4500 MRR from eighteen customers., numericValue: 4500, sourceStatus: approved, causal: false }
+    - { id: atlas-retention, kind: signal, scope: project, projectId: atlas, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.9, evidenceIds: [], text: Four Atlas customers asked for a retention review after week two., numericValue: 4, sourceStatus: approved, causal: false }
+    - { id: relay-mrr, kind: metric, scope: project, projectId: relay, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 1, evidenceIds: [], text: Relay has no paying customers., numericValue: 0, sourceStatus: approved, causal: false }
+    - { id: relay-interest, kind: signal, scope: project, projectId: relay, recordedAt: '2026-09-08T20:00:00.000Z', observedAt: '2026-09-08T20:00:00.000Z', origin: founder, confidence: 0.5, evidenceIds: [], text: One Relay prospect asked to see a prototype., numericValue: 1, sourceStatus: approved, causal: false }
+  relations: []
+  packets: []
+  decisions: []
+  actions: []
+  outcomes: []

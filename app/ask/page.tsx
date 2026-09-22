@@ -1,5 +1,4 @@
 import { loadSkills } from '../../src/skills.ts'
-import { hasReasoningCredentials } from '../../src/offline.ts'
 import { Console } from './console.tsx'
 
 export const dynamic = 'force-dynamic'
@@ -17,7 +16,6 @@ export default async function Ask({
       skills={skills}
       initialQuery={params.q ?? ''}
       initialSkill={params.skill ?? 'focus'}
-      credentialed={hasReasoningCredentials()}
     />
   )
 }

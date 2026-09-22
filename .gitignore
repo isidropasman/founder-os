@@ -4,6 +4,7 @@ traces/
 .env
 .env.local
 .context/
+.founderos/
 context/*
 !context/example/
 evals/results/*

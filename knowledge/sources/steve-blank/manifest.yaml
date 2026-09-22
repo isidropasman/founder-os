@@ -1,0 +1,28 @@
+author:
+  id: steve-blank
+  name: Steve Blank
+  kind: person
+  confidence: high
+  domains:
+    - customer-discovery
+    - pmf
+  limitations:
+    - Customer-development methodology should be tested against the startup's specific market
+  source_policy:
+    retrieval:
+      method: direct_html
+      status: approved
+      retrieved_at: 2026-09-08
+    redistribution: citation_only
+sources:
+  - id: hypotheses-experiments-insights
+    file: hypotheses-experiments-insights.html
+    title: Why Lean Startup Is Not About Building a Product
+    kind: post
+    url: https://steveblank.com/2015/05/06/
+    year: 2015
+    topics:
+      - customer-discovery
+      - pmf
+    retrieved_at: 2026-09-08
+    checksum: sha256:5ac18dbfa2692660221caaeb5fc8926e1418adeebd3cb6aedf454011a7c3b2b0

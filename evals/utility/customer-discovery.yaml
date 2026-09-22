@@ -1,0 +1,17 @@
+id: customer-discovery-fixture
+category: customer-discovery
+evidence:
+  passages:
+    steve-blank/minimum-viable-product#0011: "Startups are building minimal viable products to learn the most they can."
+answer:
+  assertions:
+    - text: "Test the customer hypothesis with an interview before building another feature."
+      basis:
+        - kind: source
+          passageId: steve-blank/minimum-viable-product#0011
+          quote: "building minimal viable products to learn the most they can"
+        - kind: inference
+expectations:
+  minAssertions: 1
+  requiredText: ["test", "interview"]
+  requiredBasisKinds: [source, inference]

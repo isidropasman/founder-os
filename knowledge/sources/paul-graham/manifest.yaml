@@ -13,6 +13,12 @@ author:
     - Consumer and developer-tool startups; weaker signal for enterprise sales motions
     - Optimizes for venture-scale outcomes, which is not every founder's goal
     - Nothing here postdates 2023; says little about AI-era distribution
+  source_policy:
+    retrieval:
+      method: direct_html
+      status: approved
+      retrieved_at: 2026-08-26
+    redistribution: citation_only
 sources:
   - id: 13sentences
     file: 13sentences.html

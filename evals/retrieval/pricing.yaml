@@ -1,0 +1,7 @@
+id: pricing
+query: pricing plan profitability unit economics
+expectedPassageIds:
+  - tomasz-tunguz/how-to-price-your-startup#0005
+filters:
+  authors:
+    - tomasz-tunguz

@@ -1,6 +1,6 @@
 import { connect, check, type Db } from './db.ts'
-import { embedderFor } from './embed.ts'
-import { search } from './retrieve.ts'
+import type { Embedder } from './embed.ts'
+import { searchMeasured, type RetrievalTiming } from './retrieve.ts'
 
 export type Passage = {
   id: string
@@ -11,7 +11,7 @@ export type Passage = {
 }
 
 export type Consultation =
-  | { ok: true; passages: Passage[]; query: string; discarded: number }
+  | { ok: true; passages: Passage[]; query: string; discarded: number; semantic: boolean; timing: RetrievalTiming }
   | { ok: false; reason: string }
 
 const MAX_PASSAGE_CHARS = 900
@@ -49,7 +49,7 @@ export async function consult(input: {
   domain?: string
   authors?: string[]
   limit?: number
-  semantic?: boolean
+  embedder?: Embedder
   db?: Db
 }): Promise<Consultation> {
   const db = input.db ?? connect()
@@ -63,20 +63,32 @@ export async function consult(input: {
     const limit = input.limit ?? DEFAULT_LIMIT
     const queries = [input.query, input.domain].filter((q): q is string => Boolean(q?.trim()))
 
+    const started = performance.now()
     const scores = new Map<string, number>()
     const matchedBy = new Map<string, Set<string>>()
     const found = new Map<string, Passage>()
+
+    const timing = { lexicalMs: 0, vectorMs: 0, fusionMs: 0, rerankMs: 0, totalMs: 0 }
+    const embedded = input.embedder
+      ? await db.query<{ count: string }>('SELECT count(*)::text AS count FROM claims WHERE embedding IS NOT NULL')
+      : null
+    const embedder = embedded && Number(embedded.rows[0]?.count ?? '0') > 0 ? input.embedder : undefined
 
     // Searching per author rather than once globally stops a single prolific
     // author from filling every slot when several are relevant.
     for (const author of perAuthor) {
       for (const query of queries) {
-        const hits = await search(db, query, {
+        const result = await searchMeasured(db, query, {
           limit: CANDIDATES,
           kinds: ['claim'],
           ...(author ? { authorId: author } : {}),
-          ...(input.semantic ? { embedder: embedderFor() } : {}),
+          ...(embedder ? { embedder } : {}),
         })
+        const hits = result.hits
+        timing.lexicalMs += result.timing.lexicalMs
+        timing.vectorMs += result.timing.vectorMs
+        timing.fusionMs += result.timing.fusionMs
+        timing.rerankMs += result.timing.rerankMs
         for (const [index, hit] of hits.entries()) {
           scores.set(hit.id, (scores.get(hit.id) ?? 0) + 1 / (RRF_K + index + 1))
           matchedBy.set(hit.id, (matchedBy.get(hit.id) ?? new Set()).add(query))
@@ -109,6 +121,8 @@ export async function consult(input: {
       passages: relevant.slice(0, limit),
       query: queries.join(' | '),
       discarded: ranked.length - relevant.length,
+      semantic: Boolean(embedder),
+      timing: { ...timing, totalMs: performance.now() - started },
     }
   } catch (error) {
     return { ok: false, reason: error instanceof Error ? error.message : String(error) }

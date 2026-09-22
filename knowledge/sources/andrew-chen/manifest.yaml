@@ -1,0 +1,28 @@
+author:
+  id: andrew-chen
+  name: Andrew Chen
+  kind: person
+  confidence: high
+  domains:
+    - gtm
+    - growth
+  limitations:
+    - Growth-team advice is later-stage than zero-to-one customer discovery
+  source_policy:
+    retrieval:
+      method: direct_html
+      status: approved
+      retrieved_at: 2026-09-08
+    redistribution: citation_only
+sources:
+  - id: how-to-build-a-growth-team
+    file: how-to-build-a-growth-team.html
+    title: How to Build a Growth Team
+    kind: essay
+    url: https://andrewchen.com/how-to-build-a-growth-team/
+    year: 2014
+    topics:
+      - gtm
+      - growth
+    retrieved_at: 2026-09-08
+    checksum: sha256:efa8774f2d67d37d3fe3980ab29a2cc54f7671c25e59c12e7a0ae88005e3f6ed

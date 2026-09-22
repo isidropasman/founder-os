@@ -1,16 +1,25 @@
 'use server'
 
 import { collectBasis, resolveAll, type ResolvedBasis } from '../../src/basis.ts'
+import { answerBrainQuestion, type BrainResponse } from '../../src/brain/answer.ts'
 import { openWorkspace, selectContext } from '../../src/context.ts'
 import { loadExperts, selectExperts } from '../../src/experts.ts'
+import { consult } from '../../src/knowledge/consult.ts'
+import { configuredSemanticEmbedder } from '../../src/knowledge/embed.ts'
 import { loadSkills, requireSkill } from '../../src/skills.ts'
-import { buildOfflineBrief, hasReasoningCredentials } from '../../src/offline.ts'
+import { buildOfflineBrief } from '../../src/offline.ts'
 import { run } from '../../src/pipeline.ts'
-import { explainProviderError, modelForRole } from '../../src/provider.ts'
+import { createProvider, explainProviderError, modelForWorkspaceRole, providerIsReady } from '../../src/provider.ts'
 import type { Passage } from '../../src/knowledge/consult.ts'
 import type { Signal } from '../../src/signals.ts'
 
 export type Counsel =
+  | {
+      mode: 'brain'
+      query: string
+      skill: string
+      response: BrainResponse
+    }
   | {
       mode: 'reasoned'
       query: string
@@ -79,13 +88,67 @@ export async function counselOffline(query: string, skillId: string): Promise<Co
   }
 }
 
-export async function counsel(query: string, skillId: string, offline: boolean): Promise<Counsel> {
+export async function askBrain(query: string, skillId: string): Promise<Counsel> {
   if (!query.trim()) return { mode: 'error', message: 'Ask something.' }
-  if (offline || !hasReasoningCredentials()) return counselOffline(query, skillId)
 
   try {
     const ws = workspace()
-    const result = await run({ query, workspace: ws, pinnedSkill: skillId })
+    const skill = requireSkill(loadSkills(), skillId)
+    const semanticEmbedder = configuredSemanticEmbedder()
+    const consultation = await consult({
+      query,
+      domain: skill.corpusTerms.join(' ') || skill.purpose,
+      ...(skill.experts.length ? { authors: skill.experts } : {}),
+      ...(semanticEmbedder ? { embedder: semanticEmbedder } : {}),
+    })
+    if (!consultation.ok) {
+      return {
+        mode: 'brain',
+        query,
+        skill: skill.id,
+        response: {
+          mode: 'retrieval_only', passages: [], reason: consultation.reason,
+          timing: { retrievalMs: 0, assemblyMs: 0, modelMs: 0, totalMs: 0 },
+        },
+      }
+    }
+    const model = modelForWorkspaceRole(ws.root, 'reason')
+    const response = await answerBrainQuestion({
+      question: query,
+      workspace: ws,
+      contextKeys: skill.requiresContext,
+      passages: consultation.passages,
+      retrievalMs: consultation.timing.totalMs,
+      ...((await providerIsReady(model)) ? { provider: createProvider(model) } : {}),
+    })
+    return { mode: 'brain', query, skill: skill.id, response }
+  } catch (error) {
+    return { mode: 'error', message: error instanceof Error ? error.message : String(error) }
+  }
+}
+
+export async function counsel(query: string, skillId: string, offline: boolean): Promise<Counsel> {
+  if (!query.trim()) return { mode: 'error', message: 'Ask something.' }
+
+  try {
+    const ws = workspace()
+    const models = {
+      route: modelForWorkspaceRole(ws.root, 'router'),
+      reason: modelForWorkspaceRole(ws.root, 'reason'),
+      challenge: modelForWorkspaceRole(ws.root, 'challenge'),
+    }
+    const ready = await Promise.all(Object.values(models).map((model) => providerIsReady(model)))
+    if (offline || ready.some((value) => !value)) return counselOffline(query, skillId)
+    const result = await run({
+      query,
+      workspace: ws,
+      pinnedSkill: skillId,
+      providers: {
+        route: createProvider(models.route),
+        reason: createProvider(models.reason),
+        challenge: createProvider(models.challenge),
+      },
+    })
 
     // Resolve every ref to something a person can read and follow. This is the
     // answer to "who is suggesting this", and it belongs next to the claim.
@@ -109,7 +172,7 @@ export async function counsel(query: string, skillId: string, offline: boolean):
   } catch (error) {
     // A billing or credential failure should still leave the founder with the
     // material, not a dead end.
-    const explained = explainProviderError(modelForRole('reason'), error)
+    const explained = explainProviderError(modelForWorkspaceRole(workspace().root, 'reason'), error)
     const fallback = await counselOffline(query, skillId)
     return fallback.mode === 'offline' ? { ...fallback, reason: explained } : fallback
   }
