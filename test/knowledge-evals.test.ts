@@ -108,7 +108,11 @@ test('initial cohort has approved multi-author coverage for every founder catego
   for (const author of ['sam-altman', 'steve-blank', 'andrew-chen', 'tomasz-tunguz']) {
     assert.ok(authorIds.has(author), `missing ${author}`)
   }
-  const topics = new Set([...corpus.sources.values()].flatMap((source) => source.topics))
+  assert.equal(
+    corpus.skipped?.filter((source) => source.reason.startsWith('retrieval policy is ')).length ?? 0,
+    0,
+  )
+  const topics = new Set([...corpus.authors.values()].flatMap((author) => author.domains))
   for (const category of ['pmf', 'customer-discovery', 'pricing', 'gtm', 'hiring', 'fundraising']) {
     assert.ok(topics.has(category), `missing ${category} coverage`)
   }
